@@ -6798,8 +6798,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               }}>
                 <Box 
                   component="img"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sony_logo.svg/2560px-Sony_logo.svg.png"
-                  alt="Sony"
+                  src="https://esellerstorevip.biz/public/uploads/all/9iSW4Ta8K8FMJV6panV26g7ueXryjhQYVlKDntkH.png"
+                  alt="Lenovo"
                   sx={{ 
                     height: 50,
                     maxWidth: '100%',
@@ -6808,7 +6808,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   }}
                 />
                 <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
-                  Sony
+                  Lenovo
                 </Typography>
               </Box>
 
@@ -6864,8 +6864,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               }}>
                 <Box 
                   component="img"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
-                  alt="Adidas"
+                  src="https://esellerstorevip.biz/public/uploads/all/hR2fnUl99blLe4umEbF87XBqSZJc8j3h3NR9bVux.webp"
+                  alt="Fila"
                   sx={{ 
                     height: 50,
                     maxWidth: '100%',
@@ -6874,7 +6874,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   }}
                 />
                 <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
-                  Adidas
+                 FILA
                 </Typography>
               </Box>
 
@@ -6897,8 +6897,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               }}>
                 <Box 
                   component="img"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Nike_Logo.svg/1200px-Nike_Logo.svg.png"
-                  alt="Nike"
+                  src="https://esellerstorevip.biz/public/uploads/all/zCGXjr9R06XtlaHMtQYNAk4xYW1SUGQWPb2QGjJs.png"
+                  alt="Hp"
                   sx={{ 
                     height: 50,
                     maxWidth: '100%',
@@ -6907,7 +6907,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   }}
                 />
                 <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
-                  Nike
+                  Hp
                 </Typography>
               </Box>
 
@@ -6930,7 +6930,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               }}>
                 <Box 
                   component="img"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Puma_logo.svg/2560px-Puma_logo.svg.png"
+                  src="https://esellerstorevip.biz/public/uploads/all/rcpEO7fXVzm4kaejPNwqw6fwyZSwJEx5zyx953QB.jpg"
                   alt="Puma"
                   sx={{ 
                     height: 50,
@@ -7169,16 +7169,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   ))}
                 </Grid>
               </>
-            ) : (
-              <Box sx={{ textAlign: 'center', py: 4, mb: 4 }}>
-                <Typography variant="h6" gutterBottom>
-                  No products are available for display at this time.
-                </Typography>
-                <Typography variant="body1">
-                  Please check back later for new products.
-                </Typography>
-              </Box>
-            )}
+            ) : null}
           </>
         ) : displayProductsWithKeys.length === 0 ? (
           <Box sx={{ textAlign: 'center', py: 4 }}>
