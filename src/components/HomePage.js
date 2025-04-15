@@ -530,7 +530,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 background: 'linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%)',
               }}
             >
-              <Box
+              {/* <Box
                 sx={{
                   bgcolor: 'white',
                   color: '#FF0000',
@@ -543,7 +543,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 100% Authentic
-              </Box>
+              </Box> */}
               <Typography 
                 variant="h4" 
                 component="h1" 
@@ -621,17 +621,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: 'white', opacity: 0.7 }} />
             </Box>
             
-            {/* Left/Right Arrows */}
-            <Box sx={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', 
-                bgcolor: 'rgba(255,255,255,0.5)', borderRadius: '50%', width: 30, height: 30, 
-                display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-              <Typography sx={{ fontSize: 20 }}>&lt;</Typography>
-            </Box>
-            <Box sx={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', 
-                bgcolor: 'rgba(255,255,255,0.5)', borderRadius: '50%', width: 30, height: 30, 
-                display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-              <Typography sx={{ fontSize: 20 }}>&gt;</Typography>
-            </Box>
+           
+          
           </Box>
           
         
@@ -646,7 +637,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               right: 0, 
               mr:10,
               width: { xs: '100%', sm: '180px' }, 
-              height: { xs: '62%', sm: '62%' },
+              height: { xs: '55%', sm: '57%' },
               maxWidth: { xs: '100%', sm: '180px' },
               bgcolor: '#FFF4EF',
               mt:'140px',
@@ -805,7 +796,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 background: 'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%)',
               }}
             >
-              <Box
+              {/* <Box
                 sx={{
                   bgcolor: 'white',
                   color: '#FF0000',
@@ -818,7 +809,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 100% Authentic
-              </Box>
+              </Box> */}
               <Typography 
                 variant="h4" 
                 component="h1" 
@@ -909,9 +900,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           borderRadius: 2,
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
         }}>
-          <Typography variant="h6" fontWeight="medium" color="text.secondary" align="center" sx={{ mb: 2 }}>
+          {/* <Typography variant="h6" fontWeight="medium" color="text.secondary" align="center" sx={{ mb: 2 }}>
             Shop by Category
-          </Typography>
+          </Typography> */}
           <Box sx={{ 
             display: 'flex', 
             flexWrap: { xs: 'nowrap', sm: 'wrap' },
@@ -1220,7 +1211,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             justifyContent: 'flex-start',
             mb: 2
           }}>
-            <Typography variant="h6" component="h3" fontWeight="bold" sx={{ color: '#333' }}>
+            <Typography variant="h7" component="h3" fontWeight="bold" sx={{ color: '#333' }}>
               Todays Deal
             </Typography>
             <Box 
