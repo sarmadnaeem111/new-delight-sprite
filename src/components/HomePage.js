@@ -499,9 +499,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
 
   return (
     <>
-      <Container maxWidth="xl" sx={{ mt: 10, mb: 5 }}>
+      <Container maxWidth="xl" sx={{ mt: 10, mb: 5, px: { xs: 0.5, sm: 2 } }}>
         {/* Banner Carousel - Desktop */}
-        <Box sx={{ position: 'relative', width: '80%', mb: 4, borderRadius: 2, overflow: 'hidden', boxShadow: 3, display: { xs: 'none', sm: 'block' } }}>
+        <Box sx={{ position: 'relative', width: { sm: '80%' }, mb: 4, borderRadius: 2, overflow: 'hidden', boxShadow: 3, display: { xs: 'none', sm: 'block' } }}>
           <Box sx={{ position: 'relative' }}>
             <Box
               component="img"
@@ -770,6 +770,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           position: 'relative', 
           width: '100%', 
           mb: 4, 
+          mt: -8,
+          mx: 'auto',
           borderRadius: 2, 
           overflow: 'hidden', 
           boxShadow: 3, 
@@ -899,8 +901,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           mb: 4, 
           mt: 4,
           py: 2, 
-          width: { xs: '100%', sm: '80%' },
+          width: { xs: '98%', sm: '80%' },
           px: 2,
+          mx: 'auto',
           backgroundColor: '#f9f9f9',
           borderRadius: 2,
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
@@ -911,13 +914,15 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           <Box sx={{ 
             display: 'flex', 
             flexWrap: { xs: 'nowrap', sm: 'wrap' },
-            justifyContent: 'flex-start',
-            gap: { xs: 2, sm: 2, md: 3 },
+            justifyContent: 'space-between',
+            gap: { xs: 0.5, sm: 2, md: 3 },
             width: '100%',
             overflowX: { xs: 'auto', sm: 'visible' },
             pb: { xs: 2, sm: 0 },
-            pl: { xs: 2, sm: 0 },
-            pr: { xs: 2, sm: 0 },
+            pl: { xs: 0.5, sm: 0 },
+            pr: { xs: 0.5, sm: 0 },
+            scrollSnapType: { xs: 'x mandatory', sm: 'none' },
+            scrollPadding: { xs: '0 4px', sm: 0 },
             '::-webkit-scrollbar': {
               height: '4px'
             },
@@ -933,7 +938,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
-                minWidth: { xs: '70px', sm: 'auto' },
+                minWidth: { xs: '18%', sm: 'auto' },
+                maxWidth: { xs: '19%', sm: 'none' },
+                scrollSnapAlign: { xs: 'start', sm: 'none' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -943,8 +950,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: { xs: 60, sm: 70 }, 
-                  height: { xs: 60, sm: 70 }, 
+                  width: { xs: 50, sm: 70 }, 
+                  height: { xs: 50, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -961,7 +968,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.65rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Women Clothing<br />& Fashion
               </Typography>
             </Box>
@@ -982,8 +989,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: { xs: 60, sm: 70 }, 
-                  height: { xs: 60, sm: 70 }, 
+                  width: { xs: 50, sm: 70 }, 
+                  height: { xs: 50, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -1000,7 +1007,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.65rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Men Clothing<br />& Fashion
               </Typography>
             </Box>
@@ -1021,8 +1028,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: { xs: 60, sm: 70 }, 
-                  height: { xs: 60, sm: 70 }, 
+                  width: { xs: 50, sm: 70 }, 
+                  height: { xs: 50, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -1039,7 +1046,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.65rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Computers-<br />Cameras-<br />Accessories
               </Typography>
             </Box>
@@ -1051,7 +1058,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
-                minWidth: { xs: '70px', sm: 'auto' },
+                minWidth: { xs: '18%', sm: 'auto' },
+                maxWidth: { xs: '19%', sm: 'none' },
+                scrollSnapAlign: { xs: 'start', sm: 'none' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -1061,8 +1070,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: { xs: 60, sm: 70 }, 
-                  height: { xs: 60, sm: 70 }, 
+                  width: { xs: 50, sm: 70 }, 
+                  height: { xs: 50, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -1079,7 +1088,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.65rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Kids & toy
               </Typography>
             </Box>
@@ -1091,7 +1100,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
-                minWidth: { xs: '70px', sm: 'auto' },
+                minWidth: { xs: '18%', sm: 'auto' },
+                maxWidth: { xs: '19%', sm: 'none' },
+                scrollSnapAlign: { xs: 'start', sm: 'none' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -1101,8 +1112,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: { xs: 60, sm: 70 }, 
-                  height: { xs: 60, sm: 70 }, 
+                  width: { xs: 50, sm: 70 }, 
+                  height: { xs: 50, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -1119,7 +1130,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.65rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Sports & outdoor
               </Typography>
             </Box>
@@ -1131,7 +1142,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
-                minWidth: { xs: '70px', sm: 'auto' },
+                minWidth: { xs: '18%', sm: 'auto' },
+                maxWidth: { xs: '19%', sm: 'none' },
+                scrollSnapAlign: { xs: 'start', sm: 'none' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -1141,8 +1154,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: { xs: 60, sm: 70 }, 
-                  height: { xs: 60, sm: 70 }, 
+                  width: { xs: 50, sm: 70 }, 
+                  height: { xs: 50, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -1159,7 +1172,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.65rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Automobile &<br />Motorcycle
               </Typography>
             </Box>
@@ -1171,7 +1184,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
-                minWidth: { xs: '70px', sm: 'auto' },
+                minWidth: { xs: '18%', sm: 'auto' },
+                maxWidth: { xs: '19%', sm: 'none' },
+                scrollSnapAlign: { xs: 'start', sm: 'none' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -1181,8 +1196,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: { xs: 60, sm: 70 }, 
-                  height: { xs: 60, sm: 70 }, 
+                  width: { xs: 50, sm: 70 }, 
+                  height: { xs: 50, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -1199,7 +1214,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.65rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Jewelry & Watches
               </Typography>
             </Box>
