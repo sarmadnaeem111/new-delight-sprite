@@ -138,6 +138,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
     }
   ], []);
 
+  // State for featured brands section
+  const [brandScrollPosition, setBrandScrollPosition] = useState(0);
+
   // Rotate offers every 3 seconds
   useEffect(() => {
     const timer = setInterval(() => {
@@ -1513,6 +1516,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           </Paper>
         </Box>
 
+        {/* New Products Section */}
+       
+
         {/* Special Offers Section */}
         <Box sx={{ mb: 4 }}>
           <Fade in={true} timeout={500}>
@@ -1769,357 +1775,1843 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
         ) : !isAuthenticated && !localSearchTerm ? (
           <>
             {/* New Products Section */}
-            <Box sx={{ mb: 5 }}>
-              <Typography variant="h5" component="h2" color="error" fontWeight="bold" sx={{ mb: 2, borderBottom: '1px solid #eaeaea', pb: 1 }}>
-                New Products
-              </Typography>
-              
-              <Box sx={{ position: 'relative' }}>
-                <IconButton 
-                  size="small" 
-                  sx={{ 
-                    position: 'absolute',
-                    left: -15,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: '#555', 
-                    bgcolor: '#fff', 
-                    boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
-                    borderRadius: '50%',
-                    width: 30, 
-                    height: 30,
-                    zIndex: 1
-                  }}
-                >
-                  <Typography sx={{ fontSize: 16 }}>&lt;</Typography>
-                </IconButton>
-                
-                <Grid container spacing={2}>
-                {/* Product 1 - Baby Shorts */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/qoGrgDeMa8fqXQynGxTuMbi8Fjyb4AvWjhpvpuFd.jpg"
-                      alt="Gerber Baby 3-Pack Knit Shorts"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                        $22.23/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                        Gerber Baby 3-Pack Knit Shorts
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+          
+             {/* New Products Section */}
+        <Box sx={{ mb: 5, position: 'relative', overflow: 'hidden' }}>
+          <Typography variant="h5" component="h2" color="error" fontWeight="bold" sx={{ mb: 2, borderBottom: '1px solid #eaeaea', pb: 1 }}>
+            New Products
+          </Typography>
+          
+          <Box sx={{ position: 'relative', px: { xs: 2, md: 0 } }}>
+            <Box sx={{ 
+              display: 'flex',
+              gap: 2,
+              overflowX: 'auto',
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none',
+              '&::-webkit-scrollbar': { display: 'none' },
+              py: 2
+            }} id="newProductsContainer">
+              {/* Product 1 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
+                  alt="Baby Shorts"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $22.23/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Gerber Baby 3-Pack Knit Shorts
+                  </Typography>
+                </CardContent>
+              </Card>
 
-                {/* Product 2 - Keyboard */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/lQc6AVC4vqUDwCd7W3MwJYMoo5Bv7u7CBV5RdmSc.jpg"
-                      alt="Keyboard"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                        $22.35/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                        Easter Basket Stuffers - Toddlers Montessori Toys
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+              {/* Product 2 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
+                  alt="Easter Basket Stuffers"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $22.35/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Easter Basket Stuffers - Toddlers Montessori Toys
+                  </Typography>
+                </CardContent>
+              </Card>
 
-                {/* Product 3 - Electric Bottle Brush */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/GmGFPFPXiwNAn81B5lqEzm81eBOg3PTaIbzXYekD.jpg"
-                      alt="MomMed Electric Bottle Brush"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                        $35.00/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                        <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                        MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+              {/* Product 3 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
+                  alt="Electric Bottle Brush"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $35.00/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
+                  </Typography>
+                </CardContent>
+              </Card>
 
-                {/* Product 4 - Paper Bowls */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/w4tlbY1RsbTC2ZGYV6SesPyoHKSUKBfQSWpQeVpa.jpg"
-                      alt="Homestockplus 24 Oz Disposable Paper Bowls"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                        $21.25/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                        <Box component="span" color="#BBB" sx={{ fontSize: '14px' }}>★</Box>
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                        Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+              {/* Product 4 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
+                  alt="Paper Bowls"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $21.25/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
+                  </Typography>
+                </CardContent>
+              </Card>
 
-                {/* Product 5 - Scissors */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/kDIAizwgimyHo4aHRUkHgfM77YS8HXKrdfPXgxcf.jpg"
-                      alt="JD.GLOBAL Basics Multipurpose Scissors"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                        $12.50/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                        JD.GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                </Grid>
-                
-                <IconButton 
-                  size="small" 
-                  sx={{ 
-                    position: 'absolute',
-                    right: -15,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: '#555', 
-                    bgcolor: '#fff', 
-                    boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
-                    borderRadius: '50%',
-                    width: 30, 
-                    height: 30,
-                    zIndex: 1
-                  }}
-                >
-                  <Typography sx={{ fontSize: 16 }}>&gt;</Typography>
-                </IconButton>
-              </Box>
+              {/* Product 5 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
+                  alt="Comfort Grip Scissors"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $12.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 6 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
+                  alt="Wireless Earbuds"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $45.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Premium Wireless Earbuds with Noise Cancellation
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 7 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
+                  alt="Smart Watch"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $89.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Smart Watch with Heart Rate Monitor and GPS
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 8 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg"
+                  alt="Portable Blender"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $32.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Portable Blender for Smoothies and Shakes
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 9 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4050388/pexels-photo-4050388.jpeg"
+                  alt="Wireless Charger"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $19.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Fast Wireless Charger for iPhone and Android
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 10 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg"
+                  alt="Smart LED Light Bulbs"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $15.75/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Smart LED Light Bulbs, Color Changing, Works with Alexa
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 11 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg"
+                  alt="Yoga Mat"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $24.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Premium Yoga Mat with Carrying Strap, Non-Slip
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 12 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/2536965/pexels-photo-2536965.jpeg"
+                  alt="Stainless Steel Water Bottle"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $18.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Insulated Stainless Steel Water Bottle, 24oz
+                  </Typography>
+                </CardContent>
+              </Card>
             </Box>
+
+            {/* Left Arrow */}
+            <IconButton 
+              size="small" 
+              sx={{ 
+                position: 'absolute',
+                left: { xs: 0, md: -15 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#555', 
+                bgcolor: '#fff', 
+                boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
+                borderRadius: '50%',
+                width: 30, 
+                height: 30,
+                zIndex: 1,
+                '&:hover': { bgcolor: '#f5f5f5' }
+              }}
+              onClick={() => {
+                const container = document.getElementById('newProductsContainer');
+                if (container) {
+                  container.scrollLeft -= container.offsetWidth;
+                }
+              }}
+            >
+              <Typography sx={{ fontSize: 16 }}>&lt;</Typography>
+            </IconButton>
+
+            {/* Right Arrow */}
+            <IconButton 
+              size="small" 
+              sx={{ 
+                position: 'absolute',
+                right: { xs: 0, md: -15 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#555', 
+                bgcolor: '#fff', 
+                boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
+                borderRadius: '50%',
+                width: 30, 
+                height: 30,
+                zIndex: 1,
+                '&:hover': { bgcolor: '#f5f5f5' }
+              }}
+              onClick={() => {
+                const container = document.getElementById('newProductsContainer');
+                if (container) {
+                  container.scrollLeft += container.offsetWidth;
+                }
+              }}
+            >
+              <Typography sx={{ fontSize: 16 }}>&gt;</Typography>
+            </IconButton>
+          </Box>
+        </Box>
 
           {/* Featured Products Section */}
-          <Box sx={{ mb: 5 }}>
-              <Typography variant="h5" component="h2" color="error" fontWeight="bold" sx={{ mb: 2, borderBottom: '1px solid #eaeaea', pb: 1 }}>
-              Featured Products
-              </Typography>
-              
-              <Box sx={{ position: 'relative' }}>
-                <IconButton 
-                  size="small" 
+          <Box sx={{ mb: 5, position: 'relative', overflow: 'hidden' }}>
+          <Typography variant="h5" component="h2" color="error" fontWeight="bold" sx={{ mb: 2, borderBottom: '1px solid #eaeaea', pb: 1 }}>
+          Featured Products
+          </Typography>
+          
+          <Box sx={{ position: 'relative', px: { xs: 2, md: 0 } }}>
+            <Box sx={{ 
+              display: 'flex',
+              gap: 2,
+              overflowX: 'auto',
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none',
+              '&::-webkit-scrollbar': { display: 'none' },
+              py: 2
+            }} id="FeaturedProductsContainer">
+              {/* Product 1 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
+                  alt="Baby Shorts"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $22.23/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Gerber Baby 3-Pack Knit Shorts
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 2 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
+                  alt="Easter Basket Stuffers"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $22.35/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Easter Basket Stuffers - Toddlers Montessori Toys
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 3 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
+                  alt="Electric Bottle Brush"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $35.00/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 4 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
+                  alt="Paper Bowls"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $21.25/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 5 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
+                  alt="Comfort Grip Scissors"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $12.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 6 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
+                  alt="Wireless Earbuds"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $45.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Premium Wireless Earbuds with Noise Cancellation
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 7 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
+                  alt="Smart Watch"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $89.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Smart Watch with Heart Rate Monitor and GPS
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 8 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg"
+                  alt="Portable Blender"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $32.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Portable Blender for Smoothies and Shakes
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 9 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4050388/pexels-photo-4050388.jpeg"
+                  alt="Wireless Charger"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $19.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Fast Wireless Charger for iPhone and Android
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 10 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg"
+                  alt="Smart LED Light Bulbs"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $15.75/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Smart LED Light Bulbs, Color Changing, Works with Alexa
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 11 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg"
+                  alt="Yoga Mat"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $24.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Premium Yoga Mat with Carrying Strap, Non-Slip
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 12 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/2536965/pexels-photo-2536965.jpeg"
+                  alt="Stainless Steel Water Bottle"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $18.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Insulated Stainless Steel Water Bottle, 24oz
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+
+            {/* Left Arrow */}
+            <IconButton 
+              size="small" 
+              sx={{ 
+                position: 'absolute',
+                left: { xs: 0, md: -15 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#555', 
+                bgcolor: '#fff', 
+                boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
+                borderRadius: '50%',
+                width: 30, 
+                height: 30,
+                zIndex: 1,
+                '&:hover': { bgcolor: '#f5f5f5' }
+              }}
+              onClick={() => {
+                const container = document.getElementById('FeaturedProductsContainer');
+                if (container) {
+                  container.scrollLeft -= container.offsetWidth;
+                }
+              }}
+            >
+              <Typography sx={{ fontSize: 16 }}>&lt;</Typography>
+            </IconButton>
+
+            {/* Right Arrow */}
+            <IconButton 
+              size="small" 
+              sx={{ 
+                position: 'absolute',
+                right: { xs: 0, md: -15 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#555', 
+                bgcolor: '#fff', 
+                boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
+                borderRadius: '50%',
+                width: 30, 
+                height: 30,
+                zIndex: 1,
+                '&:hover': { bgcolor: '#f5f5f5' }
+              }}
+              onClick={() => {
+                const container = document.getElementById('FeaturedProductsContainer');
+                if (container) {
+                  container.scrollLeft += container.offsetWidth;
+                }
+              }}
+            >
+              <Typography sx={{ fontSize: 16 }}>&gt;</Typography>
+            </IconButton>
+          </Box>
+        </Box>
+
+
+           {/* Best Selling Products Section */}
+           <Box sx={{ mb: 5, position: 'relative', overflow: 'hidden' }}>
+          <Typography variant="h5" component="h2" color="error" fontWeight="bold" sx={{ mb: 2, borderBottom: '1px solid #eaeaea', pb: 1 }}>
+          Best Selling Products
+          </Typography>
+          
+          <Box sx={{ position: 'relative', px: { xs: 2, md: 0 } }}>
+            <Box sx={{ 
+              display: 'flex',
+              gap: 2,
+              overflowX: 'auto',
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none',
+              '&::-webkit-scrollbar': { display: 'none' },
+              py: 2
+            }} id="BestSellingProductsContainer">
+              {/* Product 1 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
+                  alt="Baby Shorts"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $22.23/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Gerber Baby 3-Pack Knit Shorts
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 2 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
+                  alt="Easter Basket Stuffers"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $22.35/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Easter Basket Stuffers - Toddlers Montessori Toys
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 3 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
+                  alt="Electric Bottle Brush"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $35.00/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 4 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
+                  alt="Paper Bowls"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $21.25/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 5 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
+                  alt="Comfort Grip Scissors"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $12.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 6 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
+                  alt="Wireless Earbuds"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $45.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Premium Wireless Earbuds with Noise Cancellation
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 7 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
+                  alt="Smart Watch"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $89.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Smart Watch with Heart Rate Monitor and GPS
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 8 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg"
+                  alt="Portable Blender"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $32.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Portable Blender for Smoothies and Shakes
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 9 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/4050388/pexels-photo-4050388.jpeg"
+                  alt="Wireless Charger"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $19.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Fast Wireless Charger for iPhone and Android
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 10 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg"
+                  alt="Smart LED Light Bulbs"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $15.75/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Smart LED Light Bulbs, Color Changing, Works with Alexa
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 11 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg"
+                  alt="Yoga Mat"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $24.99/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                    <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Premium Yoga Mat with Carrying Strap, Non-Slip
+                  </Typography>
+                </CardContent>
+              </Card>
+
+              {/* Product 12 */}
+              <Card sx={{ 
+                minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
+                cursor: 'pointer',
+                '&:hover': { 
+                  transform: 'translateY(-4px)', 
+                  transition: 'transform 0.3s ease',
+                  boxShadow: 3
+                }
+              }}>
+                <CardMedia
+                  component="img"
+                  height="180"
+                  image="https://images.pexels.com/photos/2536965/pexels-photo-2536965.jpeg"
+                  alt="Stainless Steel Water Bottle"
+                />
+                <CardContent sx={{ p: 1, pt: 1.5 }}>
+                  <Typography color="error" fontWeight="bold" variant="body1">
+                    $18.50/Pc
+                  </Typography>
+                  <Box sx={{ display: 'flex', my: 0.5 }}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
+                    ))}
+                  </Box>
+                  <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
+                    Insulated Stainless Steel Water Bottle, 24oz
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Box>
+
+            {/* Left Arrow */}
+            <IconButton 
+              size="small" 
+              sx={{ 
+                position: 'absolute',
+                left: { xs: 0, md: -15 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#555', 
+                bgcolor: '#fff', 
+                boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
+                borderRadius: '50%',
+                width: 30, 
+                height: 30,
+                zIndex: 1,
+                '&:hover': { bgcolor: '#f5f5f5' }
+              }}
+              onClick={() => {
+                const container = document.getElementById('BestSellingProductsContainer');
+                if (container) {
+                  container.scrollLeft -= container.offsetWidth;
+                }
+              }}
+            >
+              <Typography sx={{ fontSize: 16 }}>&lt;</Typography>
+            </IconButton>
+
+            {/* Right Arrow */}
+            <IconButton 
+              size="small" 
+              sx={{ 
+                position: 'absolute',
+                right: { xs: 0, md: -15 },
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: '#555', 
+                bgcolor: '#fff', 
+                boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
+                borderRadius: '50%',
+                width: 30, 
+                height: 30,
+                zIndex: 1,
+                '&:hover': { bgcolor: '#f5f5f5' }
+              }}
+              onClick={() => {
+                const container = document.getElementById('BestSellingProductsContainer');
+                if (container) {
+                  container.scrollLeft += container.offsetWidth;
+                }
+              }}
+            >
+              <Typography sx={{ fontSize: 16 }}>&gt;</Typography>
+            </IconButton>
+          </Box>
+        </Box>
+
+        {/* Featured Brands Section */}
+        <Box sx={{ mb: 5, width: '100%' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            mb: 2 
+          }}>
+            <Typography 
+              variant="h5" 
+              component="h2" 
+              sx={{ 
+                fontWeight: 'bold',
+                position: 'relative',
+                '&:after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: -5,
+                  left: 0,
+                  width: 60,
+                  height: 3,
+                  bgcolor: 'primary.main',
+                  borderRadius: 1
+                }
+              }}
+            >
+              Featured Brands
+            </Typography>
+
+            {/* Desktop Navigation Arrows */}
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+              <Button 
+                variant="outlined" 
+                size="small" 
+                onClick={() => {
+                  const container = document.getElementById('featuredBrandsContainer');
+                  if (container) {
+                    container.scrollLeft -= 300;
+                  }
+                }}
+                sx={{ minWidth: 0, p: 1 }}
+              >
+                &#9664;
+              </Button>
+              <Button 
+                variant="outlined" 
+                size="small" 
+                onClick={() => {
+                  const container = document.getElementById('featuredBrandsContainer');
+                  if (container) {
+                    container.scrollLeft += 300;
+                  }
+                }}
+                sx={{ minWidth: 0, p: 1 }}
+              >
+                &#9654;
+              </Button>
+            </Box>
+          </Box>
+
+          {/* Brands Container */}
+          <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+            <Box 
+              id="featuredBrandsContainer"
+              sx={{ 
+                display: 'flex',
+                gap: 2,
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                pb: 2,
+                '&::-webkit-scrollbar': {
+                  display: 'none'
+                },
+                msOverflowStyle: 'none',
+                scrollbarWidth: 'none'
+              }}
+            >
+              {/* Brand 1 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png"
+                  alt="Amazon"
                   sx={{ 
-                    position: 'absolute',
-                    left: -15,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: '#555', 
-                    bgcolor: '#fff', 
-                    boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
-                    borderRadius: '50%',
-                    width: 30, 
-                    height: 30,
-                    zIndex: 1
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
                   }}
-                >
-                  <Typography sx={{ fontSize: 16 }}>&lt;</Typography>
-                </IconButton>
-                
-                <Grid container spacing={2}>
-                {/* Product 1 - Baby Shorts */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/IIMMgPyUmx7huS3206zEuu3UVpStrTQmM3D9mMgh.jpg"
-                      alt="Gerber Baby 3-Pack Knit Shorts"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                      $11.09/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                      Cute Cartoon Sanrio Kulomi Novelty Slippers, Hellokitty & Melody Kawaii Non-slip Soft Fuzzy Home Slippers, Plush Cozy Shoes
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Amazon
+                </Typography>
+              </Box>
 
-                {/* Product 2 - Keyboard */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/KqvMtk0RUVVVSkXqKSXjuTXn1u9oUHIi9v1ksbxU.jpg"
-                      alt="Keyboard"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                      $1,524.99/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                      Samsung - Galaxy S24 Ultra 512GB (Unlocked)
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-                {/* Product 3 - Electric Bottle Brush */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/DNgJnYIKP4KQvgKtX5cyIfH35aUnrDkg5CnD2oNs.jpg"
-                      alt="MomMed Electric Bottle Brush"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                      $3,123.75/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                        <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                      Apple iPhone 15 Plus, 256GB - Unlocked
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-                {/* Product 4 - Paper Bowls */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/0QNTpDzsYPl4iv2ht5ALmS6gAScRZJePVPmWTE9M.jpg"
-                      alt="Homestockplus 24 Oz Disposable Paper Bowls"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                      $1,123.75/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                        <Box component="span" color="#BBB" sx={{ fontSize: '14px' }}>★</Box>
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                      Apple iPhone 15 Plus, 256GB - Unlocked
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-
-                {/* Product 5 - Scissors */}
-                <Grid item xs={6} sm={6} md={2.4}>
-                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', boxShadow: 'none', border: '1px solid #eaeaea' }}>
-                    <CardMedia
-                      component="img"
-                      height="180"
-                      image="https://esellerstorevip.biz/public/uploads/all/qMAhT0DkDiDXGOCtpIkJyNAOxX5DWTEC8mXAyeGP.png"
-                      alt="JD.GLOBAL Basics Multipurpose Scissors"
-                    />
-                    <CardContent sx={{ p: 1, pt: 1.5 }}>
-                      <Typography color="error" fontWeight="bold" variant="body1">
-                      $30.59/Pc
-                      </Typography>
-                      <Box sx={{ display: 'flex', my: 0.5 }}>
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
-                        ))}
-                      </Box>
-                      <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                      Ladies Open Toe Stiletto Bow Knot Lace-Up Ankle Straps Sandals High Heels
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                </Grid>
-                
-                <IconButton 
-                  size="small" 
+              {/* Brand 2 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png"
+                  alt="Samsung"
                   sx={{ 
-                    position: 'absolute',
-                    right: -15,
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: '#555', 
-                    bgcolor: '#fff', 
-                    boxShadow: '0 0 5px rgba(0,0,0,0.2)', 
-                    borderRadius: '50%',
-                    width: 30, 
-                    height: 30,
-                    zIndex: 1
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
                   }}
-                >
-                  <Typography sx={{ fontSize: 16 }}>&gt;</Typography>
-                </IconButton>
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Samsung
+                </Typography>
+              </Box>
+
+              {/* Brand 3 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png"
+                  alt="Apple"
+                  sx={{ 
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
+                  }}
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Apple
+                </Typography>
+              </Box>
+
+              {/* Brand 4 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Sony_logo.svg/2560px-Sony_logo.svg.png"
+                  alt="Sony"
+                  sx={{ 
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
+                  }}
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Sony
+                </Typography>
+              </Box>
+
+              {/* Brand 5 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Xiaomi_logo_%282021-%29.svg/1024px-Xiaomi_logo_%282021-%29.svg.png"
+                  alt="Xiaomi"
+                  sx={{ 
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
+                  }}
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Xiaomi
+                </Typography>
+              </Box>
+
+              {/* Brand 6 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Adidas_Logo.svg/2560px-Adidas_Logo.svg.png"
+                  alt="Adidas"
+                  sx={{ 
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
+                  }}
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Adidas
+                </Typography>
+              </Box>
+
+              {/* Brand 7 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Nike_Logo.svg/1200px-Nike_Logo.svg.png"
+                  alt="Nike"
+                  sx={{ 
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
+                  }}
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Nike
+                </Typography>
+              </Box>
+
+              {/* Brand 8 */}
+              <Box sx={{
+                minWidth: { xs: 150, sm: 180, md: 200 },
+                height: { xs: 100, sm: 120, md: 130 },
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #e0e0e0',
+                borderRadius: 2,
+                p: 2,
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: 3
+                }
+              }}>
+                <Box 
+                  component="img"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Puma_logo.svg/2560px-Puma_logo.svg.png"
+                  alt="Puma"
+                  sx={{ 
+                    height: 50,
+                    maxWidth: '100%',
+                    objectFit: 'contain',
+                    mb: 1
+                  }}
+                />
+                <Typography variant="body2" sx={{ fontWeight: 'medium', textAlign: 'center' }}>
+                  Puma
+                </Typography>
               </Box>
             </Box>
 
+            {/* Mobile Navigation Arrows */}
+            <Box sx={{ 
+              display: { xs: 'flex', md: 'none' }, 
+              justifyContent: 'center',
+              mt: 2,
+              gap: 1
+            }}>
+              <IconButton 
+                size="small" 
+                onClick={() => {
+                  const container = document.getElementById('featuredBrandsContainer');
+                  if (container) {
+                    container.scrollLeft -= 200;
+                  }
+                }}
+                sx={{ 
+                  bgcolor: 'background.paper', 
+                  boxShadow: 1,
+                  '&:hover': { bgcolor: '#f5f5f5' }
+                }}
+              >
+                &#9664;
+              </IconButton>
+              
+              <IconButton 
+                size="small" 
+                onClick={() => {
+                  const container = document.getElementById('featuredBrandsContainer');
+                  if (container) {
+                    container.scrollLeft += 200;
+                  }
+                }}
+                sx={{ 
+                  bgcolor: 'background.paper', 
+                  boxShadow: 1,
+                  '&:hover': { bgcolor: '#f5f5f5' }
+                }}
+              >
+                &#9654;
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Promotional Banners */}
+        <Box sx={{ mb: 5, width: '100%' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 2,
+            width: '100%'
+          }}>
+            {/* Banner 1 - Valentine's Sale */}
+            <Box 
+              component="img"
+              src="https://esellerstorevip.biz/public/uploads/all/5AmdWNHfcLOMTKIfbWAoNEFqRjoRSDIR78JM4Vqk.png"
+              alt="Valentine's Big Sale"
+              sx={{ 
+                width: { xs: '100%', md: '33.33%' }, 
+                height: { xs: 120, md: 150 },
+                objectFit: 'cover',
+                borderRadius: 1,
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                '&:hover': { transform: 'scale(1.02)' }
+              }}
+            />
+            
+            {/* Banner 2 - Flash Sale */}
+            <Box 
+              component="img"
+              src="https://esellerstorevip.biz/public/uploads/all/A4EsJbP8jJXmlQmdlCwPG7gGhZ6UAjW7sfEnAbzb.png"
+              alt="Flash Sale"
+              sx={{ 
+                width: { xs: '100%', md: '33.33%' }, 
+                height: { xs: 120, md: 150 },
+                objectFit: 'cover',
+                borderRadius: 1,
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                '&:hover': { transform: 'scale(1.02)' }
+              }}
+            />
+            
+            {/* Banner 3 - 15% Off Everything */}
+            <Box 
+              component="img"
+              src="https://esellerstorevip.biz/public/uploads/all/RyNqpjRAQov3NhNSiB885zdRXKISuzOd5I7i285p.png"
+              alt="15% Off Everything"
+              sx={{ 
+                width: { xs: '100%', md: '33.33%' }, 
+                height: { xs: 120, md: 150 },
+                objectFit: 'cover',
+                borderRadius: 1,
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                '&:hover': { transform: 'scale(1.02)' }
+              }}
+            />
+          </Box>
+        </Box>
 
             {/* Category Tabs for Non-Authenticated Users */}
             <Box sx={{ mb: 4 }}>
