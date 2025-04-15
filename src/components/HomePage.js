@@ -498,7 +498,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
     <>
       <Container maxWidth="xl" sx={{ mt: 10, mb: 5 }}>
         {/* Banner Carousel */}
-        <Box sx={{ position: 'relative', width: '100%', mb: 4, borderRadius: 2, overflow: 'hidden', boxShadow: 3 }}>
+        <Box sx={{   position: 'relative', width: '80%',mb: 4, borderRadius: 2, overflow: 'hidden', boxShadow: 3 }}>
           <Box sx={{ position: 'relative' }}>
             <Box
               component="img"
@@ -516,7 +516,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 position: 'absolute',
                 top: 0,
                 left: 0,
-                width: '100%',
+                width: '80%',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
@@ -629,16 +629,92 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               <Typography sx={{ fontSize: 20 }}>&gt;</Typography>
             </Box>
           </Box>
+          
+        
         </Box>
+
+  {/* Todays Deal Banner - Right Side */}
+  <Box 
+            sx={{ 
+              position: 'absolute', 
+              top: { xs: 'auto', md: 0 }, 
+              bottom: { xs: 0, md: 'auto' },
+              right: 0, 
+              mr:10,
+              width: { xs: '100%', sm: '180px' }, 
+              height: { xs: '62%', sm: '62%%' },
+              maxWidth: { xs: '100%', sm: '180px' },
+              bgcolor: '#FFF4EF',
+              mt:'140px',
+              overflow: 'hidden',
+              display: { xs: 'none', md: 'block' },
+              zIndex: 1
+            }}
+          >
+            <Box sx={{ p: 2, height: '100%' }}>
+              <Typography variant="h6" component="h3" fontWeight="bold" sx={{ mb: 1, color: '#333', textAlign: 'center' }}>
+                Todays Deal <Box component="span" sx={{ bgcolor: 'red', color: 'white', fontSize: '0.7rem', p: 0.5, borderRadius: 1, ml: 0.5 }}>Hot</Box>
+              </Typography>
+              
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, overflow: 'auto', height: 'calc(100% - 40px)' }}>
+                {/* Deal Product 1 */}
+                <Box sx={{ bgcolor: 'white', p: 1, borderRadius: 1, border: '1px solid #FF6347', cursor: 'pointer' }}>
+                  <Box sx={{ mb: 1 }}>
+                    <img 
+                      src="https://m.media-amazon.com/images/I/71ctRE34RuL._AC_UF894,1000_QL80_.jpg" 
+                      alt="Boston t-shirt" 
+                      style={{ width: '100%', height: 'auto', objectFit: 'contain' }} 
+                    />
+                  </Box>
+                  <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                    $8.98
+                  </Typography>
+                  <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                    $9.48
+                  </Typography>
+                </Box>
+                
+                {/* Deal Product 2 */}
+                <Box sx={{ bgcolor: 'white', p: 1, borderRadius: 1, border: '1px solid #eaeaea', cursor: 'pointer' }}>
+                  <Box sx={{ mb: 1 }}>
+                    <img 
+                      src="https://images.pexels.com/photos/5961984/pexels-photo-5961984.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                      alt="Blue jacket" 
+                      style={{ width: '100%', height: 'auto', objectFit: 'contain' }} 
+                    />
+                  </Box>
+                  <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                    $27.14
+                  </Typography>
+                  <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                    $27.64
+                  </Typography>
+                </Box>
+                
+                {/* Deal Product 3 */}
+                <Box sx={{ bgcolor: 'gold', p: 1, borderRadius: 1, border: '1px solid #eaeaea', cursor: 'pointer' }}>
+                  <Box sx={{ mb: 1 }}>
+                    <img 
+                      src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                      alt="Power tool" 
+                      style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
 
         {/* Product Categories Section - Below Banner */}
         <Box sx={{ 
           display: 'flex',
+          position: 'relative',
           flexDirection: 'column',
           alignItems: 'center', 
           mb: 4, 
           mt: 4,
           py: 2, 
+          width: '80%',
           px: 2,
           backgroundColor: '#f9f9f9',
           borderRadius: 2,
@@ -927,6 +1003,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Typography>
             </Box>
           </Box>
+          
+          {/* Todays Deal Banner - Right Side of Shop by Category */}
+       
         </Box>
 
         {/* Search Section - Mobile friendly additional search box */}
