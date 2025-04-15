@@ -8,8 +8,10 @@ import {
   Box,
   Alert,
   Divider,
-  CircularProgress
+  CircularProgress,
+  IconButton
 } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
@@ -57,6 +59,15 @@ const CustomerLogin = ({ setIsCustomer }) => {
   return (
     <Container maxWidth="sm">
       <Box sx={{ mt: 8 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
+          <IconButton 
+            onClick={() => navigate('/')} 
+            aria-label="back to home"
+            sx={{ color: 'primary.main' }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        </Box>
         <Paper elevation={3} sx={{ p: 4 }}>
           <Typography variant="h4" align="center" gutterBottom>
             Customer Login
