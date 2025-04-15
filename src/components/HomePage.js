@@ -908,11 +908,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           <Box sx={{ 
             display: 'flex', 
             flexWrap: { xs: 'nowrap', sm: 'wrap' },
-            justifyContent: 'center',
-            gap: { xs: 1, sm: 2, md: 3 },
+            justifyContent: 'flex-start',
+            gap: { xs: 2, sm: 2, md: 3 },
             width: '100%',
             overflowX: { xs: 'auto', sm: 'visible' },
             pb: { xs: 2, sm: 0 },
+            pl: { xs: 2, sm: 0 },
+            pr: { xs: 2, sm: 0 },
             '::-webkit-scrollbar': {
               height: '4px'
             },
