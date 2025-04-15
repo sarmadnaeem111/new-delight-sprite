@@ -497,8 +497,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
   return (
     <>
       <Container maxWidth="xl" sx={{ mt: 10, mb: 5 }}>
-        {/* Banner Carousel */}
-        <Box sx={{   position: 'relative', width: '80%',mb: 4, borderRadius: 2, overflow: 'hidden', boxShadow: 3 }}>
+        {/* Banner Carousel - Desktop */}
+        <Box sx={{ position: 'relative', width: '80%', mb: 4, borderRadius: 2, overflow: 'hidden', boxShadow: 3, display: { xs: 'none', sm: 'block' } }}>
           <Box sx={{ position: 'relative' }}>
             <Box
               component="img"
@@ -642,7 +642,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               right: 0, 
               mr:10,
               width: { xs: '100%', sm: '180px' }, 
-              height: { xs: '62%', sm: '62%%' },
+              height: { xs: '62%', sm: '62%' },
               maxWidth: { xs: '100%', sm: '180px' },
               bgcolor: '#FFF4EF',
               mt:'140px',
@@ -692,7 +692,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 </Box>
                 
                 {/* Deal Product 3 */}
-                <Box sx={{ bgcolor: 'gold', p: 1, borderRadius: 1, border: '1px solid #eaeaea', cursor: 'pointer' }}>
+                <Box sx={{ bgcolor: 'white', p: 1, borderRadius: 1, border: '1px solid #eaeaea', cursor: 'pointer' }}>
                   <Box sx={{ mb: 1 }}>
                     <img 
                       src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=80" 
@@ -700,10 +700,192 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                       style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
                     />
                   </Box>
+                  <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                    $45.99
+                  </Typography>
+                  <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                    $55.99
+                  </Typography>
+                </Box>
+
+                {/* Deal Product 4 */}
+                <Box sx={{ bgcolor: 'white', p: 1, borderRadius: 1, border: '1px solid #eaeaea', cursor: 'pointer' }}>
+                  <Box sx={{ mb: 1 }}>
+                    <img 
+                      src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                      alt="Luxury watch" 
+                      style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                    />
+                  </Box>
+                  <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                    $149.99
+                  </Typography>
+                  <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                    $199.99
+                  </Typography>
+                </Box>
+
+                {/* Deal Product 5 */}
+                <Box sx={{ bgcolor: 'white', p: 1, borderRadius: 1, border: '1px solid #eaeaea', cursor: 'pointer' }}>
+                  <Box sx={{ mb: 1 }}>
+                    <img 
+                      src="https://images.pexels.com/photos/1279107/pexels-photo-1279107.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                      alt="Headphones" 
+                      style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                    />
+                  </Box>
+                  <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                    $89.99
+                  </Typography>
+                  <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                    $129.99
+                  </Typography>
+                </Box>
+
+                {/* Deal Product 6 */}
+                <Box sx={{ bgcolor: 'white', p: 1, borderRadius: 1, border: '1px solid #eaeaea', cursor: 'pointer' }}>
+                  <Box sx={{ mb: 1 }}>
+                    <img 
+                      src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=80" 
+                      alt="Camera" 
+                      style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                    />
+                  </Box>
+                  <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                    $599.99
+                  </Typography>
+                  <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                    $799.99
+                  </Typography>
                 </Box>
               </Box>
             </Box>
           </Box>
+
+        {/* Mobile Banner - ONE DAY SPECIAL */}
+        <Box sx={{ 
+          position: 'relative', 
+          width: '100%', 
+          mb: 4, 
+          borderRadius: 2, 
+          overflow: 'hidden', 
+          boxShadow: 3, 
+          display: { xs: 'block', sm: 'none' } 
+        }}>
+          <Box sx={{ position: 'relative' }}>
+            <Box
+              component="img"
+              src="https://images.pexels.com/photos/4792720/pexels-photo-4792720.jpeg?auto=compress&cs=tinysrgb&w=1260"
+              alt="Fashion banner"
+              sx={{
+                width: '100%',
+                height: 200,
+                objectFit: 'cover',
+                filter: 'brightness(0.8)',
+              }}
+            />
+            <Box
+              sx={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                p: 2,
+                background: 'linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%)',
+              }}
+            >
+              <Box
+                sx={{
+                  bgcolor: 'white',
+                  color: '#FF0000',
+                  p: 1,
+                  borderRadius: 1,
+                  display: 'inline-block',
+                  mb: 1,
+                  fontWeight: 'bold',
+                  fontSize: 12,
+                }}
+              >
+                100% Authentic
+              </Box>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                sx={{ 
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem',
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  mb: 0.5,
+                  textAlign: 'center'
+                }}
+              >
+                ONE DAY SPECIAL:
+              </Typography>
+              <Typography 
+                variant="h3" 
+                component="h2" 
+                sx={{ 
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: '2rem',
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                  mb: 2,
+                  textAlign: 'center'
+                }}
+              >
+                UP TO 50% OFF
+              </Typography>
+              
+              <Box 
+                sx={{ 
+                  display: 'flex', 
+                  gap: 2,
+                  flexWrap: 'wrap',
+                  justifyContent: 'center'
+                }}
+              >
+                <Box
+                  sx={{
+                    bgcolor: 'black',
+                    color: 'white',
+                    p: 1,
+                    textAlign: 'center',
+                    width: 130,
+                  }}
+                >
+                  <Typography variant="body2" sx={{ fontSize: 12 }}>
+                    25% off with
+                  </Typography>
+                  <Typography variant="body2" sx={{ fontSize: 12 }}>
+                    min. spend $150
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    bgcolor: 'black',
+                    color: 'white',
+                    p: 1,
+                    textAlign: 'center',
+                    width: 130,
+                  }}
+                >
+                  <Typography variant="body2" sx={{ fontSize: 12 }}>
+                    Buy 3,
+                  </Typography>
+                  <Typography variant="body2" sx={{ fontSize: 12 }}>
+                    get 15% off
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
 
         {/* Product Categories Section - Below Banner */}
         <Box sx={{ 
@@ -714,7 +896,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           mb: 4, 
           mt: 4,
           py: 2, 
-          width: '80%',
+          width: { xs: '100%', sm: '80%' },
           px: 2,
           backgroundColor: '#f9f9f9',
           borderRadius: 2,
@@ -725,10 +907,19 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           </Typography>
           <Box sx={{ 
             display: 'flex', 
-            flexWrap: 'wrap',
+            flexWrap: { xs: 'nowrap', sm: 'wrap' },
             justifyContent: 'center',
             gap: { xs: 1, sm: 2, md: 3 },
-            width: '100%'
+            width: '100%',
+            overflowX: { xs: 'auto', sm: 'visible' },
+            pb: { xs: 2, sm: 0 },
+            '::-webkit-scrollbar': {
+              height: '4px'
+            },
+            '::-webkit-scrollbar-thumb': {
+              backgroundColor: 'rgba(0,0,0,0.2)',
+              borderRadius: '4px'
+            }
           }}>
             {/* Women Clothing */}
             <Box 
@@ -737,6 +928,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
+                minWidth: { xs: '70px', sm: 'auto' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -746,8 +938,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: 70, 
-                  height: 70, 
+                  width: { xs: 60, sm: 70 }, 
+                  height: { xs: 60, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -764,7 +956,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: '0.8rem', fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Women Clothing<br />& Fashion
               </Typography>
             </Box>
@@ -785,8 +977,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: 70, 
-                  height: 70, 
+                  width: { xs: 60, sm: 70 }, 
+                  height: { xs: 60, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -803,7 +995,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: '0.8rem', fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Men Clothing<br />& Fashion
               </Typography>
             </Box>
@@ -824,8 +1016,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: 70, 
-                  height: 70, 
+                  width: { xs: 60, sm: 70 }, 
+                  height: { xs: 60, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -842,7 +1034,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: '0.8rem', fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Computers-<br />Cameras-<br />Accessories
               </Typography>
             </Box>
@@ -854,6 +1046,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
+                minWidth: { xs: '70px', sm: 'auto' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -863,8 +1056,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: 70, 
-                  height: 70, 
+                  width: { xs: 60, sm: 70 }, 
+                  height: { xs: 60, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -881,7 +1074,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: '0.8rem', fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Kids & toy
               </Typography>
             </Box>
@@ -893,6 +1086,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
+                minWidth: { xs: '70px', sm: 'auto' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -902,8 +1096,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: 70, 
-                  height: 70, 
+                  width: { xs: 60, sm: 70 }, 
+                  height: { xs: 60, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -920,7 +1114,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: '0.8rem', fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Sports & outdoor
               </Typography>
             </Box>
@@ -932,6 +1126,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
+                minWidth: { xs: '70px', sm: 'auto' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -941,8 +1136,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: 70, 
-                  height: 70, 
+                  width: { xs: 60, sm: 70 }, 
+                  height: { xs: 60, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -959,7 +1154,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: '0.8rem', fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Automobile &<br />Motorcycle
               </Typography>
             </Box>
@@ -971,6 +1166,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 flexDirection: 'column', 
                 alignItems: 'center',
                 cursor: 'pointer',
+                minWidth: { xs: '70px', sm: 'auto' },
                 '&:hover': {
                   transform: 'translateY(-2px)',
                   transition: 'all 0.3s',
@@ -980,8 +1176,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               <Box 
                 sx={{ 
-                  width: 70, 
-                  height: 70, 
+                  width: { xs: 60, sm: 70 }, 
+                  height: { xs: 60, sm: 70 }, 
                   borderRadius: '50%', 
                   display: 'flex', 
                   justifyContent: 'center', 
@@ -998,14 +1194,252 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
-              <Typography variant="body2" align="center" sx={{ fontSize: '0.8rem', fontWeight: 'medium' }}>
+              <Typography variant="body2" align="center" sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' }, fontWeight: 'medium' }}>
                 Jewelry & Watches
               </Typography>
             </Box>
           </Box>
+        </Box>
+
+        {/* Mobile Todays Deal Section - Below Shop by Category */}
+        <Box 
+          sx={{ 
+            display: { xs: 'block', md: 'none' },
+            width: '100%',
+            mb: 4,
+            px: 2
+          }}
+        >
+          <Box sx={{ 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            mb: 2
+          }}>
+            <Typography variant="h6" component="h3" fontWeight="bold" sx={{ color: '#333' }}>
+              Todays Deal
+            </Typography>
+            <Box 
+              component="span" 
+              sx={{ 
+                bgcolor: 'red', 
+                color: 'white', 
+                fontSize: '0.7rem', 
+                p: 0.5, 
+                borderRadius: 1, 
+                ml: 1 
+              }}
+            >
+              Hot
+            </Box>
+          </Box>
           
-          {/* Todays Deal Banner - Right Side of Shop by Category */}
-       
+          <Box sx={{ 
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: 2,
+            '& > *': {
+              height: 'auto'
+            }
+          }}>
+            {/* Deal Product 1 */}
+            <Box sx={{ 
+              bgcolor: 'white', 
+              p: 2, 
+              borderRadius: 1, 
+              border: '2px solid #FF4D33',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: 'auto'
+            }}>
+              <Box sx={{ 
+                mb: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 120,
+                width: '100%'
+              }}>
+                <img 
+                  src="https://m.media-amazon.com/images/I/71ctRE34RuL._AC_UF894,1000_QL80_.jpg" 
+                  alt="Boston t-shirt" 
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                />
+              </Box>
+              <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                $8.98
+              </Typography>
+              <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                $9.48
+              </Typography>
+            </Box>
+            
+            {/* Deal Product 2 */}
+            <Box sx={{ 
+              bgcolor: 'white', 
+              p: 2, 
+              borderRadius: 1, 
+              border: '2px solid #FF4D33',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: 'auto'
+            }}>
+              <Box sx={{ 
+                mb: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 120,
+                width: '100%'
+              }}>
+                <img 
+                  src="https://images.pexels.com/photos/5961984/pexels-photo-5961984.jpeg?auto=compress&cs=tinysrgb&w=300" 
+                  alt="Blue jacket" 
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                />
+              </Box>
+              <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                $27.14
+              </Typography>
+              <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                $27.64
+              </Typography>
+            </Box>
+            
+            {/* Deal Product 3 */}
+            <Box sx={{ 
+              bgcolor: 'white', 
+              p: 2, 
+              borderRadius: 1, 
+              border: '2px solid #FF4D33',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: 'auto'
+            }}>
+              <Box sx={{ 
+                mb: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 120,
+                width: '100%'
+              }}>
+                <img 
+                  src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=300" 
+                  alt="Power tool" 
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                />
+              </Box>
+              <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                $27.00
+              </Typography>
+              <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                $30.00
+              </Typography>
+            </Box>
+            
+            {/* Deal Product 4 */}
+            <Box sx={{ 
+              bgcolor: 'white', 
+              p: 2, 
+              borderRadius: 1, 
+              border: '2px solid #FF4D33',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: 'auto'
+            }}>
+              <Box sx={{ 
+                mb: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 120,
+                width: '100%'
+              }}>
+                <img 
+                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=300" 
+                  alt="Luxury watch" 
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                />
+              </Box>
+              <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                $23.00
+              </Typography>
+              <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                $24.00
+              </Typography>
+            </Box>
+            
+            {/* Deal Product 5 */}
+            <Box sx={{ 
+              bgcolor: 'white', 
+              p: 2, 
+              borderRadius: 1, 
+              border: '2px solid #FF4D33',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: 'auto'
+            }}>
+              <Box sx={{ 
+                mb: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 120,
+                width: '100%'
+              }}>
+                <img 
+                  src="https://images.pexels.com/photos/1279107/pexels-photo-1279107.jpeg?auto=compress&cs=tinysrgb&w=300" 
+                  alt="Headphones" 
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                />
+              </Box>
+              <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                $89.99
+              </Typography>
+              <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                $129.99
+              </Typography>
+            </Box>
+            
+            {/* Deal Product 6 */}
+            <Box sx={{ 
+              bgcolor: 'white', 
+              p: 2, 
+              borderRadius: 1, 
+              border: '2px solid #FF4D33',
+              cursor: 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              height: 'auto'
+            }}>
+              <Box sx={{ 
+                mb: 1,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 120,
+                width: '100%'
+              }}>
+                <img 
+                  src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=300" 
+                  alt="Camera" 
+                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                />
+              </Box>
+              <Typography color="error" fontWeight="bold" sx={{ fontSize: '1rem' }}>
+                $599.99
+              </Typography>
+              <Typography sx={{ textDecoration: 'line-through', fontSize: '0.8rem', color: 'text.secondary' }}>
+                $799.99
+              </Typography>
+            </Box>
+          </Box>
         </Box>
 
         {/* Search Section - Mobile friendly additional search box */}
