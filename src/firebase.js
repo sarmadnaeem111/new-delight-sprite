@@ -5,12 +5,21 @@ import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   // Replace with your Firebase config
-  apiKey: "AIzaSyB9vE67oV7wxU8Vukq5HKccGLhzyrV2atY",
-  authDomain: "zahid-delight-sphere.firebaseapp.com",
-  projectId: "zahid-delight-sphere",
-  storageBucket: "zahid-delight-sphere.firebasestorage.app",
-  messagingSenderId: "334658420558",
-  appId: "1:334658420558:web:462fc0007ecfbd5643e81f"
+  // apiKey: "AIzaSyB9vE67oV7wxU8Vukq5HKccGLhzyrV2atY",
+  // authDomain: "zahid-delight-sphere.firebaseapp.com",
+  // projectId: "zahid-delight-sphere",
+  // storageBucket: "zahid-delight-sphere.firebasestorage.app",
+  // messagingSenderId: "334658420558",
+  // appId: "1:334658420558:web:462fc0007ecfbd5643e81f"
+
+  apiKey: "AIzaSyBz0eNET660UbX0J7WPJ8dRQJEa80h0zMo",
+  authDomain: "ecommerce-1eeb2.firebaseapp.com",
+  databaseURL: "https://ecommerce-1eeb2-default-rtdb.firebaseio.com",
+  projectId: "ecommerce-1eeb2",
+  storageBucket: "ecommerce-1eeb2.firebasestorage.app",
+  messagingSenderId: "904802950118",
+  appId: "1:904802950118:web:9a1706e50345a8759f1427",
+  measurementId: "G-468QM1YQYK"
 };
 
 const app = initializeApp(firebaseConfig);
