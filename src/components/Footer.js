@@ -31,7 +31,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        bgcolor: '#1a237e',
+        backgroundImage: 'linear-gradient(to bottom, #FF4D33, #FF5E46, #FF6E59)',
         color: 'white',
         pt: 6,
         pb: 3,
