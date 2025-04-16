@@ -400,7 +400,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                 display: 'block'
               }}
             >
-              DelightSphere Shopping Store
+              DelightSphere 
             </Typography>
           </Box>
 
@@ -477,7 +477,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
           {!isMobile && (
             <>
               {/* Footer link button */}
-              <Button 
+              {/* <Button 
                 color="inherit"
                 onClick={scrollToFooter}
                 sx={{ 
@@ -495,7 +495,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                 }}
               >
                 Footer
-              </Button>
+              </Button> */}
               
               {isAdmin ? (
                 <Box sx={{ display: 'flex' }}>
@@ -560,7 +560,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                       border: '1px solid rgba(255, 255, 255, 0.5)'
                     }}
                   >
-                    Customer Login
+                    Customer
                   </Button>
                   <Button 
                     variant="outlined"
@@ -584,35 +584,83 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                     }}
                   >
                     <StorefrontIcon sx={{ mr: 1, fontSize: 18 }} />
-                    Seller Login
+                    Seller
                   </Button>
                 </Box>
               )}
             </>
           )}
           
-          {/* Mobile menu hamburger icon */}
+          {/* Mobile login options */}
           {isMobile && (
-            <IconButton
-              edge="end"
-              color="inherit"
-              aria-label="menu"
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <MenuIcon />
-            </IconButton>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              {isAdmin ? (
+                <IconButton color="inherit" onClick={() => navigate('/admin/dashboard')}>
+                  <DashboardIcon />
+                </IconButton>
+              ) : isCustomer ? (
+                <>
+                  <IconButton color="inherit" onClick={() => navigate('/customer/dashboard')}>
+                    <DashboardIcon />
+                  </IconButton>
+                  <IconButton color="inherit" onClick={() => navigate('/cart')}>
+                    <CartIcon />
+                  </IconButton>
+                </>
+              ) : isSeller ? (
+                <IconButton color="inherit" onClick={() => navigate('/seller/dashboard')}>
+                  <StorefrontIcon />
+                </IconButton>
+              ) : (
+                <>
+                  <Button 
+                    variant="contained"
+                    size="small"
+                    onClick={() => navigate('/customer/login')}
+                    sx={{ 
+                      background: 'linear-gradient(45deg, #ffffff 30%, #f5f5f5 90%)',
+                      color: '#1a237e',
+                      textTransform: 'none',
+                      fontSize: '0.7rem',
+                      px: 1,
+                      py: 0.4,
+                      minWidth: 'auto',
+                      borderRadius: '20px',
+                      boxShadow: '0 3px 5px 2px rgba(255, 255, 255, 0.3)'
+                    }}
+                  >
+                    Customer
+                  </Button>
+                  <Button 
+                    variant="outlined"
+                    size="small"
+                    onClick={() => navigate('/seller/login')}
+                    sx={{ 
+                      color: '#ffffff',
+                      textTransform: 'none',
+                      fontSize: '0.7rem',
+                      px: 1,
+                      py: 0.4,
+                      minWidth: 'auto',
+                      borderRadius: '20px',
+                      border: '1px solid rgba(255, 255, 255, 0.7)'
+                    }}
+                  >
+                    Seller
+                  </Button>
+                </>
+              )}
+              {(isAdmin || isCustomer || isSeller) && (
+                <IconButton color="inherit" onClick={handleLogout}>
+                  <LogoutIcon />
+                </IconButton>
+              )}
+            </Box>
           )}
         </Toolbar>
       </Container>
       
-      {/* Mobile menu drawer */}
-      <Drawer
-        anchor="right"
-        open={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
-      >
-        {mobileMenuContent}
-      </Drawer>
+      {/* Search functionality is preserved but the searchbar is removed from mobile display */}
     </AppBar>
   );
 };
