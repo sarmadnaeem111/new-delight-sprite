@@ -400,7 +400,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                 display: 'block'
               }}
             >
-              DelightSphere 
+              DelightSphere Shopping Store
             </Typography>
           </Box>
 
@@ -612,43 +612,10 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                   <StorefrontIcon />
                 </IconButton>
               ) : (
-                <>
-                  <Button 
-                    variant="contained"
-                    size="small"
-                    onClick={() => navigate('/customer/login')}
-                    sx={{ 
-                      background: 'linear-gradient(45deg, #ffffff 30%, #f5f5f5 90%)',
-                      color: '#1a237e',
-                      textTransform: 'none',
-                      fontSize: '0.7rem',
-                      px: 1,
-                      py: 0.4,
-                      minWidth: 'auto',
-                      borderRadius: '20px',
-                      boxShadow: '0 3px 5px 2px rgba(255, 255, 255, 0.3)'
-                    }}
-                  >
-                    Customer
-                  </Button>
-                  <Button 
-                    variant="outlined"
-                    size="small"
-                    onClick={() => navigate('/seller/login')}
-                    sx={{ 
-                      color: '#ffffff',
-                      textTransform: 'none',
-                      fontSize: '0.7rem',
-                      px: 1,
-                      py: 0.4,
-                      minWidth: 'auto',
-                      borderRadius: '20px',
-                      border: '1px solid rgba(255, 255, 255, 0.7)'
-                    }}
-                  >
-                    Seller
-                  </Button>
-                </>
+                // Customer and seller options removed from mobile navbar
+                <Box>
+                  {/* Login functionality is preserved but buttons are removed from mobile display */}
+                </Box>
               )}
               {(isAdmin || isCustomer || isSeller) && (
                 <IconButton color="inherit" onClick={handleLogout}>
