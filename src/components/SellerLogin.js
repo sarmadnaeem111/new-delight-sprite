@@ -18,6 +18,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import Footer from './Footer';
 
 const SellerLogin = ({ setIsSeller }) => {
   const [email, setEmail] = useState('');
@@ -176,21 +177,22 @@ const SellerLogin = ({ setIsSeller }) => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ mt: 8 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
-          <IconButton 
-            onClick={() => navigate('/')} 
-            aria-label="back to home"
-            sx={{ color: 'primary.main' }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-        </Box>
-        <Paper elevation={3} sx={{ p: 4 }}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Seller Login
-          </Typography>
+    <>
+      <Container maxWidth="sm">
+        <Box sx={{ mt: 8 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
+            <IconButton 
+              onClick={() => navigate('/')} 
+              aria-label="back to home"
+              sx={{ color: 'primary.main' }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          </Box>
+          <Paper elevation={3} sx={{ p: 4 }}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Seller Login
+            </Typography>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
               {error}
@@ -254,8 +256,10 @@ const SellerLogin = ({ setIsSeller }) => {
             Register as Seller
           </Button>
         </Paper>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+      <Footer />
+    </>
   );
 };
 
