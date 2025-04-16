@@ -1196,6 +1196,64 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           </Box>
         </Box>
 
+        {/* Promotional Banners */}
+        <Box sx={{ mb: 5, width: '97%' }}>
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 2,
+            width: '100%'
+          }}>
+            {/* Banner 1 - Valentine's Sale */}
+            <Box 
+              component="img"
+              src="https://esellerstorevip.biz/public/uploads/all/5AmdWNHfcLOMTKIfbWAoNEFqRjoRSDIR78JM4Vqk.png"
+              alt="Valentine's Big Sale"
+              sx={{ 
+                width: { xs: '100%', md: '33.33%' }, 
+                height: { xs: 120, md: 150 },
+                objectFit: 'cover',
+                borderRadius: 1,
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                '&:hover': { transform: 'scale(1.02)' }
+              }}
+            />
+            
+            {/* Banner 2 - Flash Sale */}
+            <Box 
+              component="img"
+              src="https://esellerstorevip.biz/public/uploads/all/A4EsJbP8jJXmlQmdlCwPG7gGhZ6UAjW7sfEnAbzb.png"
+              alt="Flash Sale"
+              sx={{ 
+                width: { xs: '100%', md: '33.33%' }, 
+                height: { xs: 120, md: 150 },
+                objectFit: 'cover',
+                borderRadius: 1,
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                '&:hover': { transform: 'scale(1.02)' }
+              }}
+            />
+            
+            {/* Banner 3 - 15% Off Everything */}
+            <Box 
+              component="img"
+              src="https://esellerstorevip.biz/public/uploads/all/RyNqpjRAQov3NhNSiB885zdRXKISuzOd5I7i285p.png"
+              alt="15% Off Everything"
+              sx={{ 
+                width: { xs: '100%', md: '33.33%' }, 
+                height: { xs: 120, md: 150 },
+                objectFit: 'cover',
+                borderRadius: 1,
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                '&:hover': { transform: 'scale(1.02)' }
+              }}
+            />
+          </Box>
+        </Box>
+
         {/* Mobile Todays Deal Section - Below Shop by Category */}
         <Box 
           sx={{ 
@@ -1508,66 +1566,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
 
         {/* New Products Section */}
        
-                {/* Promotional Banners */}
-        <Box sx={{ mb: 5, width: '97%' }}>
-          <Box sx={{ 
-            display: 'flex', 
-            flexDirection: { xs: 'column', md: 'row' },
-            gap: 2,
-            width: '100%'
-          }}>
-            {/* Banner 1 - Valentine's Sale */}
-            <Box 
-              component="img"
-              src="https://esellerstorevip.biz/public/uploads/all/5AmdWNHfcLOMTKIfbWAoNEFqRjoRSDIR78JM4Vqk.png"
-              alt="Valentine's Big Sale"
-              sx={{ 
-                width: { xs: '100%', md: '33.33%' }, 
-                height: { xs: 120, md: 150 },
-                objectFit: 'cover',
-                borderRadius: 1,
-                cursor: 'pointer',
-                transition: 'transform 0.3s ease',
-                '&:hover': { transform: 'scale(1.02)' }
-              }}
-            />
-            
-            {/* Banner 2 - Flash Sale */}
-            <Box 
-              component="img"
-              src="https://esellerstorevip.biz/public/uploads/all/A4EsJbP8jJXmlQmdlCwPG7gGhZ6UAjW7sfEnAbzb.png"
-              alt="Flash Sale"
-              sx={{ 
-                width: { xs: '100%', md: '33.33%' }, 
-                height: { xs: 120, md: 150 },
-                objectFit: 'cover',
-                borderRadius: 1,
-                cursor: 'pointer',
-                transition: 'transform 0.3s ease',
-                '&:hover': { transform: 'scale(1.02)' }
-              }}
-            />
-            
-            {/* Banner 3 - 15% Off Everything */}
-            <Box 
-              component="img"
-              src="https://esellerstorevip.biz/public/uploads/all/RyNqpjRAQov3NhNSiB885zdRXKISuzOd5I7i285p.png"
-              alt="15% Off Everything"
-              sx={{ 
-                width: { xs: '100%', md: '33.33%' }, 
-                height: { xs: 120, md: 150 },
-                objectFit: 'cover',
-                borderRadius: 1,
-                cursor: 'pointer',
-                transition: 'transform 0.3s ease',
-                '&:hover': { transform: 'scale(1.02)' }
-              }}
-            />
-          </Box>
-        </Box>
-
-
-        {/* Special Offers Section */}
+                {/* Special Offers Section */}
         <Box sx={{ mb: 4 }}>
           <Fade in={true} timeout={500}>
             <Paper
