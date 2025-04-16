@@ -6671,22 +6671,25 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               }}
             >
               {/* Brand 1 */}
-              <Box sx={{
-                minWidth: { xs: 150, sm: 180, md: 200 },
-                height: { xs: 100, sm: 120, md: 130 },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid #e0e0e0',
-                borderRadius: 2,
-                p: 2,
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 3
-                }
-              }}>
+              <Box 
+                onClick={() => navigate('/customer/login')}
+                sx={{
+                  minWidth: { xs: 150, sm: 180, md: 200 },
+                  height: { xs: 100, sm: 120, md: 130 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  p: 2,
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 3
+                  }
+                }}>
                 <Box 
                   component="img"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png"
@@ -6704,22 +6707,25 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Box>
 
               {/* Brand 2 */}
-              <Box sx={{
-                minWidth: { xs: 150, sm: 180, md: 200 },
-                height: { xs: 100, sm: 120, md: 130 },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid #e0e0e0',
-                borderRadius: 2,
-                p: 2,
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 3
-                }
-              }}>
+              <Box 
+                onClick={() => navigate('/customer/login')}
+                sx={{
+                  minWidth: { xs: 150, sm: 180, md: 200 },
+                  height: { xs: 100, sm: 120, md: 130 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  p: 2,
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 3
+                  }
+                }}>
                 <Box 
                   component="img"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png"
@@ -6737,22 +6743,25 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Box>
 
               {/* Brand 3 */}
-              <Box sx={{
-                minWidth: { xs: 150, sm: 180, md: 200 },
-                height: { xs: 100, sm: 120, md: 130 },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid #e0e0e0',
-                borderRadius: 2,
-                p: 2,
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 3
-                }
-              }}>
+              <Box 
+                onClick={() => navigate('/customer/login')}
+                sx={{
+                  minWidth: { xs: 150, sm: 180, md: 200 },
+                  height: { xs: 100, sm: 120, md: 130 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  p: 2,
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 3
+                  }
+                }}>
                 <Box 
                   component="img"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png"
@@ -6770,22 +6779,25 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Box>
 
               {/* Brand 4 */}
-              <Box sx={{
-                minWidth: { xs: 150, sm: 180, md: 200 },
-                height: { xs: 100, sm: 120, md: 130 },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid #e0e0e0',
-                borderRadius: 2,
-                p: 2,
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 3
-                }
-              }}>
+              <Box 
+                onClick={() => navigate('/customer/login')}
+                sx={{
+                  minWidth: { xs: 150, sm: 180, md: 200 },
+                  height: { xs: 100, sm: 120, md: 130 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  p: 2,
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 3
+                  }
+                }}>
                 <Box 
                   component="img"
                   src="https://esellerstorevip.biz/public/uploads/all/9iSW4Ta8K8FMJV6panV26g7ueXryjhQYVlKDntkH.png"
@@ -6803,22 +6815,25 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Box>
 
               {/* Brand 5 */}
-              <Box sx={{
-                minWidth: { xs: 150, sm: 180, md: 200 },
-                height: { xs: 100, sm: 120, md: 130 },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid #e0e0e0',
-                borderRadius: 2,
-                p: 2,
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 3
-                }
-              }}>
+              <Box 
+                onClick={() => navigate('/customer/login')}
+                sx={{
+                  minWidth: { xs: 150, sm: 180, md: 200 },
+                  height: { xs: 100, sm: 120, md: 130 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  p: 2,
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 3
+                  }
+                }}>
                 <Box 
                   component="img"
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Xiaomi_logo_%282021-%29.svg/1024px-Xiaomi_logo_%282021-%29.svg.png"
@@ -6836,22 +6851,25 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Box>
 
               {/* Brand 6 */}
-              <Box sx={{
-                minWidth: { xs: 150, sm: 180, md: 200 },
-                height: { xs: 100, sm: 120, md: 130 },
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: '1px solid #e0e0e0',
-                borderRadius: 2,
-                p: 2,
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 3
-                }
-              }}>
+              <Box 
+                onClick={() => navigate('/customer/login')}
+                sx={{
+                  minWidth: { xs: 150, sm: 180, md: 200 },
+                  height: { xs: 100, sm: 120, md: 130 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: 2,
+                  p: 2,
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  cursor: 'pointer',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: 3
+                  }
+                }}>
                 <Box 
                   component="img"
                   src="https://esellerstorevip.biz/public/uploads/all/hR2fnUl99blLe4umEbF87XBqSZJc8j3h3NR9bVux.webp"
@@ -6869,7 +6887,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Box>
 
               {/* Brand 7 */}
-              <Box sx={{
+              <Box 
+              onClick={() => navigate('/customer/login')}
+              sx={{
                 minWidth: { xs: 150, sm: 180, md: 200 },
                 height: { xs: 100, sm: 120, md: 130 },
                 display: 'flex',
@@ -6880,6 +6900,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 borderRadius: 2,
                 p: 2,
                 transition: 'transform 0.3s, box-shadow 0.3s',
+                cursor: 'pointer',
                 '&:hover': {
                   transform: 'translateY(-5px)',
                   boxShadow: 3
@@ -6902,7 +6923,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
               </Box>
 
               {/* Brand 8 */}
-              <Box sx={{
+              <Box
+              onClick={() => navigate('/customer/login')}
+               sx={{
                 minWidth: { xs: 150, sm: 180, md: 200 },
                 height: { xs: 100, sm: 120, md: 130 },
                 display: 'flex',
@@ -6913,6 +6936,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 borderRadius: 2,
                 p: 2,
                 transition: 'transform 0.3s, box-shadow 0.3s',
+                cursor: 'pointer',
                 '&:hover': {
                   transform: 'translateY(-5px)',
                   boxShadow: 3
