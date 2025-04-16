@@ -16,6 +16,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 const CustomerLogin = ({ setIsCustomer }) => {
   const [email, setEmail] = useState('');
@@ -57,21 +58,22 @@ const CustomerLogin = ({ setIsCustomer }) => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ mt: 8 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
-          <IconButton 
-            onClick={() => navigate('/')} 
-            aria-label="back to home"
-            sx={{ color: 'primary.main' }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
-        </Box>
-        <Paper elevation={3} sx={{ p: 4 }}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Customer Login
-          </Typography>
+    <>
+      <Container maxWidth="sm">
+        <Box sx={{ mt: 8 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 2 }}>
+            <IconButton 
+              onClick={() => navigate('/')} 
+              aria-label="back to home"
+              sx={{ color: 'primary.main' }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          </Box>
+          <Paper elevation={3} sx={{ p: 4 }}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Customer Login
+            </Typography>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
               {error}
@@ -126,9 +128,35 @@ const CustomerLogin = ({ setIsCustomer }) => {
           >
             Create New Account
           </Button>
+          
+          <Box sx={{ mt: 3, mb: 2 }}>
+            <Divider>
+              <Typography variant="body2" color="textSecondary">
+                Are you a seller?
+              </Typography>
+            </Divider>
+          </Box>
+          
+          <Button
+            fullWidth
+            variant="text"
+            onClick={() => navigate('/seller/login')}
+            sx={{ 
+              mt: 1,
+              color: 'secondary.main',
+              '&:hover': {
+                backgroundColor: 'rgba(156, 39, 176, 0.04)'
+              }
+            }}
+            disabled={loading}
+          >
+            Seller Login
+          </Button>
         </Paper>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+      <Footer />
+    </>
   );
 };
 
