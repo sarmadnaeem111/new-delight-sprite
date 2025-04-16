@@ -30,6 +30,7 @@ import { useNavigate } from 'react-router-dom';
 import { uploadToCloudinary } from '../utils/cloudinaryConfig';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Footer from './Footer';
 
 const SELLER_SECRET_KEY = "96274";
 
@@ -178,12 +179,13 @@ const SellerRegister = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ mt: 8 }}>
-        <Paper elevation={3} sx={{ p: 4 }}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Seller Registration
-          </Typography>
+    <>
+      <Container maxWidth="sm">
+        <Box sx={{ mt: 8 }}>
+          <Paper elevation={3} sx={{ p: 4 }}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Seller Registration
+            </Typography>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
               {error}
@@ -434,7 +436,9 @@ const SellerRegister = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </Container>
+      </Container>
+      <Footer />
+    </>
   );
 };
 
