@@ -1254,25 +1254,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           </Box>
         </Box>
 
-        {/* Mobile Todays Deal Section - Below Shop by Category */}
-        <Box 
-          sx={{ 
-            display: { xs: 'block', md: 'none' },
-            width: '100%',
-            mb: 4,
-            px: 2
-          }}
-        >
-          <Box sx={{ 
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            mb: 2
-          }}>
-            <Typography variant="h7" component="h3" fontWeight="bold" sx={{ color: '#333' }}>
-              Todays Deal
-            </Typography>
-            <Box 
+        <Typography backgroundColor="#FFECE8" variant="h6" component="h3" fontWeight="bold" sx={{ color: '#333', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+              Todays Deal 
+              <Box 
               component="span" 
               sx={{ 
                 bgcolor: 'red', 
@@ -1285,6 +1269,28 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
             >
               Hot
             </Box>
+            </Typography>
+            
+
+
+        {/* Mobile Todays Deal Section - Below Shop by Category */}
+        <Box 
+          sx={{ 
+            backgroundColor: '#FF4D33',
+            paddingBottom: 2,
+            display: { xs: 'block', md: 'none' },
+            width: '100%',
+            mb: 4,
+            px: 2
+          }}
+        >
+          <Box sx={{ 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            mb: 2
+          }}>
+            
           </Box>
           
           <Box sx={{ 
