@@ -12,6 +12,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 const CustomerRegister = () => {
   const [email, setEmail] = useState('');
@@ -48,12 +49,13 @@ const CustomerRegister = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ mt: 8 }}>
-        <Paper elevation={3} sx={{ p: 4 }}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Customer Registration
-          </Typography>
+    <>
+      <Container maxWidth="sm">
+        <Box sx={{ mt: 8 }}>
+          <Paper elevation={3} sx={{ p: 4 }}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Customer Registration
+            </Typography>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
               {error}
@@ -117,8 +119,10 @@ const CustomerRegister = () => {
             </Button>
           </form>
         </Paper>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+      <Footer />
+    </>
   );
 };
 
