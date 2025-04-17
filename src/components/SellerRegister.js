@@ -180,9 +180,9 @@ const SellerRegister = () => {
 
   return (
     <>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" sx={{ width: '100%', px: { xs: 0, sm: 3, md: 4 } }}>
         <Box sx={{ mt: 8 }}>
-          <Paper elevation={3} sx={{ p: 4 }}>
+          <Paper elevation={3} sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
             <Typography variant="h4" align="center" gutterBottom>
               Seller Registration
             </Typography>
@@ -333,7 +333,8 @@ const SellerRegister = () => {
                       variant="outlined"
                       component="span"
                       startIcon={<CloudUploadIcon />}
-                      sx={{ mb: 2 }}
+                      sx={{ mb: 2  }}
+                    
                     >
                       Upload Back Side
                     </Button>
@@ -365,7 +366,14 @@ const SellerRegister = () => {
                 fullWidth
                 variant="contained"
                 disabled={isUploading}
-                sx={{ height: 48 }}
+                sx={{ height: 48 
+                  ,backgroundImage: 'linear-gradient(to bottom, #FF4D33, #FF5E46, #FF6E59)',
+                '&:hover': {
+                  backgroundImage: 'linear-gradient(to bottom, #FF5E46, #FF6E59, #FF7E69)',
+                  boxShadow: '0 4px 8px rgba(255, 77, 51, 0.3)'
+                }
+
+                }}
               >
                 {isUploading ? 'Processing...' : 'Register as Seller'}
               </Button>
