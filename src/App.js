@@ -12,6 +12,7 @@ import HomePage from './components/HomePage';
 import SellerLogin from './components/SellerLogin';
 import SellerRegister from './components/SellerRegister';
 import SellerDashboard from './components/SellerDashboard';
+import SellerOrderDetailsPage from './components/SellerOrderDetailsPage';
 import Setup from './components/Setup';
 import { Container, CssBaseline, ThemeProvider, createTheme, Toolbar } from '@mui/material';
 import { auth } from './firebase';
@@ -230,6 +231,11 @@ function AppContent({
           <Route path="/seller/dashboard" element={
             <ProtectedSellerRoute>
               <SellerDashboard />
+            </ProtectedSellerRoute>
+          } />
+          <Route path="/seller/order/:orderId" element={
+            <ProtectedSellerRoute>
+              <SellerOrderDetailsPage />
             </ProtectedSellerRoute>
           } />
         </Routes>
