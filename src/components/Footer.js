@@ -119,7 +119,10 @@ const Footer = () => {
             </Link> */}
             <Button
               variant="contained"
-              onClick={() => navigate('/seller/register')}
+              onClick={() => {
+                navigate('/seller/register');
+                window.scrollTo(0, 0);
+              }}
               startIcon={<StorefrontIcon />}
               sx={{
                 mt: 2,
