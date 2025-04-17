@@ -3538,98 +3538,98 @@ const AdminDashboard = () => {
               <CircularProgress />
             </Box>
           ) : (
-            <TableContainer component={Paper} sx={{ maxHeight: 400, overflowY: 'auto' }}>
-              <Table stickyHeader>
-                <TableHead>
-                  <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
-                    <TableCell sx={{ color: 'white' }}>Order ID</TableCell>
-                    <TableCell sx={{ color: 'white' }}>Date</TableCell>
-                    <TableCell sx={{ color: 'white' }}>Seller</TableCell>
-                    <TableCell sx={{ color: 'white' }}>Total</TableCell>
-                    <TableCell sx={{ color: 'white' }}>Status</TableCell>
-                    <TableCell sx={{ color: 'white' }}>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* Filter for admin-created orders only and by selected seller */}
-                  {selectedSellerEmail && orders.filter(order => 
+            <Box>
+              {/* Filter for admin-created orders only and by selected seller */}
+              {selectedSellerEmail && orders.filter(order => 
+                order.source === 'admin' && 
+                order.sellerInfo?.email === selectedSellerEmail
+              ).length > 0 ? (
+                orders
+                  .filter(order => 
                     order.source === 'admin' && 
                     order.sellerInfo?.email === selectedSellerEmail
-                  ).length > 0 ? (
-                    orders
-                      .filter(order => 
-                        order.source === 'admin' && 
-                        order.sellerInfo?.email === selectedSellerEmail
-                      )
-                      .slice(0, 10)
-                      .map((order) => (
-                        <TableRow 
-                          key={order.id} 
-                          hover
-                          sx={{
-                            bgcolor: alpha(theme.palette.secondary.light, 0.1),
-                            '&:hover': { bgcolor: alpha(theme.palette.secondary.light, 0.2) },
-                          }}
-                        >
-                          <TableCell>
-                            <Tooltip title="View order details">
-                              <Typography 
-                                variant="body2" 
-                                sx={{ 
-                                  cursor: 'pointer',
-                                  '&:hover': { color: theme.palette.primary.main },
-                                  fontWeight: 'medium',
-                                }}
-                                onClick={() => handleViewDetails(order)}
-                              >
-                                {order.orderNumber || order.id.substring(0, 8)}
-                              </Typography>
-                            </Tooltip>
-                          </TableCell>
-                          <TableCell>{formatDate(order.createdAt)}</TableCell>
-                          <TableCell>
-                            {order.sellerInfo?.email || 'Unknown Seller'}
-                          </TableCell>
-                          <TableCell>
-                            ${Number(order.totalAmount || 0).toFixed(2)}
-                          </TableCell>
-                          <TableCell>
-                            <Chip 
-                              label={order.status} 
-                              color={
-                                order.status === 'completed' ? 'success' :
-                                order.status === 'processing' ? 'info' :
-                                order.status === 'pending' ? 'warning' :
-                                order.status === 'cancelled' ? 'error' : 'default'
-                              }
-                              size="small"
-                            />
-                          </TableCell>
-                          <TableCell>
-                            <IconButton 
-                              size="small" 
-                              color="primary"
+                  )
+                  .slice(0, 10)
+                  .map((order) => (
+                    <Paper 
+                      key={order.id}
+                      sx={{
+                        mb: 2,
+                        p: 2,
+                        bgcolor: alpha(theme.palette.secondary.light, 0.1),
+                        '&:hover': { bgcolor: alpha(theme.palette.secondary.light, 0.2) },
+                      }}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                          <Typography variant="subtitle2" color="text.secondary">Order ID</Typography>
+                          <Tooltip title="View order details">
+                            <Typography 
+                              variant="body2" 
+                              sx={{ 
+                                cursor: 'pointer',
+                                '&:hover': { color: theme.palette.primary.main },
+                                fontWeight: 'medium',
+                              }}
                               onClick={() => handleViewDetails(order)}
                             >
-                              <VisibilityIcon fontSize="small" />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={6} align="center">
-                        <Typography variant="body2" color="text.secondary" sx={{ py: 2 }}>
-                          {selectedSellerEmail 
-                            ? `No admin-assigned orders found for ${selectedSellerEmail}` 
-                            : 'Please select a seller to view their orders'}
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                              {order.orderNumber || order.id.substring(0, 8)}
+                            </Typography>
+                          </Tooltip>
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                          <Typography variant="subtitle2" color="text.secondary">Date</Typography>
+                          <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                          <Typography variant="subtitle2" color="text.secondary">Seller</Typography>
+                          <Typography variant="body2">{order.sellerInfo?.email || 'Unknown Seller'}</Typography>
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                          <Typography variant="subtitle2" color="text.secondary">Total</Typography>
+                          <Typography variant="body2">${Number(order.totalAmount || 0).toFixed(2)}</Typography>
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                          <Typography variant="subtitle2" color="text.secondary">Status</Typography>
+                          <Chip 
+                            label={order.status} 
+                            color={
+                              order.status === 'completed' ? 'success' :
+                              order.status === 'processing' ? 'info' :
+                              order.status === 'pending' ? 'warning' :
+                              order.status === 'cancelled' ? 'error' : 'default'
+                            }
+                            size="small"
+                          />
+                        </Grid>
+                        
+                        <Grid item xs={12} sm={6} md={4} lg={2}>
+                          <Typography variant="subtitle2" color="text.secondary">Actions</Typography>
+                          <IconButton 
+                            size="small" 
+                            color="primary"
+                            onClick={() => handleViewDetails(order)}
+                          >
+                            <VisibilityIcon fontSize="small" />
+                          </IconButton>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  ))
+              ) : (
+                <Box sx={{ p: 3, textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary">
+                    {selectedSellerEmail 
+                      ? `No admin-assigned orders found for ${selectedSellerEmail}` 
+                      : 'Please select a seller to view their orders'}
+                  </Typography>
+                </Box>
+              )}
+            </Box>
           )}
         </SectionCard>
       </Box>
@@ -3638,8 +3638,8 @@ const AdminDashboard = () => {
 
   const renderOrdersContent = () => {
     return (
-        <Box sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Box sx={{ p: 3, width: '100%', px: { xs: 0, sm: 3, md: 4 } }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, px: { xs: 0, sm: 3, md: 4 } }}>
           <Typography variant="h4" gutterBottom>
               Orders Management
           </Typography>
@@ -3676,65 +3676,82 @@ const AdminDashboard = () => {
           />
         </Box>
         
-        <Paper sx={{ width: '100%', overflow: 'hidden', mb: 4 }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="orders table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Order ID</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Product Names</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Shipping Address</TableCell>
-                    <TableCell>Phone</TableCell>
-                    <TableCell>Total</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Assigned To</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {filteredOrders
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((order) => (
-                    <TableRow key={order.id} hover>
-                      <TableCell>{order.orderNumber || order.id.substring(0, 8)}</TableCell>
-                      <TableCell>{order.customerName || order.customerEmail || 'Anonymous'}</TableCell>
-                      <TableCell>{order.customerEmail || 'No email'}</TableCell>
-                      <TableCell>
-                        <Tooltip title={order.items?.map(item => `${item.name} (x${item.quantity})`).join('\n') || 'No products'}>
-                          <span>
-                            {order.items?.map(item => item.name).join(', ').slice(0, 30)}
-                            {order.items && order.items.join(', ').length > 30 ? '...' : ''}
-                            {!order.items && 'No products'}
-                          </span>
-                        </Tooltip>
-                      </TableCell>
-                      <TableCell>{formatDate(order.createdAt)}</TableCell>
-                      <TableCell>
-                        <Tooltip title={String(order.shippingAddress || 'No address provided')}>
-                          <span>
-                            {String(order.shippingAddress || 'No address').slice(0, 20)}
-                            {order.shippingAddress && String(order.shippingAddress).length > 20 ? '...' : ''}
-                          </span>
-                        </Tooltip>
-                      </TableCell>
-                      <TableCell>{order.customerPhone || 'No phone'}</TableCell>
-                      <TableCell>${parseFloat(order.total).toFixed(2)}</TableCell>
-                      <TableCell>
-                        <Chip
-                          label={order.status}
-                          color={
-                            order.status === 'completed' ? 'success' :
-                            order.status === 'processing' ? 'info' :
-                            order.status === 'assigned' ? 'primary' :
-                            order.status === 'cancelled' ? 'error' : 'default'
-                          }
-                          size="small"
-                        />
-                      </TableCell>
-                      <TableCell>
+        <Grid container spacing={2}>
+          {filteredOrders
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((order) => (
+              <Grid item xs={12} key={order.id}>
+                <Paper sx={{ p: 2, mb: 2 }}>
+                  <Grid container spacing={1}>
+                    {/* Order Information displayed vertically */}
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Order ID</Typography>
+                      <Typography variant="body2">{order.orderNumber || order.id.substring(0, 8)}</Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Customer</Typography>
+                      <Typography variant="body2">{order.customerName || order.customerEmail || 'Anonymous'}</Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Email</Typography>
+                      <Typography variant="body2">{order.customerEmail || 'No email'}</Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Product Names</Typography>
+                      <Tooltip title={order.items?.map(item => `${item.name} (x${item.quantity})`).join('\n') || 'No products'}>
+                        <Typography variant="body2" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {order.items?.map(item => item.name).join(', ').slice(0, 30)}
+                          {order.items && order.items.join(', ').length > 30 ? '...' : ''}
+                          {!order.items && 'No products'}
+                        </Typography>
+                      </Tooltip>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Date</Typography>
+                      <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Shipping Address</Typography>
+                      <Tooltip title={String(order.shippingAddress || 'No address provided')}>
+                        <Typography variant="body2" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {String(order.shippingAddress || 'No address').slice(0, 20)}
+                          {order.shippingAddress && String(order.shippingAddress).length > 20 ? '...' : ''}
+                        </Typography>
+                      </Tooltip>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Phone</Typography>
+                      <Typography variant="body2">{order.customerPhone || 'No phone'}</Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Total</Typography>
+                      <Typography variant="body2">${parseFloat(order.total).toFixed(2)}</Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Status</Typography>
+                      <Chip
+                        label={order.status}
+                        color={
+                          order.status === 'completed' ? 'success' :
+                          order.status === 'processing' ? 'info' :
+                          order.status === 'assigned' ? 'primary' :
+                          order.status === 'pending' ? 'warning' :
+                          order.status === 'cancelled' ? 'error' : 'default'
+                        }
+                        size="small"
+                      />
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Assigned To</Typography>
                       {order.sellerId ? (
                         <Tooltip title="View seller details">
                           <Chip 
@@ -3752,12 +3769,14 @@ const AdminDashboard = () => {
                       ) : (
                         <Chip label="Unassigned" size="small" color="default" variant="outlined" />
                       )}
-                      </TableCell>
-                    <TableCell>
+                    </Grid>
+                    
+                    <Grid item xs={12} sm={4} md={3} lg={2}>
+                      <Typography variant="subtitle2" color="text.secondary">Actions</Typography>
                       <Box sx={{ display: 'flex', gap: 1 }}>
                         <Tooltip title="View Details">
-                        <IconButton
-                          size="small"
+                          <IconButton
+                            size="small"
                             color="primary"
                             onClick={() => handleViewDetails(order)}
                           >
@@ -3790,22 +3809,22 @@ const AdminDashboard = () => {
                           </Tooltip>
                         )}
                       </Box>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={filteredOrders.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-          </Paper>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </Grid>
+            ))}
+        </Grid>
+        
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={filteredOrders.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
 
         {/* Order Details Modal */}
         <OrderDetailsModal
