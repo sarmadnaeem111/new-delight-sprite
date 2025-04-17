@@ -1592,7 +1592,7 @@ const SellerDashboard = () => {
   );
 
   const renderProductsContent = () => (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
+    <Container maxWidth={false} sx={{ mt: 4, width: '100%', px: { xs: 1, sm: 3, md: 4 } }}>
       <Typography variant="h4" gutterBottom fontWeight="medium">
         Products Management
       </Typography>
@@ -1604,7 +1604,7 @@ const SellerDashboard = () => {
           mb: 2,
         }}
       >
-        <Box sx={{ display: "flex", gap: 2, flexGrow: 1, maxWidth: "70%" }}>
+        <Box sx={{ display: "flex", gap: 2, flexGrow: 1, maxWidth: "100%" }}>
           <TextField
             placeholder="Search by product name..."
             value={searchQuery}
@@ -1644,105 +1644,133 @@ const SellerDashboard = () => {
           Add New Products
         </Button>
       </Box>
-      <Paper elevation={3} sx={{ p: 3 }}>
+      <Paper elevation={3} sx={{ p: 2, px: { xs: 1, sm: 2, md: 3 }, width: '100%', overflow: 'hidden' }}>
         {sellerProducts.length > 0 ? (
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Image</TableCell>
-                  <TableCell>Product Name</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Price</TableCell>
-                  <TableCell>Profit</TableCell>
-                  {/* <TableCell>Grand Total</TableCell> */}
-                  <TableCell>Status</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {filteredProducts.map((product) => (
-                  <TableRow key={product.id}>
-                    <TableCell>
-                      <Box
-                        component="img"
-                        src={product.imageUrl}
-                        alt={product.name}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src =
-                            process.env.PUBLIC_URL + "/images/product1.jpg";
-                        }}
-                        sx={{
-                          width: 80,
-                          height: 80,
-                          objectFit: "cover",
-                          borderRadius: 1,
-                          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                          backgroundColor: "#f5f5f5",
-                          display: "block",
-                          border: "1px solid #e0e0e0",
-                        }}
-                        loading="lazy"
-                      />
-                    </TableCell>
-                    <TableCell>{product.name}</TableCell>
-                    <TableCell>{product.description}</TableCell>
-                    <TableCell>${Number(product.price).toFixed(2)}</TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: "medium",
-                          color: "success.main",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        ${(Number(product.price || 0) * 0.23).toFixed(2)}
+          <Grid container spacing={{ xs: 1, sm: 2, md: 3 }}>
+            {filteredProducts.map((product) => (
+              <Grid item xs={6} sm={6} md={4} lg={3} key={product.id}>
+                <Card
+                  elevation={3}
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    transition: 'transform 0.2s, box-shadow 0.2s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: (theme) => `0 8px 16px ${alpha(theme.palette.primary.main, 0.15)}`,
+                    },
+                    position: 'relative',
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                  }}
+                >
+                  {/* Status indicator */}
+                  <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
+                    <Chip
+                      label={product.status || "Active"}
+                      color={
+                        product.status === "Inactive"
+                          ? "default"
+                          : product.status === "Pending"
+                            ? "warning"
+                            : "success"
+                      }
+                      size="small"
+                      sx={{ fontWeight: "medium" }}
+                    />
+                  </Box>
+                  
+                  {/* Product Image */}
+                  <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
+                    <Box
+                      component="img"
+                      src={product.imageUrl}
+                      alt={product.name}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = process.env.PUBLIC_URL + "/images/product1.jpg";
+                      }}
+                      sx={{
+                        width: '100%',
+                        height: { xs: 120, sm: 150, md: 180 },
+                        objectFit: 'contain',
+                        borderRadius: 1,
+                        backgroundColor: '#f5f5f5',
+                      }}
+                      loading="lazy"
+                    />
+                  </Box>
+                  
+                  {/* Product Details */}
+                  <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    {/* Product Name */}
+                    <Typography variant="h6" component="h3" sx={{ mb: 1, fontWeight: 600 }}>
+                      {product.name}
+                    </Typography>
+                    
+                    {/* Product Description - with text truncation */}
+                    <Typography 
+                      variant="body2" 
+                      color="text.secondary" 
+                      sx={{ 
+                        mb: 2,
+                        flexGrow: 1,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: '-webkit-box',
+                        WebkitLineClamp: { xs: 2, sm: 3 },
+                        WebkitBoxOrient: 'vertical',
+                      }}
+                    >
+                      {product.description}
+                    </Typography>
+                    
+                    {/* Price and Profit Information */}
+                    <Box sx={{ mt: 'auto' }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', fontSize: { xs: '0.9rem', sm: '1.1rem', md: '1.25rem' } }}>
+                          ${Number(product.price).toFixed(2)}
+                        </Typography>
+                        
                         <Typography
-                          variant="caption"
-                          sx={{ ml: 1, color: "text.secondary" }}
-                        ></Typography>
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: "medium",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        $
-                        {(
-                          Number(product.price || 0) +
-                          Number(product.price || 0) * 0.23
-                        ).toFixed(2)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Chip
-                        label={product.status || "Active"}
-                        color={
-                          product.status === "Inactive"
-                            ? "default"
-                            : product.status === "Pending"
-                              ? "warning"
-                              : "success"
-                        }
-                        size="small"
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                          variant="body2"
+                          sx={{
+                            fontWeight: "medium",
+                            fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.875rem' },
+                            color: "success.main",
+                          }}
+                        >
+                          Profit: ${(Number(product.price || 0) * 0.23).toFixed(2)}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
         ) : (
-          <Typography color="textSecondary">
-            No products added yet. Click "Add New Products" to get started.
-          </Typography>
+          <Box
+            sx={{
+              p: 3,
+              textAlign: "center",
+              borderRadius: 2,
+              backgroundColor: "background.paper",
+            }}
+          >
+            <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
+              You don't have any products yet
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={() => setIsProductDialogOpen(true)}
+            >
+              Add Products
+            </Button>
+          </Box>
         )}
       </Paper>
 
@@ -1817,120 +1845,159 @@ const SellerDashboard = () => {
             />
           </Box>
           
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      indeterminate={
-                        selectedProducts.length > 0 &&
-                        selectedProducts.length < adminProducts.length
-                      }
-                      checked={
-                        selectedProducts.length === adminProducts.length &&
-                        adminProducts.length > 0
-                      }
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedProducts(adminProducts.map((p) => p.id));
-                        } else {
-                          setSelectedProducts([]);
-                        }
+          {/* Select All Checkbox */}
+          <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  indeterminate={
+                    selectedProducts.length > 0 &&
+                    selectedProducts.length < adminProducts.length
+                  }
+                  checked={
+                    selectedProducts.length === adminProducts.length &&
+                    adminProducts.length > 0
+                  }
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedProducts(adminProducts.map((p) => p.id));
+                    } else {
+                      setSelectedProducts([]);
+                    }
+                  }}
+                />
+              }
+              label="Select All"
+            />
+          </Box>
+          
+          {/* Products Card View */}
+          {loading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+              <CircularProgress size={40} />
+            </Box>
+          ) : getFilteredProducts().length === 0 ? (
+            <Box sx={{ textAlign: "center", p: 4, bgcolor: 'background.paper', borderRadius: 2 }}>
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                No products match your search criteria
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Try adjusting your search terms or price range
+              </Typography>
+              {(productSearchQuery || productPriceRange.min || productPriceRange.max) && (
+                <Button 
+                  onClick={clearProductFilters}
+                  color="primary"
+                  sx={{ mt: 2 }}
+                >
+                  Clear Filters
+                </Button>
+              )}
+            </Box>
+          ) : (
+            <Grid container spacing={2}>
+              {getFilteredProducts().map((product) => {
+                const isSelected = selectedProducts.includes(product.id);
+                const isAlreadyAdded = sellerData?.products?.includes(product.id);
+                
+                return (
+                  <Grid item xs={12} sm={6} md={4} key={product.id}>
+                    <Card 
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                        borderRadius: 2,
+                        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+                        boxShadow: isSelected ? '0 8px 16px rgba(25, 118, 210, 0.2)' : '0 2px 8px rgba(0,0,0,0.1)',
+                        border: isSelected ? '2px solid #1976d2' : '1px solid rgba(0,0,0,0.12)',
+                        backgroundColor: isAlreadyAdded ? 'rgba(0, 0, 0, 0.04)' : 'inherit',
+                        '&:hover': {
+                          transform: isAlreadyAdded ? 'none' : 'translateY(-4px)',
+                          boxShadow: isAlreadyAdded ? '0 2px 8px rgba(0,0,0,0.1)' : '0 8px 16px rgba(0,0,0,0.15)'
+                        },
+                        position: 'relative',
+                        cursor: isAlreadyAdded ? 'default' : 'pointer',
+                        opacity: isAlreadyAdded ? 0.7 : 1
                       }}
-                    />
-                  </TableCell>
-                  <TableCell>Image</TableCell>
-                  <TableCell>Product Name</TableCell>
-                  <TableCell>Description</TableCell>
-                  <TableCell>Price</TableCell>
-                  <TableCell>Profit</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {loading ? (
-                  <TableRow>
-                    <TableCell colSpan={6} align="center" sx={{ py: 3 }}>
-                      <CircularProgress size={40} />
-                    </TableCell>
-                  </TableRow>
-                ) : getFilteredProducts().length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={6} align="center" sx={{ py: 3 }}>
-                      <Box sx={{ textAlign: "center", p: 2 }}>
-                        <Typography variant="body1" color="textSecondary" gutterBottom>
-                          No products match your search criteria
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                          Try adjusting your search terms or price range
-                        </Typography>
-                        {(productSearchQuery || productPriceRange.min || productPriceRange.max) && (
-                          <Button 
-                            onClick={clearProductFilters}
-                            color="primary"
-                            sx={{ mt: 1 }}
-                          >
-                            Clear Filters
-                          </Button>
-                        )}
+                      onClick={() => {
+                        if (!isAlreadyAdded) handleProductSelection(product.id);
+                      }}
+                    >
+                      {/* Checkbox overlay in top-right corner */}
+                      <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
+                        <Checkbox
+                          checked={isSelected}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            handleProductSelection(product.id);
+                          }}
+                          disabled={isAlreadyAdded}
+                          sx={{
+                            backgroundColor: 'rgba(255,255,255,0.8)',
+                            borderRadius: '50%',
+                            padding: '4px',
+                            '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
+                          }}
+                        />
                       </Box>
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  getFilteredProducts().map((product) => {
-                    const isSelected = selectedProducts.includes(product.id);
-                    const isAlreadyAdded = sellerData?.products?.includes(
-                      product.id,
-                    );
-
-                    return (
-                      <TableRow
-                        key={product.id}
-                        selected={isSelected}
-                        sx={{
-                          backgroundColor: isAlreadyAdded
-                            ? "rgba(0, 0, 0, 0.04)"
-                            : "inherit",
-                          "&.Mui-selected": {
-                            backgroundColor: "rgba(25, 118, 210, 0.08)",
-                          },
-                        }}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            checked={isSelected}
-                            onChange={() => handleProductSelection(product.id)}
-                            disabled={isAlreadyAdded}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Box
-                            component="img"
-                            src={product.imageUrl}
-                            alt={product.name}
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src =
-                                process.env.PUBLIC_URL + "/images/product1.jpg";
-                            }}
-                            sx={{
-                              width: 80,
-                              height: 80,
-                              objectFit: "cover",
-                              borderRadius: 1,
-                              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                              backgroundColor: "#f5f5f5",
-                              display: "block",
-                              border: "1px solid #e0e0e0",
-                            }}
-                            loading="lazy"
-                          />
-                        </TableCell>
-                        <TableCell>{product.name}</TableCell>
-                        <TableCell>{product.description}</TableCell>
-                        <TableCell>${Number(product.price).toFixed(2)}</TableCell>
-                        <TableCell>
-                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                      
+                      {/* Already added indicator */}
+                      {isAlreadyAdded && (
+                        <Chip 
+                          label="Already in inventory" 
+                          size="small" 
+                          color="default"
+                          sx={{ 
+                            position: 'absolute', 
+                            top: 8, 
+                            left: 8, 
+                            zIndex: 1,
+                            backgroundColor: 'rgba(0,0,0,0.6)',
+                            color: 'white'
+                          }}
+                        />
+                      )}
+                      
+                      {/* Product Image */}
+                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
+                        <Box
+                          component="img"
+                          src={product.imageUrl}
+                          alt={product.name}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = process.env.PUBLIC_URL + "/images/product1.jpg";
+                          }}
+                          sx={{
+                            width: '100%',
+                            height: 180,
+                            objectFit: 'contain',
+                            borderRadius: 1,
+                            backgroundColor: '#f5f5f5',
+                          }}
+                          loading="lazy"
+                        />
+                      </Box>
+                      
+                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                        {/* Product Name */}
+                        <Typography variant="h6" component="h3" sx={{ mb: 1, fontWeight: 600 }}>
+                          {product.name}
+                        </Typography>
+                        
+                        {/* Product Description */}
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
+                          {product.description}
+                        </Typography>
+                        
+                        {/* Price and Profit Information */}
+                        <Box sx={{ mt: 'auto' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', mb: 1 }}>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                              ${Number(product.price).toFixed(2)}
+                            </Typography>
+                            
                             <Typography
                               variant="body2"
                               sx={{
@@ -1939,58 +2006,39 @@ const SellerDashboard = () => {
                                   product.price &&
                                   product.cost &&
                                   product.price > 0
-                                    ? (product.price - product.cost) /
-                                        product.price >=
-                                      0.4
+                                    ? (product.price - product.cost) / product.price >= 0.4
                                       ? "success.main"
-                                      : (product.price - product.cost) /
-                                            product.price >=
-                                          0.2
+                                      : (product.price - product.cost) / product.price >= 0.2
                                         ? "info.main"
-                                        : (product.price - product.cost) /
-                                              product.price >=
-                                            0.1
+                                        : (product.price - product.cost) / product.price >= 0.1
                                           ? "warning.main"
                                           : "error.main"
-                                  : "text.secondary",
-                                }}
-                              >
-                              $
-                              {(
-                                Number(product.price || 0) -
-                                Number(product.cost || 0)
-                              ).toFixed(2)}
-                              <br />
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  mt: 1,
-                                }}
-                              >
-                                <Typography
-                                  variant="caption"
-                                  sx={{
-                                    fontWeight: "medium",
-                                    color: "success.main",
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  23%: $
-                                  {(Number(product.price || 0) * 0.23).toFixed(2)}
-                                </Typography>
-                              </Box>
+                                    : "text.secondary",
+                              }}
+                            >
+                              Profit: ${(Number(product.price || 0) - Number(product.cost || 0)).toFixed(2)}
                             </Typography>
                           </Box>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                          
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              display: 'block',
+                              textAlign: 'right',
+                              fontWeight: "medium",
+                              color: "success.main",
+                            }}
+                          >
+                            23%: ${(Number(product.price || 0) * 0.23).toFixed(2)}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </Card>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleProductDialogClose}>Cancel</Button>
@@ -2128,13 +2176,13 @@ const SellerDashboard = () => {
   };
 
   const handleViewOrderDetails = (order) => {
-    setSelectedOrder(order);
-    setIsOrderDetailsModalOpen(true);
+    // Navigate to the order details page
+    navigate(`/seller/order/${order.id}`);
   };
 
   const handleCloseOrderDetailsModal = () => {
-    setIsOrderDetailsModalOpen(false);
-    setSelectedOrder(null);
+    // Deprecated: We now use a separate page for order details
+    console.log("This function is deprecated - order details are now shown on a separate page");
   };
 
   const handleDeleteOrder = async (orderId) => {
@@ -2250,11 +2298,6 @@ const SellerDashboard = () => {
           : `Order status updated to ${newStatus}`,
         severity: "success",
       });
-
-      // Close modal if open
-      if (isOrderDetailsModalOpen) {
-        handleCloseOrderDetailsModal();
-      }
 
       // Refresh orders
       fetchSellerOrders();
@@ -2657,213 +2700,7 @@ const SellerDashboard = () => {
         </Paper>
       )}
 
-      {/* Order Details Modal */}
-      <Dialog
-        open={isOrderDetailsModalOpen}
-        onClose={handleCloseOrderDetailsModal}
-        maxWidth="md"
-        fullWidth
-      >
-        {selectedOrder && (
-          <>
-            <DialogTitle>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6">
-                  Order Details - #{selectedOrder.orderNumber || selectedOrder.id.substring(0, 8)}
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() => {
-                      handlePickOrder(selectedOrder.id);
-                      handleCloseOrderDetailsModal();
-                    }}
-                    startIcon={<ShoppingCartCheckoutIcon />}
-                  >
-                    Pick
-                  </Button>
-                  <Chip
-                    label={selectedOrder.status}
-                    color={
-                      selectedOrder.status === "completed"
-                        ? "success"
-                        : selectedOrder.status === "processing"
-                          ? "info"
-                          : selectedOrder.status === "assigned"
-                            ? "primary"
-                            : selectedOrder.status === "cancelled"
-                              ? "error"
-                              : "default"
-                    }
-                    size="small"
-                  />
-                </Box>
-              </Box>
-            </DialogTitle>
-            <DialogContent dividers>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
-                    <Typography variant="subtitle1" gutterBottom color="primary">
-                      Customer Information
-                    </Typography>
-                    <Box sx={{ mb: 2 }}>
-                      <Typography variant="body2" color="textSecondary">Name:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{selectedOrder.customerName || 'N/A'}</Typography>
-                      <Typography variant="body2" color="textSecondary">Email:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{selectedOrder.customerEmail || 'N/A'}</Typography>
-                      <Typography variant="body2" color="textSecondary">Phone:</Typography>
-                      <Typography variant="body1">{selectedOrder.customerPhone || 'N/A'}</Typography>
-                    </Box>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
-                    <Typography variant="subtitle1" gutterBottom color="primary">
-                      Order Information
-                    </Typography>
-                    <Box sx={{ mb: 2 }}>
-                      <Typography variant="body2" color="textSecondary">Order Date:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{formatDate(selectedOrder.createdAt)}</Typography>
-                      <Typography variant="body2" color="textSecondary">Payment Method:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{selectedOrder.paymentMethod || 'N/A'}</Typography>
-                      <Typography variant="body2" color="textSecondary">Assignment:</Typography>
-                      <Typography variant="body1">
-                        {selectedOrder.assignedByAdmin ? 'Assigned by Admin' : 'Direct Order'}
-                      </Typography>
-                      
-                      {selectedOrder.status === "assigned" && (
-                        <Box sx={{ mt: 2 }}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                            onClick={() => {
-                              handlePickOrder(selectedOrder.id);
-                              handleCloseOrderDetailsModal();
-                            }}
-                            startIcon={<ShoppingCartCheckoutIcon />}
-                          >
-                            PICK
-                          </Button>
-                        </Box>
-                      )}
-                    </Box>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Paper elevation={1} sx={{ p: 2 }}>
-                    <Typography variant="subtitle1" gutterBottom color="primary">
-                      Order Items
-                    </Typography>
-                    <TableContainer sx={{ maxHeight: { xs: 300, sm: 400 } }}>
-                      <Table stickyHeader size="small">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Product</TableCell>
-                            <TableCell align="right">Price</TableCell>
-                            <TableCell align="center">Quantity</TableCell>
-                            <TableCell align="right">Subtotal</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {selectedOrder.items?.map((item, index) => (
-                            <TableRow key={`${selectedOrder.id}-${index}-${item.id || item.name}`}>
-                              <TableCell>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                  {item.imageUrl && (
-                                    <img
-                                      src={item.imageUrl}
-                                      alt={item.name}
-                                      style={{
-                                        width: 40,
-                                        height: 40,
-                                        objectFit: 'cover',
-                                        borderRadius: 4
-                                      }}
-                                    />
-                                  )}
-                                  <Typography variant="body2">{item.name}</Typography>
-                                </Box>
-                              </TableCell>
-                              <TableCell align="right">
-                                ${Number(item.price || 0).toFixed(2)}
-                              </TableCell>
-                              <TableCell align="center">
-                                {item.quantity}
-                              </TableCell>
-                              <TableCell align="right">
-                                ${(Number(item.price || 0) * (item.quantity || 1)).toFixed(2)}
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                          <TableRow>
-                            <TableCell colSpan={3} align="right">
-                              <Typography variant="body2">Subtotal:</Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                              ${Number(selectedOrder.subtotal || 0).toFixed(2)}
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell colSpan={3} align="right">
-                              <Typography variant="body2">Shipping:</Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                              ${Number(selectedOrder.shipping || 0).toFixed(2)}
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell colSpan={3} align="right">
-                              <Typography variant="subtitle2" color="primary">Total:</Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                              <Typography variant="subtitle2" color="primary">
-                                ${Number(selectedOrder.total || selectedOrder.totalAmount || 0).toFixed(2)}
-                              </Typography>
-                            </TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Paper>
-                </Grid>
-              </Grid>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseOrderDetailsModal}>Close</Button>
-              {selectedOrder.status === "assigned" && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    handlePickOrder(selectedOrder.id);
-                    handleCloseOrderDetailsModal();
-                  }}
-                >
-                  Pick Order
-                </Button>
-              )}
-              {(selectedOrder.status === "picked" || selectedOrder.status === "processing") && (
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={() => {
-                    handleUpdateOrderStatus(selectedOrder.id, "completed");
-                    handleCloseOrderDetailsModal();
-                  }}
-                >
-                  Mark as Completed
-                </Button>
-              )}
-            </DialogActions>
-          </>
-        )}
-      </Dialog>
+      {/* Order Details Modal - Removed as we now use a separate page */}
     </Container>
   );
 
@@ -4222,7 +4059,7 @@ const [toogle, setToogle] = useState(true)
     <Box sx={{ display: "flex", height: "100vh" }} >
       {/* Sidebar */}
 
-      <button className='absolute z-20 top-22 mt-3 left-3 flex items-start box-border justify-center px-3 py-1  rounded-lg bg-custom-blue text-white ' onClick={() => setToogle(!toogle)}>
+      <button className='h-6 absolute z-20 top-22 mt-3 left-3 flex items-start box-border justify-center px-3 py-1  rounded-lg bg-custom-blue text-white ' onClick={() => setToogle(!toogle)}>
                            
       <div className="flex items-center">
     {/* Hamburger/drawer icon using CSS */}
@@ -4232,7 +4069,7 @@ const [toogle, setToogle] = useState(true)
       <div className="w-6 h-0.5 bg-white"></div>
     </div>
     {/* Optional text */}
-    <span>Menu</span>
+    
   </div>  
       </button>
       {/* <Box
@@ -4520,8 +4357,6 @@ const [toogle, setToogle] = useState(true)
         open={snackbar.open}
         autoHideDuration={6000}
         onClose={() => setSnackbar({ ...snackbar, open: false })}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        sx={{ marginLeft: "280px" }} // Match sidebar width
       >
         <Alert
           onClose={() => setSnackbar({ ...snackbar, open: false })}
@@ -4532,212 +4367,285 @@ const [toogle, setToogle] = useState(true)
         </Alert>
       </Snackbar>
 
-      {/* Order Details Modal */}
+      {/* Order Details Modal - Removed as we now use a separate page */}
+
+      {/* Product Selection Dialog */}
       <Dialog
-        open={isOrderDetailsModalOpen}
-        onClose={handleCloseOrderDetailsModal}
+        open={isProductDialogOpen}
+        onClose={handleProductDialogClose}
         maxWidth="md"
         fullWidth
       >
-        {selectedOrder && (
-          <>
-            <DialogTitle>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="h6">
-                  Order Details - #{selectedOrder.orderNumber || selectedOrder.id.substring(0, 8)}
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() => {
-                      handlePickOrder(selectedOrder.id);
-                      handleCloseOrderDetailsModal();
-                    }}
-                    startIcon={<ShoppingCartCheckoutIcon />}
-                  >
-                    Pick
-                  </Button>
-                  <Chip
-                    label={selectedOrder.status}
-                    color={
-                      selectedOrder.status === "completed"
-                        ? "success"
-                        : selectedOrder.status === "processing"
-                          ? "info"
-                          : selectedOrder.status === "assigned"
-                            ? "primary"
-                            : selectedOrder.status === "cancelled"
-                              ? "error"
-                              : "default"
+        <DialogTitle>
+          Select Products to Add
+          <IconButton
+            aria-label="close"
+            onClick={handleProductDialogClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="subtitle1" color="primary" sx={{ mb: 2 }}>
+            You can add products to your inventory free of cost. No wallet
+            balance will be deducted.
+          </Typography>
+          
+          {/* Search and Filter Section */}
+          <Box sx={{ mb: 2, display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+            <TextField
+              label="Search products"
+              variant="outlined"
+              size="small"
+              value={productSearchQuery}
+              onChange={(e) => setProductSearchQuery(e.target.value)}
+              sx={{ flexGrow: 1, minWidth: '250px' }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              label="Min Price"
+              variant="outlined"
+              size="small"
+              type="number"
+              value={productPriceRange.min}
+              onChange={(e) => setProductPriceRange(prev => ({ ...prev, min: e.target.value }))}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              }}
+              sx={{ width: '120px' }}
+            />
+            <TextField
+              label="Max Price"
+              variant="outlined"
+              size="small"
+              type="number"
+              value={productPriceRange.max}
+              onChange={(e) => setProductPriceRange(prev => ({ ...prev, max: e.target.value }))}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+              }}
+              sx={{ width: '120px' }}
+            />
+          </Box>
+          
+          {/* Select All Checkbox */}
+          <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  indeterminate={
+                    selectedProducts.length > 0 &&
+                    selectedProducts.length < adminProducts.length
+                  }
+                  checked={
+                    selectedProducts.length === adminProducts.length &&
+                    adminProducts.length > 0
+                  }
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedProducts(adminProducts.map((p) => p.id));
+                    } else {
+                      setSelectedProducts([]);
                     }
-                    size="small"
-                  />
-                </Box>
-              </Box>
-            </DialogTitle>
-            <DialogContent dividers>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6}>
-                  <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
-                    <Typography variant="subtitle1" gutterBottom color="primary">
-                      Customer Information
-                    </Typography>
-                    <Box sx={{ mb: 2 }}>
-                      <Typography variant="body2" color="textSecondary">Name:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{selectedOrder.customerName || 'N/A'}</Typography>
-                      <Typography variant="body2" color="textSecondary">Email:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{selectedOrder.customerEmail || 'N/A'}</Typography>
-                      <Typography variant="body2" color="textSecondary">Phone:</Typography>
-                      <Typography variant="body1">{selectedOrder.customerPhone || 'N/A'}</Typography>
-                    </Box>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
-                    <Typography variant="subtitle1" gutterBottom color="primary">
-                      Order Information
-                    </Typography>
-                    <Box sx={{ mb: 2 }}>
-                      <Typography variant="body2" color="textSecondary">Order Date:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{formatDate(selectedOrder.createdAt)}</Typography>
-                      <Typography variant="body2" color="textSecondary">Payment Method:</Typography>
-                      <Typography variant="body1" sx={{ mb: 1 }}>{selectedOrder.paymentMethod || 'N/A'}</Typography>
-                      <Typography variant="body2" color="textSecondary">Assignment:</Typography>
-                      <Typography variant="body1">
-                        {selectedOrder.assignedByAdmin ? 'Assigned by Admin' : 'Direct Order'}
-                      </Typography>
-                      
-                      {selectedOrder.status === "assigned" && (
-                        <Box sx={{ mt: 2 }}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                            onClick={() => {
-                              handlePickOrder(selectedOrder.id);
-                              handleCloseOrderDetailsModal();
-                            }}
-                            startIcon={<ShoppingCartCheckoutIcon />}
-                          >
-                            PICK
-                          </Button>
-                        </Box>
-                      )}
-                    </Box>
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Paper elevation={1} sx={{ p: 2 }}>
-                    <Typography variant="subtitle1" gutterBottom color="primary">
-                      Order Items
-                    </Typography>
-                    <TableContainer sx={{ maxHeight: { xs: 300, sm: 400 } }}>
-                      <Table stickyHeader size="small">
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>Product</TableCell>
-                            <TableCell align="right">Price</TableCell>
-                            <TableCell align="center">Quantity</TableCell>
-                            <TableCell align="right">Subtotal</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {selectedOrder.items?.map((item, index) => (
-                            <TableRow key={`${selectedOrder.id}-${index}-${item.id || item.name}`}>
-                              <TableCell>
-                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                                  {item.imageUrl && (
-                                    <img
-                                      src={item.imageUrl}
-                                      alt={item.name}
-                                      style={{
-                                        width: 40,
-                                        height: 40,
-                                        objectFit: 'cover',
-                                        borderRadius: 4
-                                      }}
-                                    />
-                                  )}
-                                  <Typography variant="body2">{item.name}</Typography>
-                                </Box>
-                              </TableCell>
-                              <TableCell align="right">
-                                ${Number(item.price || 0).toFixed(2)}
-                              </TableCell>
-                              <TableCell align="center">
-                                {item.quantity}
-                              </TableCell>
-                              <TableCell align="right">
-                                ${(Number(item.price || 0) * (item.quantity || 1)).toFixed(2)}
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                          <TableRow>
-                            <TableCell colSpan={3} align="right">
-                              <Typography variant="body2">Subtotal:</Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                              ${Number(selectedOrder.subtotal || 0).toFixed(2)}
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell colSpan={3} align="right">
-                              <Typography variant="body2">Shipping:</Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                              ${Number(selectedOrder.shipping || 0).toFixed(2)}
-                            </TableCell>
-                          </TableRow>
-                          <TableRow>
-                            <TableCell colSpan={3} align="right">
-                              <Typography variant="subtitle2" color="primary">Total:</Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                              <Typography variant="subtitle2" color="primary">
-                                ${Number(selectedOrder.total || selectedOrder.totalAmount || 0).toFixed(2)}
-                              </Typography>
-                            </TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </Paper>
-                </Grid>
-              </Grid>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseOrderDetailsModal}>Close</Button>
-              {selectedOrder.status === "assigned" && (
-                <Button
-                  variant="contained"
+                  }}
+                />
+              }
+              label="Select All"
+            />
+          </Box>
+          
+          {/* Products Card View */}
+          {loading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+              <CircularProgress size={40} />
+            </Box>
+          ) : getFilteredProducts().length === 0 ? (
+            <Box sx={{ textAlign: "center", p: 4, bgcolor: 'background.paper', borderRadius: 2 }}>
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                No products match your search criteria
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Try adjusting your search terms or price range
+              </Typography>
+              {(productSearchQuery || productPriceRange.min || productPriceRange.max) && (
+                <Button 
+                  onClick={clearProductFilters}
                   color="primary"
-                  onClick={() => {
-                    handlePickOrder(selectedOrder.id);
-                    handleCloseOrderDetailsModal();
-                  }}
+                  sx={{ mt: 2 }}
                 >
-                  Pick Order
+                  Clear Filters
                 </Button>
               )}
-              {(selectedOrder.status === "picked" || selectedOrder.status === "processing") && (
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={() => {
-                    handleUpdateOrderStatus(selectedOrder.id, "completed");
-                    handleCloseOrderDetailsModal();
-                  }}
-                >
-                  Mark as Completed
-                </Button>
-              )}
-            </DialogActions>
-          </>
-        )}
+            </Box>
+          ) : (
+            <Grid container spacing={2}>
+              {getFilteredProducts().map((product) => {
+                const isSelected = selectedProducts.includes(product.id);
+                const isAlreadyAdded = sellerData?.products?.includes(product.id);
+                
+                return (
+                  <Grid item xs={12} sm={6} md={4} key={product.id}>
+                    <Card 
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        height: '100%',
+                        borderRadius: 2,
+                        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+                        boxShadow: isSelected ? '0 8px 16px rgba(25, 118, 210, 0.2)' : '0 2px 8px rgba(0,0,0,0.1)',
+                        border: isSelected ? '2px solid #1976d2' : '1px solid rgba(0,0,0,0.12)',
+                        backgroundColor: isAlreadyAdded ? 'rgba(0, 0, 0, 0.04)' : 'inherit',
+                        '&:hover': {
+                          transform: isAlreadyAdded ? 'none' : 'translateY(-4px)',
+                          boxShadow: isAlreadyAdded ? '0 2px 8px rgba(0,0,0,0.1)' : '0 8px 16px rgba(0,0,0,0.15)'
+                        },
+                        position: 'relative',
+                        cursor: isAlreadyAdded ? 'default' : 'pointer',
+                        opacity: isAlreadyAdded ? 0.7 : 1
+                      }}
+                      onClick={() => {
+                        if (!isAlreadyAdded) handleProductSelection(product.id);
+                      }}
+                    >
+                      {/* Checkbox overlay in top-right corner */}
+                      <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
+                        <Checkbox
+                          checked={isSelected}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            handleProductSelection(product.id);
+                          }}
+                          disabled={isAlreadyAdded}
+                          sx={{
+                            backgroundColor: 'rgba(255,255,255,0.8)',
+                            borderRadius: '50%',
+                            padding: '4px',
+                            '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
+                          }}
+                        />
+                      </Box>
+                      
+                      {/* Already added indicator */}
+                      {isAlreadyAdded && (
+                        <Chip 
+                          label="Already in inventory" 
+                          size="small" 
+                          color="default"
+                          sx={{ 
+                            position: 'absolute', 
+                            top: 8, 
+                            left: 8, 
+                            zIndex: 1,
+                            backgroundColor: 'rgba(0,0,0,0.6)',
+                            color: 'white'
+                          }}
+                        />
+                      )}
+                      
+                      {/* Product Image */}
+                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
+                        <Box
+                          component="img"
+                          src={product.imageUrl}
+                          alt={product.name}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = process.env.PUBLIC_URL + "/images/product1.jpg";
+                          }}
+                          sx={{
+                            width: '100%',
+                            height: 180,
+                            objectFit: 'contain',
+                            borderRadius: 1,
+                            backgroundColor: '#f5f5f5',
+                          }}
+                          loading="lazy"
+                        />
+                      </Box>
+                      
+                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                        {/* Product Name */}
+                        <Typography variant="h6" component="h3" sx={{ mb: 1, fontWeight: 600 }}>
+                          {product.name}
+                        </Typography>
+                        
+                        {/* Product Description */}
+                        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
+                          {product.description}
+                        </Typography>
+                        
+                        {/* Price and Profit Information */}
+                        <Box sx={{ mt: 'auto' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', mb: 1 }}>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                              ${Number(product.price).toFixed(2)}
+                            </Typography>
+                            
+                            <Typography
+                              variant="body2"
+                              sx={{
+                                fontWeight: "medium",
+                                color:
+                                  product.price &&
+                                  product.cost &&
+                                  product.price > 0
+                                    ? (product.price - product.cost) / product.price >= 0.4
+                                      ? "success.main"
+                                      : (product.price - product.cost) / product.price >= 0.2
+                                        ? "info.main"
+                                        : (product.price - product.cost) / product.price >= 0.1
+                                          ? "warning.main"
+                                          : "error.main"
+                                    : "text.secondary",
+                              }}
+                            >
+                              Profit: ${(Number(product.price || 0) - Number(product.cost || 0)).toFixed(2)}
+                            </Typography>
+                          </Box>
+                          
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              display: 'block',
+                              textAlign: 'right',
+                              fontWeight: "medium",
+                              color: "success.main",
+                            }}
+                          >
+                            23%: ${(Number(product.price || 0) * 0.23).toFixed(2)}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </Card>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleProductDialogClose}>Cancel</Button>
+          <Button
+            onClick={handleAddSelectedProducts}
+            variant="contained"
+            color="primary"
+            disabled={selectedProducts.length === 0 || loading}
+          >
+            Add Selected Products
+          </Button>
+        </DialogActions>
       </Dialog>
     </Box>
   );
