@@ -56,7 +56,8 @@ import {
   Snackbar,
   Link,
   Fab,
-  ListItemSecondaryAction
+  ListItemSecondaryAction,
+  Menu
 } from '@mui/material';
 import { 
   People as PeopleIcon,
@@ -1059,6 +1060,7 @@ const AdminDashboard = () => {
   const [sellerEmailSearch, setSellerEmailSearch] = useState('');
   const [orderEmailSearch, setOrderEmailSearch] = useState('');
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
   
   useEffect(() => {
     if (activeTab === 'storehouse' || activeTab === 'products') {
@@ -1852,6 +1854,9 @@ const AdminDashboard = () => {
       const orderData = orderDoc.data();
       const now = new Date();
       
+      // Log the original order data
+      console.log('ORIGINAL ORDER DATA:', JSON.stringify(orderData, null, 2));
+      
       // Update the order status
       await updateDoc(orderRef, {
         status: newStatus,
@@ -1863,68 +1868,217 @@ const AdminDashboard = () => {
         })
       });
       
-      // If the new status is 'completed' and the order has a seller, transfer the pending amount to the seller's wallet
+      // If the new status is 'completed', transfer the grand total amount to the seller's wallet
       if (newStatus === 'completed' && orderData.sellerId) {
-        // Check if this order has been picked by a seller and has a pending amount
-        if (orderData.pickedAt && orderData.pendingAdded) {
-          const pendingAmount = Number(orderData.pendingAdded) || 0;
+        try {
+          // DEBUG: Log all the calculation fields that might be used
+          console.log('ORDER COMPLETION - Available fields for calculation:', {
+            pendingAdded: orderData.pendingAdded,
+            walletDeducted: orderData.walletDeducted,
+            additionalProfit: orderData.additionalProfit,
+            total: orderData.total,
+            totalAmount: orderData.totalAmount,
+            items: orderData.items ? orderData.items.length : 'none'
+          });
           
-          if (pendingAmount > 0) {
-            // Get the seller's current data
-            const sellerRef = doc(db, 'sellers', orderData.sellerId);
-            const sellerDoc = await getDoc(sellerRef);
-            
-            if (sellerDoc.exists()) {
-              const sellerData = sellerDoc.data();
-              const currentWalletBalance = Number(sellerData.walletBalance) || 0;
-              const currentPendingAmount = Number(sellerData.pendingAmount) || 0;
-              
-              // Calculate new balances
-              const newWalletBalance = currentWalletBalance + pendingAmount;
-              const newPendingAmount = Math.max(0, currentPendingAmount - pendingAmount);
-              
-              // Update seller's wallet and pending amounts
-              await updateDoc(sellerRef, {
-                walletBalance: newWalletBalance,
-                pendingAmount: newPendingAmount,
-                lastUpdated: serverTimestamp()
-              });
-              
-              // Add a transaction record
-              await addDoc(collection(db, 'transactions'), {
-                orderId: orderId,
-                sellerId: orderData.sellerId,
-                amount: pendingAmount,
-                type: 'order_completed',
-                timestamp: serverTimestamp(),
-                description: `Order #${orderData.orderNumber || orderId.substring(0, 8)} completed. ${pendingAmount.toFixed(2)} transferred from pending to wallet.`
-              });
-              
-              // Update the order with transfer information
-              await updateDoc(orderRef, {
-                pendingTransferred: pendingAmount,
-                transferredAt: serverTimestamp()
-              });
-              
-              // console.log(`Transferred $${pendingAmount.toFixed(2)} from pending to wallet for seller ${orderData.sellerId}`);
-            }
+          // Get the seller's current data FIRST
+          const sellerRef = doc(db, 'sellers', orderData.sellerId);
+          const sellerDoc = await getDoc(sellerRef);
+          
+          if (!sellerDoc.exists()) {
+            throw new Error('Seller not found');
           }
+          
+          const sellerData = sellerDoc.data();
+          const currentWalletBalance = Number(sellerData.walletBalance || 0);
+          const currentPendingAmount = Number(sellerData.pendingAmount || 0);
+          
+          console.log('SELLER DATA BEFORE UPDATE:', {
+            id: orderData.sellerId,
+            walletBalance: currentWalletBalance,
+            pendingAmount: currentPendingAmount
+          });
+          
+          // FORCE APPROACH: Calculate the base amount and 23% profit directly from the order items
+          let baseAmount = 0;
+          let profitAmount = 0;
+          let grandTotal = 0;
+          
+          // Method 1: Try to use pendingAdded from the order (most accurate)
+          if (orderData.pendingAdded && Number(orderData.pendingAdded) > 0) {
+            grandTotal = Number(orderData.pendingAdded);
+            
+            // If walletDeducted is available, we can use it to determine the base and profit split
+            if (orderData.walletDeducted && Number(orderData.walletDeducted) > 0) {
+              baseAmount = Number(orderData.walletDeducted);
+              profitAmount = grandTotal - baseAmount;
+            } else {
+              // If not, we'll estimate (base is 81.3% of total, profit is 18.7%)
+              baseAmount = Number((grandTotal / 1.23).toFixed(2));
+              profitAmount = Number((grandTotal - baseAmount).toFixed(2));
+            }
+            
+            console.log('METHOD 1 - Using pendingAdded from order:', {
+              pendingAdded: grandTotal,
+              baseAmount,
+              profitAmount
+            });
+          }
+          // Method 2: Try using walletDeducted + additionalProfit directly
+          else if (orderData.walletDeducted && orderData.additionalProfit) {
+            baseAmount = Number(orderData.walletDeducted);
+            profitAmount = Number(orderData.additionalProfit);
+            grandTotal = baseAmount + profitAmount;
+            
+            console.log('METHOD 2 - Using walletDeducted + additionalProfit:', {
+              baseAmount,
+              profitAmount,
+              grandTotal
+            });
+          }
+          // Method 3: Calculate from items
+          else if (orderData.items && Array.isArray(orderData.items) && orderData.items.length > 0) {
+            orderData.items.forEach(item => {
+              const itemPrice = Number(item.price || 0);
+              const itemQuantity = Number(item.quantity || 1);
+              baseAmount += itemPrice * itemQuantity;
+            });
+            
+            // Calculate 23% profit
+            profitAmount = Number((baseAmount * 0.23).toFixed(2));
+            grandTotal = baseAmount + profitAmount;
+            
+            console.log('METHOD 3 - Calculated from items:', {
+              baseAmount,
+              profitAmount,
+              grandTotal
+            });
+          }
+          // Method 4: Fall back to total/totalAmount if available
+          else if (orderData.total || orderData.totalAmount) {
+            const totalValue = Number(orderData.total || orderData.totalAmount || 0);
+            baseAmount = Number((totalValue / 1.23).toFixed(2));
+            profitAmount = Number((totalValue - baseAmount).toFixed(2));
+            grandTotal = baseAmount + profitAmount;
+            
+            console.log('METHOD 4 - Using total/totalAmount:', {
+              totalUsed: orderData.total ? 'total' : 'totalAmount',
+              totalValue,
+              baseAmount,
+              profitAmount,
+              grandTotal
+            });
+          }
+          
+          // Final safety check - ensure we have positive values
+          baseAmount = Math.max(0, baseAmount);
+          profitAmount = Math.max(0, profitAmount);
+          grandTotal = baseAmount + profitAmount;
+          
+          console.log('FINAL CALCULATION RESULTS:', {
+            baseAmount,
+            profitAmount,
+            grandTotal
+          });
+          
+          // If we couldn't calculate a valid amount, log an error but don't throw
+          if (grandTotal <= 0) {
+            console.error('ERROR: Could not calculate a valid amount to transfer. Defaulting to 0.');
+          }
+          
+          // Now we'll update the seller's wallet - FORCE TRANSFER AMOUNT FROM PENDING TO WALLET
+          const newWalletBalance = currentWalletBalance + grandTotal;
+          const newPendingAmount = Math.max(0, currentPendingAmount - grandTotal);
+          
+          console.log('WALLET UPDATE CALCULATION:', {
+            previousWalletBalance: currentWalletBalance,
+            previousPendingAmount: currentPendingAmount,
+            transferAmount: grandTotal,
+            newWalletBalance,
+            newPendingAmount
+          });
+          
+          // Update seller's wallet and pending amounts
+          await updateDoc(sellerRef, {
+            walletBalance: newWalletBalance,
+            pendingAmount: newPendingAmount,
+            lastUpdated: serverTimestamp()
+          });
+          
+          // Verify the update was successful by getting the seller's data again
+          const updatedSellerDoc = await getDoc(sellerRef);
+          const updatedSellerData = updatedSellerDoc.data();
+          
+          console.log('SELLER DATA AFTER UPDATE:', {
+            id: orderData.sellerId,
+            walletBalance: updatedSellerData.walletBalance,
+            pendingAmount: updatedSellerData.pendingAmount,
+            expectedWalletBalance: newWalletBalance,
+            expectedPendingAmount: newPendingAmount
+          });
+          
+          // Add a transaction record for accounting
+          await addDoc(collection(db, 'transactions'), {
+            orderId: orderId,
+            sellerId: orderData.sellerId,
+            amount: grandTotal,
+            baseAmount: baseAmount,
+            profitAmount: profitAmount,
+            type: 'order_completed',
+            timestamp: serverTimestamp(),
+            description: `Order #${orderData.orderNumber || orderId.substring(0, 8)} completed. $${baseAmount.toFixed(2)} base + $${profitAmount.toFixed(2)} profit (total $${grandTotal.toFixed(2)}) transferred from pending to wallet.`,
+            walletBalanceBefore: currentWalletBalance,
+            walletBalanceAfter: newWalletBalance,
+            pendingAmountBefore: currentPendingAmount,
+            pendingAmountAfter: newPendingAmount,
+            processedBy: 'admin'
+          });
+          
+          // Update the order with transfer information
+          await updateDoc(orderRef, {
+            pendingTransferred: grandTotal,
+            baseAmountTransferred: baseAmount,
+            profitAmountTransferred: profitAmount,
+            transferredAt: serverTimestamp(),
+            walletBalanceBefore: currentWalletBalance,
+            walletBalanceAfter: newWalletBalance,
+            pendingAmountBefore: currentPendingAmount,
+            pendingAmountAfter: newPendingAmount
+          });
+          
+          console.log(`SUCCESS: Transferred $${grandTotal.toFixed(2)} total (base: $${baseAmount.toFixed(2)} + profit: $${profitAmount.toFixed(2)}) from pending to wallet for seller ${orderData.sellerId}`);
+          
+          // Set a special message for this operation
+          setSnackbar({
+            open: true,
+            message: `Order status updated to ${newStatus}. Transferred $${baseAmount.toFixed(2)} + $${profitAmount.toFixed(2)} profit (total $${grandTotal.toFixed(2)}) from pending to wallet balance.`,
+            severity: 'success'
+          });
+        } catch (transferError) {
+          // If there was an error in the transfer process, log it but don't throw
+          console.error('ERROR during wallet transfer process:', transferError);
+          setSnackbar({
+            open: true,
+            message: `Order status updated to ${newStatus}, but there was an error transferring funds: ${transferError.message}`,
+            severity: 'warning'
+          });
         }
+      } else {
+        // For other status updates, just show a success message
+        setSnackbar({
+          open: true,
+          message: `Order status updated to ${newStatus}`,
+          severity: 'success'
+        });
       }
 
       // Refresh orders list
       await fetchOrders();
-
-      setSnackbar({
-        open: true,
-        message: `Order status updated to ${newStatus}${newStatus === 'completed' ? ' and pending amount transferred to seller wallet' : ''}`,
-        severity: 'success'
-      });
     } catch (error) {
-      console.error('Error updating order status:', error);
+      console.error('ERROR updating order status:', error);
       setSnackbar({
         open: true,
-        message: 'Failed to update order status',
+        message: 'Failed to update order status: ' + error.message,
         severity: 'error'
       });
     } finally {
@@ -3538,100 +3692,157 @@ const AdminDashboard = () => {
               <CircularProgress />
             </Box>
           ) : (
-            <Box>
-              {/* Filter for admin-created orders only and by selected seller */}
-              {selectedSellerEmail && orders.filter(order => 
-                order.source === 'admin' && 
-                order.sellerInfo?.email === selectedSellerEmail
-              ).length > 0 ? (
-                orders
-                  .filter(order => 
+            <TableContainer component={Paper} sx={{ boxShadow: 'none' }}>
+              <Table size="medium">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Order ID</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Seller</TableCell>
+                    <TableCell>Total</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {selectedSellerEmail && orders.filter(order => 
                     order.source === 'admin' && 
                     order.sellerInfo?.email === selectedSellerEmail
-                  )
-                  .slice(0, 10)
-                  .map((order) => (
-                    <Paper 
-                      key={order.id}
-                      sx={{
-                        mb: 2,
-                        p: 2,
-                        bgcolor: alpha(theme.palette.secondary.light, 0.1),
-                        '&:hover': { bgcolor: alpha(theme.palette.secondary.light, 0.2) },
-                      }}
-                    >
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={4} lg={2}>
-                          <Typography variant="subtitle2" color="text.secondary">Order ID</Typography>
-                          <Tooltip title="View order details">
-                            <Typography 
-                              variant="body2" 
-                              sx={{ 
-                                cursor: 'pointer',
-                                '&:hover': { color: theme.palette.primary.main },
-                                fontWeight: 'medium',
-                              }}
-                              onClick={() => handleViewDetails(order)}
-                            >
-                              {order.orderNumber || order.id.substring(0, 8)}
-                            </Typography>
-                          </Tooltip>
-                        </Grid>
-                        
-                        <Grid item xs={12} sm={6} md={4} lg={2}>
-                          <Typography variant="subtitle2" color="text.secondary">Date</Typography>
-                          <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
-                        </Grid>
-                        
-                        <Grid item xs={12} sm={6} md={4} lg={2}>
-                          <Typography variant="subtitle2" color="text.secondary">Seller</Typography>
-                          <Typography variant="body2">{order.sellerInfo?.email || 'Unknown Seller'}</Typography>
-                        </Grid>
-                        
-                        <Grid item xs={12} sm={6} md={4} lg={2}>
-                          <Typography variant="subtitle2" color="text.secondary">Total</Typography>
-                          <Typography variant="body2">${Number(order.totalAmount || 0).toFixed(2)}</Typography>
-                        </Grid>
-                        
-                        <Grid item xs={12} sm={6} md={4} lg={2}>
-                          <Typography variant="subtitle2" color="text.secondary">Status</Typography>
-                          <Chip 
-                            label={order.status} 
-                            color={
-                              order.status === 'completed' ? 'success' :
-                              order.status === 'processing' ? 'info' :
-                              order.status === 'pending' ? 'warning' :
-                              order.status === 'cancelled' ? 'error' : 'default'
+                  ).length > 0 ? (
+                    orders
+                      .filter(order => 
+                        order.source === 'admin' && 
+                        order.sellerInfo?.email === selectedSellerEmail
+                      )
+                      .slice(0, 10)
+                      .map((order) => (
+                        <TableRow 
+                          key={order.id}
+                          hover
+                          sx={{
+                            '&:hover': {
+                              bgcolor: alpha(theme.palette.secondary.light, 0.1)
                             }
-                            size="small"
-                          />
-                        </Grid>
-                        
-                        <Grid item xs={12} sm={6} md={4} lg={2}>
-                          <Typography variant="subtitle2" color="text.secondary">Actions</Typography>
-                          <IconButton 
-                            size="small" 
-                            color="primary"
-                            onClick={() => handleViewDetails(order)}
-                          >
-                            <VisibilityIcon fontSize="small" />
-                          </IconButton>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  ))
-              ) : (
-                <Box sx={{ p: 3, textAlign: 'center' }}>
-                  <Typography variant="body2" color="text.secondary">
-                    {selectedSellerEmail 
-                      ? `No admin-assigned orders found for ${selectedSellerEmail}` 
-                      : 'Please select a seller to view their orders'}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
+                          }}
+                        >
+                          <TableCell>
+                            <Tooltip title="View order details">
+                              <Typography 
+                                variant="body2" 
+                                sx={{ 
+                                  cursor: 'pointer',
+                                  '&:hover': { color: theme.palette.primary.main },
+                                  fontWeight: 'medium',
+                                }}
+                                onClick={() => handleViewDetails(order)}
+                              >
+                                {order.orderNumber || order.id.substring(0, 8)}
+                              </Typography>
+                            </Tooltip>
+                          </TableCell>
+                          <TableCell>{formatDate(order.createdAt)}</TableCell>
+                          <TableCell>{order.sellerInfo?.email || 'Unknown Seller'}</TableCell>
+                          <TableCell>${Number(order.totalAmount || 0).toFixed(2)}</TableCell>
+                          <TableCell>
+                            <Chip 
+                              label={order.status} 
+                              color={
+                                order.status === 'completed' ? 'success' :
+                                order.status === 'processing' ? 'info' :
+                                order.status === 'pending' ? 'warning' :
+                                order.status === 'cancelled' ? 'error' : 'default'
+                              }
+                              size="small"
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <Box sx={{ display: 'flex', gap: 1 }}>
+                              <Tooltip title="View Details">
+                                <IconButton 
+                                  size="small" 
+                                  color="primary"
+                                  onClick={() => handleViewDetails(order)}
+                                >
+                                  <VisibilityIcon fontSize="small" />
+                                </IconButton>
+                              </Tooltip>
+                              
+                              <Tooltip title="Update Status">
+                                <IconButton
+                                  size="small"
+                                  color="info"
+                                  onClick={(event) => {
+                                    setSelectedOrder(order);
+                                    setAnchorEl(event.currentTarget);
+                                  }}
+                                >
+                                  <EditIcon fontSize="small" />
+                                </IconButton>
+                              </Tooltip>
+                            </Box>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} align="center">
+                        <Typography variant="body2" color="text.secondary">
+                          {selectedSellerEmail 
+                            ? `No admin-assigned orders found for ${selectedSellerEmail}` 
+                            : 'Please select a seller to view their orders'}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
           )}
         </SectionCard>
+        
+        {/* Status update dropdown menu */}
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={() => setAnchorEl(null)}
+          MenuListProps={{
+            'aria-labelledby': 'status-update-button',
+          }}
+        >
+          <MenuItem onClick={() => {
+            handleUpdateOrderStatus(selectedOrder?.id, 'pending');
+            setAnchorEl(null);
+          }}>
+            <Chip 
+              label="Pending" 
+              color="warning"
+              size="small"
+              sx={{ minWidth: 80 }}
+            />
+          </MenuItem>
+          <MenuItem onClick={() => {
+            handleUpdateOrderStatus(selectedOrder?.id, 'completed');
+            setAnchorEl(null);
+          }}>
+            <Chip 
+              label="Completed" 
+              color="success"
+              size="small"
+              sx={{ minWidth: 80 }}
+            />
+          </MenuItem>
+          <MenuItem onClick={() => {
+            handleUpdateOrderStatus(selectedOrder?.id, 'cancelled');
+            setAnchorEl(null);
+          }}>
+            <Chip 
+              label="Cancelled" 
+              color="error"
+              size="small"
+              sx={{ minWidth: 80 }}
+            />
+          </MenuItem>
+        </Menu>
       </Box>
     );
   };
