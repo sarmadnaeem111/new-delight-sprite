@@ -1331,7 +1331,7 @@ const SellerDashboard = () => {
           </Grid>
 
           {/* Recent Orders */}
-          <Box mt={4}>
+          {/* <Box mt={4}>
             <SectionHeading variant="h5" gutterBottom>
               Recent Orders
             </SectionHeading>
@@ -1483,7 +1483,7 @@ const SellerDashboard = () => {
                 </Button>
               </Box>
             )}
-          </Box>
+          </Box> */}
 
           <Box mt={6}>
             <SectionHeading variant="h5" gutterBottom>
@@ -2527,16 +2527,18 @@ const SellerDashboard = () => {
   };
 
   const renderOrdersContent = () => (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4, px: { xs: 1, sm: 2, md: 3 } }}>
       <Box
         sx={{
           display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: { xs: "flex-start", sm: "center" },
           mb: 3,
+          gap: { xs: 2, sm: 0 }
         }}
       >
-        <Typography variant="h4" fontWeight="medium">
+        <Typography variant="h4" fontWeight="medium" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }}>
           Orders Management
         </Typography>
         <Button
@@ -2547,6 +2549,7 @@ const SellerDashboard = () => {
             fetchSellerOrders().finally(() => setLoading(false));
           }}
           startIcon={<RefreshIcon />}
+          sx={{ alignSelf: { xs: "flex-start", sm: "auto" } }}
         >
           Refresh Orders
         </Button>
@@ -2566,20 +2569,144 @@ const SellerDashboard = () => {
           </Typography>
         </Paper>
       ) : (
-        <Paper elevation={3} sx={{ overflow: "hidden" }}>
+        <>
+          {/* Mobile view - cards */}
+          <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', gap: 2 }}>
+            {sellerOrders.map((order) => (
+              <Paper
+                key={order.id}
+                elevation={2}
+                sx={{
+                  p: 2,
+                  borderRadius: 2,
+                  bgcolor: order.assignedAt
+                    ? alpha(theme.palette.secondary.light, 0.1)
+                    : 'inherit',
+                  '&:hover': {
+                    bgcolor: order.assignedAt
+                      ? alpha(theme.palette.secondary.light, 0.2)
+                      : alpha(theme.palette.primary.light, 0.1),
+                  },
+                  borderLeft: `4px solid ${
+                    order.status === "completed"
+                      ? theme.palette.success.main
+                      : order.status === "processing"
+                        ? theme.palette.info.main
+                        : order.status === "assigned"
+                          ? theme.palette.primary.main
+                          : order.status === "cancelled"
+                            ? theme.palette.error.main
+                            : theme.palette.grey[500]
+                  }`
+                }}
+              >
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <Typography variant="caption" color="textSecondary">Order ID</Typography>
+                    <Typography variant="body2" fontWeight="medium">
+                      {order.orderNumber || order.id.substring(0, 8)}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="caption" color="textSecondary">Date</Typography>
+                    <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="caption" color="textSecondary">Customer</Typography>
+                    <Typography variant="body2" noWrap>
+                      {order.customerName || order.customerEmail || "Anonymous"}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="caption" color="textSecondary">Price</Typography>
+                    <Typography variant="body2">
+                      ${Number(order.total || order.totalAmount || 0).toFixed(2)}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="caption" color="textSecondary">Profit</Typography>
+                    <Typography variant="body2" sx={{ color: 'success.main', fontWeight: 'medium' }}>
+                      ${(Number(order.total || order.totalAmount || 0) * 0.23).toFixed(2)}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="caption" color="textSecondary">Status</Typography>
+                    <Box>
+                      <Chip
+                        label={order.status}
+                        color={
+                          order.status === "completed"
+                            ? "success"
+                            : order.status === "processing"
+                              ? "info"
+                              : order.status === "assigned"
+                                ? "primary"
+                                : order.status === "cancelled"
+                                  ? "error"
+                                  : "default"
+                        }
+                        size="small"
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography variant="caption" color="textSecondary">Source</Typography>
+                    <Box>
+                      {order.assignedByAdmin ? (
+                        <Chip
+                          label="Admin Assigned"
+                          color="secondary"
+                          size="small"
+                        />
+                      ) : (
+                        <Chip label="Direct" color="primary" size="small" />
+                      )}
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6} sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                    <Box sx={{ display: 'flex', gap: 1 }}>
+                      <Tooltip title="View Order Details">
+                        <IconButton
+                          size="small"
+                          color="primary"
+                          onClick={() => handleViewOrderDetails(order)}
+                        >
+                          <VisibilityIcon fontSize="small" />
+                        </IconButton>
+                      </Tooltip>
+                      {order.status === "assigned" && (
+                        <Button
+                          size="small"
+                          variant="contained"
+                          color="primary"
+                          onClick={() => handlePickOrder(order.id)}
+                        >
+                          PICK
+                        </Button>
+                      )}
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Paper>
+            ))}
+          </Box>
+
+          {/* Desktop view - table */}
+          <Paper elevation={3} sx={{ overflow: "hidden", display: { xs: "none", sm: "block" } }}>
+            <Box sx={{ overflowX: 'auto', width: '100%' }}>
           <TableContainer>
-            <Table>
+                <Table sx={{ minWidth: { xs: 650, sm: 800 } }}>
               <TableHead>
-                <TableRow>
-                  <TableCell>Order ID</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Customer</TableCell>
-                  <TableCell>Price</TableCell>
-                  <TableCell>Profit</TableCell>
-                  {/* <TableCell>Grand Total</TableCell> */}
-                  <TableCell>Status</TableCell>
-                  <TableCell>Source</TableCell>
-                  <TableCell>Actions</TableCell>
+                    <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
+                      <TableCell sx={{ color: "white" }}>Order ID</TableCell>
+                      <TableCell sx={{ color: "white" }}>Date</TableCell>
+                      <TableCell sx={{ color: "white" }}>Customer</TableCell>
+                      <TableCell sx={{ color: "white" }}>Price</TableCell>
+                      <TableCell sx={{ color: "white" }}>Profit</TableCell>
+                      {/* <TableCell sx={{ color: "white" }}>Grand Total</TableCell> */}
+                      <TableCell sx={{ color: "white" }}>Status</TableCell>
+                      <TableCell sx={{ color: "white" }}>Source</TableCell>
+                      <TableCell sx={{ color: "white" }}>Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -2606,8 +2733,7 @@ const SellerDashboard = () => {
                       {order.customerName || order.customerEmail || "Anonymous"}
                     </TableCell>
                     <TableCell>
-                      $
-                      {Number(order.total || order.totalAmount || 0).toFixed(2)}
+                          ${Number(order.total || order.totalAmount || 0).toFixed(2)}
                     </TableCell>
                     <TableCell>
                       <Typography
@@ -2621,22 +2747,6 @@ const SellerDashboard = () => {
                       >
                         $
                         {(
-                          Number(order.total || order.totalAmount || 0) * 0.23
-                        ).toFixed(2)}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: "medium",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        $
-                        {(
-                          Number(order.total || order.totalAmount || 0) +
                           Number(order.total || order.totalAmount || 0) * 0.23
                         ).toFixed(2)}
                       </Typography>
@@ -2697,7 +2807,9 @@ const SellerDashboard = () => {
               </TableBody>
             </Table>
           </TableContainer>
+            </Box>
         </Paper>
+        </>
       )}
 
       {/* Order Details Modal - Removed as we now use a separate page */}
@@ -2959,7 +3071,7 @@ const SellerDashboard = () => {
     // console.log("History loading state:", historyLoading);
 
     return (
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4}}>
         <Typography variant="h4" gutterBottom fontWeight="medium">
           Money Withdrawal
         </Typography>
@@ -3780,11 +3892,13 @@ const SellerDashboard = () => {
 
   const renderAllOrdersContent = () => {
     return (
-      <Box sx={{ p: 3 }}>
-        <Typography variant="h5" sx={{ mb: 3 }}>
+      <Box sx={{ p: { xs: 1, sm: 3 } }}>
+        <Typography variant="h5" sx={{ mb: 3, fontSize: { xs: '1.2rem', sm: '1.5rem' } }}>
           All Orders
         </Typography>
+        <Box sx={{ overflowX: 'auto', width: '100%' }}>
         {renderOrdersTable(sellerOrders)}
+        </Box>
       </Box>
     );
   };
@@ -3795,12 +3909,14 @@ const SellerDashboard = () => {
     );
 
     return (
-      <Box sx={{ p: 3 }}>
-        <Typography variant="h5" sx={{ mb: 3 }}>
+      <Box sx={{ p: { xs: 1, sm: 3 } }}>
+        <Typography variant="h5" sx={{ mb: 3, fontSize: { xs: '1.2rem', sm: '1.5rem' } }}>
           Admin Assigned Orders
         </Typography>
         {adminAssignedOrders.length > 0 ? (
-          renderOrdersTable(adminAssignedOrders)
+          <Box sx={{ overflowX: 'auto', width: '100%' }}>
+            {renderOrdersTable(adminAssignedOrders)}
+          </Box>
         ) : (
           <Paper sx={{ p: 3, textAlign: "center" }}>
             <Typography variant="body1">
@@ -3818,12 +3934,14 @@ const SellerDashboard = () => {
     );
 
     return (
-      <Box sx={{ p: 3 }}>
-        <Typography variant="h5" sx={{ mb: 3 }}>
+      <Box sx={{ p: { xs: 1, sm: 3 } }}>
+        <Typography variant="h5" sx={{ mb: 3, fontSize: { xs: '1.2rem', sm: '1.5rem' } }}>
           Direct Orders
         </Typography>
         {directOrders.length > 0 ? (
-          renderOrdersTable(directOrders)
+          <Box sx={{ overflowX: 'auto', width: '100%' }}>
+            {renderOrdersTable(directOrders)}
+          </Box>
         ) : (
           <Paper sx={{ p: 3, textAlign: "center" }}>
             <Typography variant="body1">No direct orders found.</Typography>
@@ -3863,9 +3981,119 @@ const SellerDashboard = () => {
   };
 
   const renderOrdersTable = (orders) => {
-    return (
-      <TableContainer component={Paper}>
-        <Table>
+    // Mobile card view
+    const renderMobileCardView = () => (
+      <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', gap: 2 }}>
+        {orders.length > 0 ? (
+          orders.map((order) => (
+            <Paper
+              key={order.id}
+              elevation={2}
+              sx={{
+                p: 2,
+                borderRadius: 2,
+                bgcolor: order.assignedAt
+                  ? alpha(theme.palette.secondary.light, 0.1)
+                  : 'inherit',
+                '&:hover': {
+                  bgcolor: order.assignedAt
+                    ? alpha(theme.palette.secondary.light, 0.2)
+                    : alpha(theme.palette.primary.light, 0.1),
+                },
+                borderLeft: `4px solid ${
+                  order.status === "completed"
+                    ? theme.palette.success.main
+                    : order.status === "processing"
+                      ? theme.palette.info.main
+                      : order.status === "assigned"
+                        ? theme.palette.primary.main
+                        : order.status === "cancelled"
+                          ? theme.palette.error.main
+                          : theme.palette.grey[500]
+                }`
+              }}
+            >
+              <Grid container spacing={1}>
+                <Grid item xs={6}>
+                  <Typography variant="caption" color="textSecondary">Order ID</Typography>
+                  <Typography variant="body2" fontWeight="medium">
+                    {order.orderNumber || order.id.substring(0, 8)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="caption" color="textSecondary">Date</Typography>
+                  <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="caption" color="textSecondary">Price</Typography>
+                  <Typography variant="body2">
+                    ${Number(order.total || order.totalAmount || 0).toFixed(2)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="caption" color="textSecondary">Profit</Typography>
+                  <Typography variant="body2" sx={{ color: 'success.main', fontWeight: 'medium' }}>
+                    ${(Number(order.total || order.totalAmount || 0) * 0.23).toFixed(2)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="caption" color="textSecondary">Status</Typography>
+                  <Box>
+                    <Chip
+                      label={order.status}
+                      color={
+                        order.status === "completed"
+                          ? "success"
+                          : order.status === "processing"
+                            ? "info"
+                            : order.status === "assigned"
+                              ? "primary"
+                              : order.status === "cancelled"
+                                ? "error"
+                                : "default"
+                      }
+                      size="small"
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sx={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <Tooltip title="View Order Details">
+                      <IconButton
+                        size="small"
+                        color="primary"
+                        onClick={() => handleViewOrderDetails(order)}
+                      >
+                        <VisibilityIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                    {order.status === "assigned" && (
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handlePickOrder(order.id)}
+                      >
+                        PICK
+                      </Button>
+                    )}
+                  </Box>
+                </Grid>
+              </Grid>
+            </Paper>
+          ))
+        ) : (
+          <Paper sx={{ p: 3, textAlign: 'center' }}>
+            <Typography variant="body1">No orders found</Typography>
+          </Paper>
+        )}
+      </Box>
+    );
+
+    // Desktop table view
+    const renderDesktopTableView = () => (
+      <TableContainer component={Paper} sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <Table sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
               <TableCell sx={{ color: "white" }}>Order ID</TableCell>
@@ -3873,7 +4101,7 @@ const SellerDashboard = () => {
               {/* <TableCell sx={{ color: "white" }}>Customer</TableCell> */}
               <TableCell sx={{ color: "white" }}>Price</TableCell>
               <TableCell sx={{ color: "white" }}>Profit</TableCell>
-              {/* <TableCell sx={{ color: "white" }}>Grand Total</TableCell> */}
+              <TableCell sx={{ color: "white" }}>Grand Total</TableCell>
               <TableCell sx={{ color: "white" }}>Status</TableCell>
               <TableCell sx={{ color: "white" }}>Source</TableCell>
               <TableCell sx={{ color: "white" }}>Actions</TableCell>
@@ -3920,7 +4148,7 @@ const SellerDashboard = () => {
                       ).toFixed(2)}
                     </Typography>
                   </TableCell>
-                  {/* <TableCell>
+                  <TableCell>
                     <Typography
                       variant="body2"
                       sx={{
@@ -3935,7 +4163,7 @@ const SellerDashboard = () => {
                         Number(order.total || order.totalAmount || 0) * 0.23
                       ).toFixed(2)}
                     </Typography>
-                  </TableCell> */}
+                  </TableCell>
                   <TableCell>
                     <Chip
                       label={order.status}
@@ -3975,7 +4203,7 @@ const SellerDashboard = () => {
                           <VisibilityIcon fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      {order.status === "assigned" && (
+                      {/* {order.status === "assigned" && (
                         <Button
                           size="small"
                           variant="contained"
@@ -3984,7 +4212,7 @@ const SellerDashboard = () => {
                         >
                           PICK
                         </Button>
-                      )}
+                      )} */}
                     </Box>
                   </TableCell>
                 </TableRow>
@@ -3999,6 +4227,13 @@ const SellerDashboard = () => {
           </TableBody>
         </Table>
       </TableContainer>
+    );
+
+    return (
+      <>
+        {renderMobileCardView()}
+        {renderDesktopTableView()}
+      </>
     );
   };
 
@@ -4126,7 +4361,7 @@ const [toogle, setToogle] = useState(true)
           </Typography>
           {sellerData?.shopName && (
             <Typography variant="subtitle1" sx={{ opacity: 0.8 }}>
-              {sellerData.shopName}
+              {sellerData.email}
             </Typography>
           )}
         </Box>
