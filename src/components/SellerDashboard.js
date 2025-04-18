@@ -184,8 +184,8 @@ const StyledSectionCard = styled(Card)(({ theme }) => ({
       left: 0,
       width: "60px",
       height: 4,
-      background: "linear-gradient(to right, #3f51b5, #5c6bc0)",
-      borderRadius: "0 0 4px 0",
+      background: "linear-gradient(to right, #FF4D33, #FF6E59)",
+      borderRadius: 4,
       transition: "width 0.3s ease",
     },
   },
@@ -200,8 +200,8 @@ const StyledSectionCard = styled(Card)(({ theme }) => ({
       border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
     },
     "& .MuiTableHead-root .MuiTableCell-root": {
-      backgroundColor: alpha(theme.palette.primary.main, 0.04),
-      color: theme.palette.text.primary,
+      background: "linear-gradient(to right, #FF4D33, #FF6E59)",
+      color: theme.palette.common.white,
       fontWeight: 600,
       borderBottom: `2px solid ${alpha(theme.palette.primary.main, 0.1)}`,
     },
@@ -238,7 +238,7 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
   "& .MuiDrawer-paper": {
     width: drawerWidth,
     boxSizing: "border-box",
-    backgroundImage: "linear-gradient(to bottom, #1a237e, #283593, #303f9f)",
+    backgroundImage: "linear-gradient(to bottom, #FF4D33, #FF5E46, #FF6E59)",
     color: "white",
     borderRight: "none",
     boxShadow: "2px 0 20px rgba(0, 0, 0, 0.2)",
@@ -269,7 +269,7 @@ const SectionHeading = styled(Typography)(({ theme }) => ({
     bottom: 0,
     height: 4,
     width: 60,
-    background: "linear-gradient(to right, #3f51b5, #5c6bc0)",
+    background: "linear-gradient(to right, #FF4D33, #FF6E59)",
     borderRadius: 4,
     transition: "width 0.3s ease",
   },
@@ -289,7 +289,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   },
   "& .MuiTableHead-root": {
     "& .MuiTableCell-root": {
-      background: "linear-gradient(to right, #3f51b5, #5c6bc0)",
+      background: "linear-gradient(to right, #FF4D33, #FF6E59)",
       color: theme.palette.common.white,
       fontWeight: 600,
       borderBottom: "none",
@@ -4059,7 +4059,9 @@ const [toogle, setToogle] = useState(true)
     <Box sx={{ display: "flex", height: "100vh" }} >
       {/* Sidebar */}
 
-      <button className='h-6 absolute z-20 top-22 mt-3 left-3 flex items-start box-border justify-center px-3 py-1  rounded-lg bg-custom-blue text-white ' onClick={() => setToogle(!toogle)}>
+      <button className='h-6 absolute z-20 top-22 mt-3 left-3 flex items-start box-border justify-center px-3 py-1 rounded-lg text-white hover:bg-[#e73c1e] transition-colors' 
+        onClick={() => setToogle(!toogle)}
+        style={{ backgroundColor: '#FF4D33' }}>
                            
       <div className="flex items-center">
     {/* Hamburger/drawer icon using CSS */}
@@ -4105,15 +4107,17 @@ const [toogle, setToogle] = useState(true)
 
       <Box
         component="nav"
-        className={`md:w-64 ${toogle ? 'block' : 'hidden'} mt-12 fixed top-0 left-0  h-full bg-gradient-to-b from-[#1a237e] to-[#303f9f] text-white overflow-y-auto shadow-lg flex flex-col z-50`}
+        className={`md:w-64 ${toogle ? 'block' : 'hidden'} mt-12 fixed top-0 left-0  h-full bg-gradient-to-b from-[#FF4D33] to-[#FF6E59] text-white overflow-y-auto shadow-lg flex flex-col z-50`}
         style={{
           // Add custom styles that aren't available in Tailwind
           boxShadow: "2px 0 20px rgba(0, 0, 0, 0.2)",
-          backgroundImage: `linear-gradient(to bottom, #1a237e, #283593, #303f9f)`,
+          backgroundImage: `linear-gradient(to bottom, #FF4D33, #FF5E46, #FF6E59)`,
         }}
       >
 
-        <button className=' absolute mt-16 mt-1 z-50 left-3 flex items-start box-border justify-center px-3 py-1  rounded-lg bg-custom-blue text-white ' onClick={() => setToogle(!toogle)}>
+        <button className='absolute mt-16 mt-1 z-50 left-3 flex items-start box-border justify-center px-3 py-1 rounded-lg text-white hover:bg-[#e73c1e] transition-colors' 
+          onClick={() => setToogle(!toogle)}
+          style={{ backgroundColor: '#FF4D33' }}>
                   X
                 </button>
         <Box sx={{ p: 3, textAlign: "center" }}>
@@ -4277,15 +4281,14 @@ const [toogle, setToogle] = useState(true)
         <Box sx={{ p: 2, borderTop: "1px solid rgba(255, 255, 255, 0.1)" }}>
           <Button
             fullWidth
-            variant="outlined"
-            color="inherit"
+            variant="contained"
             onClick={() => auth.signOut()}
             startIcon={<LogoutIcon />}
             sx={{
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              "&:hover": {
-                borderColor: "rgba(255, 255, 255, 0.8)",
-                backgroundColor: "rgba(255, 255, 255, 0.1)",
+              backgroundColor: '#FF4D33',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: '#e73c1e',
               },
             }}
           >
