@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import { 
   Container, 
   Grid, 
@@ -490,6 +490,17 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
     window.location.href = '/';
   };
 
+  // Add this near the top of the file, inside the component
+  const categoryImages = useMemo(() => ({
+    womenClothing: '/images/categories/women-clothing.jpg',
+    menClothing: '/images/categories/men-clothing.jpg',
+    computers: '/images/categories/computers-cameras.jpg',
+    kidsToys: '/images/categories/kids-toys.jpg',
+    sports: '/images/categories/sports-outdoor.jpg',
+    automobile: '/images/categories/automobile-motorcycle.jpg',
+    jewelry: '/images/categories/jewelry-watches.jpg'
+  }), []);
+
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
@@ -506,8 +517,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           <Box sx={{ position: 'relative' }}>
             <Box
               component="img"
-              src="https://images.pexels.com/photos/4792720/pexels-photo-4792720.jpeg?auto=compress&cs=tinysrgb&w=1260"
+              src={process.env.PUBLIC_URL + "/images/one-day-special.jpg"}
               alt="Fashion banner"
+              loading="eager"
               sx={{
                 width: '100%',
                 height: { xs: 200, sm: 300 },
@@ -772,11 +784,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           <Box sx={{ position: 'relative' }}>
             <Box
               component="img"
-              src="https://images.pexels.com/photos/4792720/pexels-photo-4792720.jpeg?auto=compress&cs=tinysrgb&w=1260"
+              src={process.env.PUBLIC_URL + "/images/one-day-special.jpg"}
               alt="Fashion banner"
+              loading="eager"
               sx={{
                 width: '100%',
-                height: 200,
+                height: { xs: 200, sm: 300 },
                 objectFit: 'cover',
                 filter: 'brightness(0.8)',
               }}
@@ -944,8 +957,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 <img 
-                  src="https://images.pexels.com/photos/1021693/pexels-photo-1021693.jpeg" 
+                  src={process.env.PUBLIC_URL + "/images/women-clothing.jpg"}
                   alt="Women Clothing" 
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
@@ -983,8 +997,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 <img 
-                  src="https://images.pexels.com/photos/2254065/pexels-photo-2254065.jpeg" 
+                  src={process.env.PUBLIC_URL + "/images/men-clothing.jpg"}
                   alt="Men Clothing" 
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
@@ -1022,8 +1037,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 <img 
-                  src="https://images.pexels.com/photos/777001/pexels-photo-777001.jpeg" 
+                  src={process.env.PUBLIC_URL + "/images/computers-cameras.jpg"}
                   alt="Computers & Cameras" 
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
@@ -1062,8 +1078,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 <img 
-                  src="https://images.pexels.com/photos/981588/pexels-photo-981588.jpeg" 
+                  src={process.env.PUBLIC_URL + "/images/kids-toys.jpg"}
                   alt="Kids & toy" 
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
@@ -1102,8 +1119,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 <img 
-                  src="https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg" 
+                  src={process.env.PUBLIC_URL + "/images/sports-outdoor.jpg"}
                   alt="Sports & outdoor" 
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
@@ -1143,8 +1161,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 <img 
-                  src="https://images.pexels.com/photos/3422964/pexels-photo-3422964.jpeg" 
+                  src={process.env.PUBLIC_URL + "/images/automobile-motorcycle.jpg"}
                   alt="Automobile & Motorcycle" 
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
@@ -1184,8 +1203,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }}
               >
                 <img 
-                  src="https://images.pexels.com/photos/265906/pexels-photo-265906.jpeg" 
+                  src={process.env.PUBLIC_URL + "/images/jewelry-watches.jpg"}
                   alt="Jewelry & Watches" 
+                  loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </Box>
