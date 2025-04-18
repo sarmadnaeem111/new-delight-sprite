@@ -21,15 +21,25 @@ import {
   Card,
   CardContent,
   Divider,
-  Stack
+  Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  TextField,
+  Alert
 } from '@mui/material';
 import { 
   ArrowBack as ArrowBackIcon,
-  ShoppingCartCheckout as ShoppingCartCheckoutIcon 
+  ShoppingCartCheckout as ShoppingCartCheckoutIcon,
+  Check as CheckIcon,
+  Lock as LockIcon
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
-import { db } from '../firebase';
+import { db, auth } from '../firebase';
 import { doc, getDoc, updateDoc, arrayUnion, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 
 const SellerOrderDetailsPage = () => {
   const { orderId } = useParams();
@@ -39,6 +49,12 @@ const SellerOrderDetailsPage = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+
+
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
@@ -79,7 +95,51 @@ const SellerOrderDetailsPage = () => {
     }
   };
 
-  const handlePickOrder = async () => {
+  const openPasswordDialog = () => {
+    setPassword('');
+    setPasswordError('');
+    setPasswordDialogOpen(true);
+  };
+
+  const closePasswordDialog = () => {
+    setPasswordDialogOpen(false);
+    setPassword('');
+    setPasswordError('');
+  };
+
+  const handlePasswordConfirm = async () => {
+    try {
+      setLoading(true);
+      
+      // Get current user
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error("You must be logged in to pick an order");
+      }
+      
+      const email = user.email;
+      
+      // Create credential with email and password
+      const credential = EmailAuthProvider.credential(email, password);
+      
+      // Reauthenticate the user
+      await reauthenticateWithCredential(user, credential);
+      
+      // Close dialog and proceed with order pickup
+      closePasswordDialog();
+      await processOrderPickup();
+    } catch (error) {
+      console.error("Authentication error:", error);
+      setPasswordError("Incorrect password. Please try again.");
+      setLoading(false);
+    }
+  };
+
+  const handlePickOrder = () => {
+    openPasswordDialog();
+  };
+
+  const processOrderPickup = async () => {
     try {
       setLoading(true);
       
@@ -99,6 +159,11 @@ const SellerOrderDetailsPage = () => {
       }
 
       const orderData = orderDoc.data();
+
+      // Ensure order is in a status that can be picked
+      if (orderData.status !== "assigned" && orderData.status !== "pending") {
+        throw new Error("This order cannot be picked in its current status");
+      }
 
       // Calculate total product price and profit from order items
       let totalProductPrice = 0;
@@ -428,25 +493,35 @@ const SellerOrderDetailsPage = () => {
             justifyContent: isMobile ? 'space-between' : 'flex-end'
           }}
         >
-          {order.status === "assigned" && (
+          {/* {(order.status === "assigned" || order.status === "pending") && (
             <Button
               variant="contained"
               color="primary"
               onClick={handlePickOrder}
-              startIcon={isMobile ? null : <ShoppingCartCheckoutIcon />}
+              startIcon={<ShoppingCartCheckoutIcon />}
               disabled={loading}
-              size={isMobile ? "small" : "medium"}
-              sx={{ flexGrow: isMobile ? 1 : 0 }}
+              size={isMobile ? "medium" : "large"}
+              sx={{ 
+                flexGrow: isMobile ? 1 : 0,
+                fontWeight: 'bold',
+                py: isMobile ? 1 : 1.5,
+                boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 6px 12px rgba(0,0,0,0.3)',
+                }
+              }}
             >
-              {isMobile ? "Pick" : "Pick Order"}
-            </Button>
-          )}
+              {isMobile ? "PICK ORDER" : "PICK THIS ORDER"}
+            </Button> */}
+          {/* )} */}
           <Chip
             label={order.status}
             color={
               order.status === "completed" ? "success" :
               order.status === "processing" ? "info" :
               order.status === "assigned" ? "primary" :
+              order.status === "pending" ? "warning" :
               order.status === "cancelled" ? "error" : "default"
             }
             size={isMobile ? "small" : "medium"}
@@ -480,17 +555,17 @@ const SellerOrderDetailsPage = () => {
               Order Information
             </Typography>
             <Box sx={{ mb: 2 }}>
-              <Typography variant="body2" color="text.secondary">Order Date:</Typography>
+              <Typography variant="body2" color="textSecondary">Order Date:</Typography>
               <Typography variant="body1" sx={{ mb: 1 }}>{formatDate(order.createdAt)}</Typography>
-              {/* <Typography variant="body2" color="text.secondary">Payment Method:</Typography>
+              {/* <Typography variant="body2" color="textSecondary">Payment Method:</Typography>
               <Typography variant="body1" sx={{ mb: 1 }}>{order.paymentMethod || 'N/A'}</Typography> */}
-              <Typography variant="body2" color="text.secondary">Assignment:</Typography>
+              <Typography variant="body2" color="textSecondary">Assignment:</Typography>
               <Typography variant="body1">
                 {order.assignedByAdmin ? 'Assigned by Admin' : 'Direct Order'}
               </Typography>
               
-              {order.status === "assigned" && isMobile && (
-                <Box sx={{ mt: 2 }}>
+              {(order.status === "assigned" || order.status === "pending") && (
+                <Box sx={{ mt: 3 }}>
                   <Button
                     variant="contained"
                     color="primary"
@@ -498,9 +573,18 @@ const SellerOrderDetailsPage = () => {
                     onClick={handlePickOrder}
                     startIcon={<ShoppingCartCheckoutIcon />}
                     disabled={loading}
-                    size="small"
+                    size="large"
+                    sx={{
+                      py: 1.5,
+                      fontWeight: 'bold',
+                      boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                      '&:hover': {
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 6px 12px rgba(0,0,0,0.3)',
+                      }
+                    }}
                   >
-                    PICK ORDER
+                    PICK THIS ORDER
                   </Button>
                 </Box>
               )}
@@ -524,6 +608,7 @@ const SellerOrderDetailsPage = () => {
                     <TableRow>
                       <TableCell>Product</TableCell>
                       <TableCell align="right">Price</TableCell>
+                      <TableCell align="right">Profit</TableCell>
                       <TableCell align="center">Quantity</TableCell>
                       <TableCell align="right">Subtotal</TableCell>
                     </TableRow>
@@ -551,6 +636,9 @@ const SellerOrderDetailsPage = () => {
                         <TableCell align="right">
                           ${Number(item.price || 0).toFixed(2)}
                         </TableCell>
+                        <TableCell align="right">
+                          ${Number(item.price*23/100 || 0).toFixed(2)}
+                        </TableCell>
                         <TableCell align="center">
                           {item.quantity}
                         </TableCell>
@@ -564,6 +652,7 @@ const SellerOrderDetailsPage = () => {
                         <Typography variant="body2">Subtotal:</Typography>
                       </TableCell>
                       <TableCell align="right">
+                        
                         ${Number(order.subtotal || 0).toFixed(2)}
                       </TableCell>
                     </TableRow>
@@ -597,68 +686,126 @@ const SellerOrderDetailsPage = () => {
       <Box 
         sx={{ 
           mt: { xs: 2, sm: 3, md: 4 }, 
-          display: 'flex', 
+          display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
           gap: 2,
-          justifyContent: 'space-between' 
+          justifyContent: isMobile ? 'stretch' : 'center'
         }}
       >
-        {!isMobile && (
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => navigate('/seller/dashboard?tab=orders')}
+          startIcon={<ArrowBackIcon />}
+          fullWidth={isMobile}
+        >
+          Back to Orders
+        </Button>
+        
+       
+        
+        {order.status === "processing" && (
           <Button
-            variant="outlined"
-            startIcon={<ArrowBackIcon />}
-            onClick={() => navigate('/seller/dashboard?tab=orders')}
+            variant="contained"
+            color="success"
+            onClick={() => handleUpdateOrderStatus("completed")}
+            disabled={loading}
+            fullWidth={isMobile}
+            size={isMobile ? "medium" : "medium"}
           >
-            Back to Orders
+            Request Completion
           </Button>
         )}
-        
-        <Box 
-          sx={{ 
-            display: 'flex', 
-            gap: 2,
-            width: isMobile ? '100%' : 'auto',
-            flexDirection: isMobile ? 'column' : 'row'
+      </Box>
+
+      {/* Floating Action Button for Pick Order - shows for pending and assigned orders */}
+      {(order.status === "assigned" || order.status === "pending") && (
+        <Box
+          sx={{
+            position: 'fixed',
+            bottom: 20,
+            right: 20,
+            zIndex: 1000,
           }}
         >
-          {order.status === "assigned" && !isMobile && (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handlePickOrder}
-              disabled={loading}
-            >
-              Pick Order
-            </Button>
-          )}
-          
-          {order.status === "picked" && (
-            <Button
-              variant="contained"
-              color="info"
-              onClick={() => handleUpdateOrderStatus("processing")}
-              disabled={loading}
-              fullWidth={isMobile}
-              size={isMobile ? "small" : "medium"}
-            >
-              Mark as Processing
-            </Button>
-          )}
-          
-          {order.status === "processing" && (
-            <Button
-              variant="contained"
-              color="success"
-              onClick={() => handleUpdateOrderStatus("completed")}
-              disabled={loading}
-              fullWidth={isMobile}
-              size={isMobile ? "small" : "medium"}
-            >
-              Request Completion
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handlePickOrder}
+            disabled={loading}
+            sx={{
+              borderRadius: '50%',
+              width: 64,
+              height: 64,
+              boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+              '&:hover': {
+                transform: 'scale(1.1)',
+                boxShadow: '0 6px 14px rgba(0,0,0,0.4)',
+              }
+            }}
+          >
+            <CheckIcon fontSize="large" />
+          </Button>
         </Box>
-      </Box>
+      )}
+
+      {/* Password Confirmation Dialog */}
+      <Dialog 
+        open={passwordDialogOpen} 
+        onClose={() => !loading && closePasswordDialog()}
+        fullWidth
+        maxWidth="xs"
+      >
+        <DialogTitle sx={{ pb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
+          <LockIcon color="primary" />
+          Password Confirmation
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{ mb: 2 }}>
+            Please enter your password to confirm picking this order.
+          </DialogContentText>
+          {passwordError && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {passwordError}
+            </Alert>
+          )}
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Password"
+            type="password"
+            fullWidth
+            variant="outlined"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
+            error={!!passwordError}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' && password) {
+                handlePasswordConfirm();
+              }
+            }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button 
+            onClick={closePasswordDialog} 
+            disabled={loading}
+            variant="outlined"
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={handlePasswordConfirm} 
+            disabled={!password || loading}
+            variant="contained"
+            color="primary"
+            startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />}
+          >
+            {loading ? "Verifying..." : "Confirm"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
