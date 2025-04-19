@@ -238,12 +238,12 @@ function AppContent({
           } />
           <Route path="/seller/dashboard" element={
             <ProtectedSellerRoute>
-              <SellerDashboard />
+              <SellerDashboard setIsSeller={setIsSeller} />
             </ProtectedSellerRoute>
           } />
           <Route path="/seller/order/:orderId" element={
             <ProtectedSellerRoute>
-              <SellerOrderDetailsPage />
+              <SellerOrderDetailsPage setIsSeller={setIsSeller} />
             </ProtectedSellerRoute>
           } />
         </Routes>
