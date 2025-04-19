@@ -332,7 +332,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 }));
 
 const DashboardCard = ({ title, value, icon, color }) => (
-  <StyledDashboardCard elevation={3} color={color}>
+  <StyledDashboardCard color={color}>
     <Box
       display="flex"
       alignItems="center"
@@ -370,7 +370,7 @@ const DashboardCard = ({ title, value, icon, color }) => (
   </StyledDashboardCard>
 );
 
-const SellerDashboard = () => {
+const SellerDashboard = ({ setIsSeller }) => {
   const [sellerData, setSellerData] = useState(null);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [adminProducts, setAdminProducts] = useState([]);
@@ -4273,6 +4273,10 @@ const SellerDashboard = () => {
   // Handle logout and navigate to seller login page
   const handleLogout = async () => {
     try {
+      // Set isSeller to false first, to ensure the navbar updates immediately
+      setIsSeller(false);
+      
+      // Then sign out and clear localStorage
       await auth.signOut();
       
       // Clear any seller related data from localStorage
