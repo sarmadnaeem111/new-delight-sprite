@@ -169,8 +169,7 @@ const Message = ({ message, isAdmin }) => {
   const { text, imageUrl, timestamp, senderName, senderUid } = message;
   
   // Display "Customer Care" instead of "mdzahid11@gmail.com" for sender name
-  // For admin messages, don't display any name
-  const displayName = senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "" : senderName;
+  const displayName = senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "Customer Care" : senderName;
   
   // Determine if this message is from the current user (either admin or seller)
   // isAdmin prop now represents whether the current user is admin, not the message sender
@@ -216,7 +215,7 @@ const Message = ({ message, isAdmin }) => {
       )}
       <MessageBubble isCurrentUser={isCurrentUserMessage}>
         <MessageContent>
-          {!isCurrentUserMessage && displayName && (
+          {!isCurrentUserMessage && displayName === "Customer Care" && (
             <Typography variant="caption" sx={{ 
               fontWeight: 'bold', 
               color: 'text.secondary',
@@ -264,7 +263,7 @@ const Message = ({ message, isAdmin }) => {
       </MessageBubble>
       {isCurrentUserMessage && (
         <MessageAvatar
-          alt={senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "" : displayName}
+          alt={senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "Customer Care" : displayName}
         />
       )}
     </MessageContainer>
