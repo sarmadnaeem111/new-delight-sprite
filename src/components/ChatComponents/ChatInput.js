@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, TextField, IconButton, Paper, styled, CircularProgress, LinearProgress, Typography } from '@mui/material';
+import { Box, TextField, IconButton, Paper, styled, CircularProgress, LinearProgress, Typography, useTheme, useMediaQuery } from '@mui/material';
 import { Send as SendIcon, AddPhotoAlternate as ImageIcon, Close as CloseIcon } from '@mui/icons-material';
 import { uploadToCloudinary } from '../../utils/cloudinaryConfig';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -10,12 +10,19 @@ const InputContainer = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1, 2),
   borderRadius: '24px',
   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-  marginTop: theme.spacing(2),
+  [theme.breakpoints.down('sm')]: {
+    borderRadius: '18px',
+    padding: theme.spacing(0.75, 1.5),
+    marginTop: theme.spacing(1),
+  }
 }));
 
 const ImagePreviewContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   margin: theme.spacing(1, 0),
+  [theme.breakpoints.down('sm')]: {
+    margin: theme.spacing(0.5, 0),
+  }
 }));
 
 const ImagePreview = styled('img')({
@@ -35,6 +42,9 @@ const RemoveImageButton = styled(IconButton)(({ theme }) => ({
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
   },
+  [theme.breakpoints.down('sm')]: {
+    padding: '2px',
+  }
 }));
 
 const ProgressBar = styled(LinearProgress)(({ theme }) => ({
@@ -78,6 +88,8 @@ const ChatInput = ({ onSendMessage, currentUserUid }) => {
   const [imagePreview, setImagePreview] = useState('');
   const [sending, setSending] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
@@ -135,12 +147,12 @@ const ChatInput = ({ onSendMessage, currentUserUid }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
       {imagePreview && (
         <ImagePreviewContainer>
           <ImagePreview src={imagePreview} alt="Selected" />
           <RemoveImageButton size="small" onClick={removeImage}>
-            <CloseIcon fontSize="small" />
+            <CloseIcon fontSize={isMobile ? 'small' : 'medium'} />
           </RemoveImageButton>
         </ImagePreviewContainer>
       )}
@@ -158,8 +170,15 @@ const ChatInput = ({ onSendMessage, currentUserUid }) => {
         <IconButton 
           component="label" 
           disabled={sending}
+          size={isMobile ? "small" : "medium"}
+          sx={{ 
+            p: isMobile ? 0.5 : 1,
+            '&:active': { 
+              backgroundColor: theme.palette.action.selected
+            }
+          }}
         >
-          <ImageIcon color="action" />
+          <ImageIcon color="action" fontSize={isMobile ? "small" : "medium"} />
           <input
             hidden
             accept="image/*"
@@ -177,6 +196,10 @@ const ChatInput = ({ onSendMessage, currentUserUid }) => {
           disabled={sending}
           InputProps={{
             disableUnderline: true,
+            sx: {
+              px: 1,
+              fontSize: isMobile ? '0.95rem' : '1rem',
+            }
           }}
         />
         
@@ -184,8 +207,18 @@ const ChatInput = ({ onSendMessage, currentUserUid }) => {
           color="primary" 
           type="submit" 
           disabled={sending || (message.trim() === '' && !image)}
+          size={isMobile ? "small" : "medium"}
+          sx={{ 
+            p: isMobile ? 0.5 : 1,
+            '&:active': { 
+              backgroundColor: theme.palette.action.selected
+            }
+          }}
         >
-          {sending ? <CircularProgress size={24} /> : <SendIcon />}
+          {sending ? 
+            <CircularProgress size={isMobile ? 18 : 24} /> : 
+            <SendIcon fontSize={isMobile ? "small" : "medium"} />
+          }
         </IconButton>
       </InputContainer>
     </Box>
