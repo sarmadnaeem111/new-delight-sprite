@@ -21,6 +21,7 @@ import {
 } from 'firebase/firestore';
 import { cloudinary } from '../../utils/cloudinaryConfig';
 import { initializeChatCleanupWorker } from '../../utils/chatCleanup';
+import { useNavigate } from 'react-router-dom';
 
 // Add a flag to track if Cloudinary is properly configured
 let isCloudinaryConfigured = false;
@@ -39,13 +40,15 @@ try {
 }
 
 const ChatContainer = styled(Box)(({ theme }) => ({
-  height: '75vh',
-  maxHeight: '900px',
+  height: '100vh',
+  width: '100%',
   display: 'flex',
-  borderRadius: theme.spacing(2),
   overflow: 'hidden',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
   backgroundColor: alpha(theme.palette.background.paper, 0.9),
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    height: '100vh'
+  }
 }));
 
 const SidebarContainer = styled(Paper)(({ theme }) => ({
@@ -104,6 +107,7 @@ const Chat = ({ isAdmin }) => {
   
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate();
   
   // Initialize the chat cleanup worker once when the component mounts
   useEffect(() => {
@@ -374,46 +378,81 @@ const Chat = ({ isAdmin }) => {
     }
   };
 
-  // Admin starts a new chat with a seller
-  const startAdminChat = async (sellerId, sellerName) => {
-    if (!isAdmin || !currentUserUid) return;
-    
-    try {
-      // Check if a chat already exists
-      const chatsRef = collection(db, 'chats');
-      const existingChatQuery = query(
-        chatsRef, 
-        where('sellerUid', '==', sellerId),
-        where('adminUid', '==', currentUserUid)
-      );
-      
-      const existingChatsSnapshot = await getDocs(existingChatQuery);
-      
-      let chatId;
-      
-      if (existingChatsSnapshot.empty) {
-        // Create a new chat document
-        const newChatRef = await addDoc(chatsRef, {
-          sellerUid: sellerId,
-          adminUid: currentUserUid,
-          createdAt: serverTimestamp(),
-          lastMessageTime: null,
-          adminUnreadCount: 0,
-          sellerUnreadCount: 0
-        });
+  // Modified to automatically create or get existing chat for sellers
+  useEffect(() => {
+    if (!currentUserUid || isAdmin) return;
+
+    const setupSellerChat = async () => {
+      try {
+        // Find admin user
+        const adminsRef = collection(db, 'admins');
+        const adminsSnapshot = await getDocs(adminsRef);
         
-        chatId = newChatRef.id;
-      } else {
-        // Use existing chat
-        chatId = existingChatsSnapshot.docs[0].id;
+        if (adminsSnapshot.empty) {
+          console.error('No admin found');
+          return;
+        }
+        
+        // Use the first admin
+        const adminDoc = adminsSnapshot.docs[0];
+        const adminUid = adminDoc.id;
+        
+        // Check if a chat already exists
+        const chatsRef = collection(db, 'chats');
+        const existingChatQuery = query(
+          chatsRef, 
+          where('sellerUid', '==', currentUserUid),
+          where('adminUid', '==', adminUid)
+        );
+        
+        const existingChatsSnapshot = await getDocs(existingChatQuery);
+        
+        let chatId;
+        let isNewChat = false;
+        
+        if (existingChatsSnapshot.empty) {
+          isNewChat = true;
+          // Create a new chat document
+          const newChatRef = await addDoc(chatsRef, {
+            sellerUid: currentUserUid,
+            adminUid: adminUid,
+            createdAt: serverTimestamp(),
+            lastMessageTime: serverTimestamp(),
+            adminUnreadCount: 0,
+            sellerUnreadCount: 1,
+            lastMessage: {
+              text: "How can I help you?",
+              senderUid: adminUid,
+              timestamp: serverTimestamp()
+            }
+          });
+          
+          chatId = newChatRef.id;
+        } else {
+          // Use existing chat
+          chatId = existingChatsSnapshot.docs[0].id;
+        }
+        
+        // If this is a new chat, add the default welcome message
+        if (isNewChat) {
+          await addDoc(collection(db, 'chats', chatId, 'messages'), {
+            text: "How can I help you?",
+            imageUrl: null,
+            senderUid: adminUid,
+            senderName: "Customer Care",
+            timestamp: serverTimestamp(),
+            isRead: false
+          });
+        }
+        
+        setSelectedChatId(chatId);
+      } catch (error) {
+        console.error('Error setting up seller chat:', error);
       }
-      
-      setSelectedChatId(chatId);
-      setShowSellerDialog(false);
-    } catch (error) {
-      console.error('Error starting chat with seller:', error);
-    }
-  };
+    };
+
+    setupSellerChat();
+  }, [currentUserUid, isAdmin]);
 
   // Filter sellers based on search query
   const filteredSellers = sellerSearchQuery.trim() === '' 
@@ -471,7 +510,6 @@ const Chat = ({ isAdmin }) => {
         });
         
         chatId = newChatRef.id;
-        isNewChat = true;
       } else {
         // Use existing chat
         chatId = existingChatsSnapshot.docs[0].id;
@@ -506,9 +544,15 @@ const Chat = ({ isAdmin }) => {
   
   // Handle back button in mobile view
   const handleBackClick = () => {
-    setSelectedChatId(null);
-    if (isMobile) {
-      setSidebarOpen(true);
+    if (!isAdmin) {
+      // For sellers, navigate to seller dashboard
+      navigate('/seller/dashboard');
+    } else {
+      // For admin, keep the existing functionality
+      setSelectedChatId(null);
+      if (isMobile) {
+        setSidebarOpen(true);
+      }
     }
   };
   
@@ -554,28 +598,105 @@ const Chat = ({ isAdmin }) => {
       
       const chatData = chatDoc.data();
       const sellerId = chatData.sellerUid;
+      const adminUid = chatData.adminUid;
       
       // Use a batch write to ensure all operations succeed or fail together
       const batch = writeBatch(db);
       
-      // 1. Delete all messages in the chat
-      const messagesSnapshot = await getDocs(collection(db, 'chats', chatToDelete, 'messages'));
-      messagesSnapshot.forEach((messageDoc) => {
-        batch.delete(doc(db, 'chats', chatToDelete, 'messages', messageDoc.id));
-      });
+      // 1. Get all messages except the default "How can I help you?" message
+      console.log(`Processing messages from chat ${chatToDelete}`);
+      const messagesRef = collection(db, 'chats', chatToDelete, 'messages');
+      const messagesSnapshot = await getDocs(messagesRef);
       
-      // 2. Delete the chat document itself
-      batch.delete(doc(db, 'chats', chatToDelete));
+      let defaultWelcomeMessageId = null;
+      let hasDefaultMessage = false;
       
-      // Execute the batch
+      // Find messages to delete (preserving the welcome message)
+      if (!messagesSnapshot.empty) {
+        messagesSnapshot.forEach((messageDoc) => {
+          const messageData = messageDoc.data();
+          
+          // Check if this is the default welcome message from admin
+          if (messageData.text === "How can I help you?" && 
+              messageData.senderUid === adminUid &&
+              messageData.senderName === "Customer Care") {
+            hasDefaultMessage = true;
+            defaultWelcomeMessageId = messageDoc.id;
+            console.log('Found default welcome message, will preserve it');
+          } else {
+            // Delete all other messages
+            batch.delete(doc(db, 'chats', chatToDelete, 'messages', messageDoc.id));
+          }
+        });
+        
+        console.log(`Deleting ${messagesSnapshot.size - (hasDefaultMessage ? 1 : 0)} messages`);
+      }
+      
+      // 2. Reset the chat document instead of deleting it
+      if (hasDefaultMessage) {
+        // Update the chat document to reset it with only the welcome message
+        batch.update(doc(db, 'chats', chatToDelete), {
+          lastMessage: {
+            text: "How can I help you?",
+            senderUid: adminUid,
+            timestamp: serverTimestamp()
+          },
+          lastMessageTime: serverTimestamp(),
+          adminUnreadCount: 0,
+          sellerUnreadCount: 1,  // Set to 1 to notify seller
+          createdAt: serverTimestamp() // Reset creation time
+        });
+        
+        console.log(`Resetting chat ${chatToDelete} to initial state`);
+      } else {
+        // If no default message was found, or we couldn't identify it, 
+        // create a new welcome message and reset the chat
+        
+        // Delete the chat document first
+        batch.delete(doc(db, 'chats', chatToDelete));
+        
+        console.log(`No default welcome message found. Creating a new chat for the seller`);
+      }
+      
+      // 3. Execute the batch
       await batch.commit();
       
-      console.log(`Chat ${chatToDelete} successfully deleted`);
+      // 4. If we deleted the chat completely (no welcome message found), create a new one
+      if (!hasDefaultMessage) {
+        // Create a new chat with a welcome message
+        const newChatRef = await addDoc(collection(db, 'chats'), {
+          sellerUid: sellerId,
+          adminUid: adminUid,
+          createdAt: serverTimestamp(),
+          lastMessageTime: serverTimestamp(),
+          adminUnreadCount: 0,
+          sellerUnreadCount: 1,  // Set to 1 to notify seller
+          lastMessage: {
+            text: "How can I help you?",
+            senderUid: adminUid,
+            timestamp: serverTimestamp()
+          }
+        });
+        
+        // Add the welcome message to the new chat
+        await addDoc(collection(db, 'chats', newChatRef.id, 'messages'), {
+          text: "How can I help you?",
+          imageUrl: null,
+          senderUid: adminUid,
+          senderName: "Customer Care",
+          timestamp: serverTimestamp(),
+          isRead: false
+        });
+        
+        console.log(`Created new chat ${newChatRef.id} with welcome message`);
+      }
       
-      // Update the UI by removing the deleted chat from state
+      console.log(`Chat cleaning completed successfully`);
+      
+      // 5. Update the UI by removing the deleted chat from state
       setChats(prevChats => prevChats.filter(chat => chat.id !== chatToDelete));
       
-      // If the deleted chat was selected, clear the selection
+      // 6. If the deleted chat was selected, clear the selection
       if (selectedChatId === chatToDelete) {
         setSelectedChatId(null);
         setOtherUserDetails(null);
@@ -584,36 +705,38 @@ const Chat = ({ isAdmin }) => {
       setDeleteLoading(false);
       closeDeleteDialog();
     } catch (error) {
-      console.error('Error deleting chat:', error);
+      console.error('Error during chat cleanup:', error);
       setDeleteLoading(false);
       closeDeleteDialog();
     }
   };
   
-  // Create the chat layout
+  // Modify the chat layout for sellers to show chat window directly
   const renderChatLayout = () => {
     if (isMobile) {
       return (
         <>
-          <IconButton 
-            onClick={toggleSidebar} 
-            sx={{ display: { xs: 'flex', md: 'none' }, mb: 1 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          {isAdmin && (
+            <IconButton 
+              onClick={toggleSidebar} 
+              sx={{ display: { xs: 'flex', md: 'none' }, mb: 1 }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           
-          <Drawer
-            anchor="left"
-            open={sidebarOpen}
-            onClose={() => setSidebarOpen(false)}
-            PaperProps={{
-              sx: { width: '80%', maxWidth: '320px' }
-            }}
-          >
-            <SidebarContainer square elevation={0}>
-              <SidebarHeader>
-                <Typography variant="h6">Convesations</Typography>
-                {isAdmin ? (
+          {isAdmin ? (
+            <Drawer
+              anchor="left"
+              open={sidebarOpen}
+              onClose={() => setSidebarOpen(false)}
+              PaperProps={{
+                sx: { width: '80%', maxWidth: '320px' }
+              }}
+            >
+              <SidebarContainer square elevation={0}>
+                <SidebarHeader>
+                  <Typography variant="h6">Conversations</Typography>
                   <Button
                     startIcon={<AddIcon />}
                     size="small"
@@ -624,29 +747,33 @@ const Chat = ({ isAdmin }) => {
                   >
                     New Conversation
                   </Button>
-                ) : (
-                  <Typography 
-                    variant="body2" 
-                    color="primary" 
-                    sx={{ cursor: 'pointer', mt: 1 }}
-                    onClick={startNewChat}
-                  >
-                    + Start new conversation
-                  </Typography>
-                )}
-              </SidebarHeader>
-              <ScrollableChatListContainer>
-                <ChatList 
-                  chats={chats} 
-                  selectedChatId={selectedChatId}
-                  onSelectChat={handleSelectChat}
-                  currentUserIsAdmin={isAdmin}
-                />
-              </ScrollableChatListContainer>
-            </SidebarContainer>
-          </Drawer>
+                </SidebarHeader>
+                <ScrollableChatListContainer>
+                  <ChatList 
+                    chats={chats} 
+                    selectedChatId={selectedChatId}
+                    onSelectChat={handleSelectChat}
+                    currentUserIsAdmin={isAdmin}
+                  />
+                </ScrollableChatListContainer>
+              </SidebarContainer>
+            </Drawer>
+          ) : null}
           
-          <Box sx={{ width: '100%', height: '100%' }}>
+          <Box sx={{ 
+            width: '100%', 
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            [theme.breakpoints.down('sm')]: {
+              height: 'calc(100vh - 56px)', // Account for potential mobile browser navigation
+              width: '100vw',
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              zIndex: 1000 // Ensure chat is on top
+            }
+          }}>
             <ChatWindow 
               selectedChatId={selectedChatId}
               onBackClick={handleBackClick}
@@ -663,11 +790,11 @@ const Chat = ({ isAdmin }) => {
     
     return (
       <Grid container sx={{ height: '100%' }}>
-        <Grid item xs={12} md={4} sx={{ height: '100%' }}>
-          <SidebarContainer elevation={0}>
-            <SidebarHeader>
-              <Typography variant="h6">Conversations</Typography>
-              {isAdmin ? (
+        {isAdmin && (
+          <Grid item xs={12} md={4} sx={{ height: '100%' }}>
+            <SidebarContainer elevation={0}>
+              <SidebarHeader>
+                <Typography variant="h6">Conversations</Typography>
                 <Button
                   startIcon={<AddIcon />}
                   size="small"
@@ -678,29 +805,20 @@ const Chat = ({ isAdmin }) => {
                 >
                   New Conversation
                 </Button>
-              ) : (
-                <Typography 
-                  variant="body2" 
-                  color="primary" 
-                  sx={{ cursor: 'pointer', mt: 1 }}
-                  onClick={startNewChat}
-                >
-                  + Start new conversation
-                </Typography>
-              )}
-            </SidebarHeader>
-            <ScrollableChatListContainer>
-              <ChatList 
-                chats={chats} 
-                selectedChatId={selectedChatId}
-                onSelectChat={handleSelectChat}
-                currentUserIsAdmin={isAdmin}
-              />
-            </ScrollableChatListContainer>
-          </SidebarContainer>
-        </Grid>
+              </SidebarHeader>
+              <ScrollableChatListContainer>
+                <ChatList 
+                  chats={chats} 
+                  selectedChatId={selectedChatId}
+                  onSelectChat={handleSelectChat}
+                  currentUserIsAdmin={isAdmin}
+                />
+              </ScrollableChatListContainer>
+            </SidebarContainer>
+          </Grid>
+        )}
         
-        <Grid item xs={12} md={8} sx={{ height: '100%' }}>
+        <Grid item xs={12} md={isAdmin ? 8 : 12} sx={{ height: '100%' }}>
           <ChatWindow 
             selectedChatId={selectedChatId}
             onBackClick={handleBackClick}
@@ -719,82 +837,84 @@ const Chat = ({ isAdmin }) => {
     <ChatContainer>
       {renderChatLayout()}
       
-      {/* Seller Selection Dialog */}
-      <Dialog 
-        open={showSellerDialog} 
-        onClose={() => setShowSellerDialog(false)}
-        fullWidth
-        maxWidth="sm"
-      >
-        <DialogTitle>
-          Select a Seller to Start Conversation
-        </DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            fullWidth
-            placeholder="Search sellers..."
-            value={sellerSearchQuery}
-            onChange={(e) => setSellerSearchQuery(e.target.value)}
-            variant="outlined"
-            sx={{ mb: 2 }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-          
-          {loadingSellers ? (
-            <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
-              <CircularProgress />
-            </Box>
-          ) : filteredSellers.length > 0 ? (
-            <List sx={{ maxHeight: '400px', overflow: 'auto' }}>
-              {filteredSellers.map((seller) => (
-                <ListItem 
-                  button 
-                  key={seller.id}
-                  onClick={() => startAdminChat(seller.id, seller.name)}
-                  sx={{
-                    borderRadius: 1,
-                    mb: 0.5,
-                    '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
-                    position: 'relative',
-                    pl: 2,
-                    ...(seller.status === 'frozen' ? { opacity: 0.7 } : {})
-                  }}
-                >
-                  <ListItemText 
-                    primary={seller.name}
-                    secondary={
-                      <>
-                        {seller.email}
-                        {seller.status === 'frozen' && (
-                          <Box component="span" sx={{ ml: 1, color: 'error.main', fontSize: '0.75rem' }}>
-                            (Frozen)
-                          </Box>
-                        )}
-                      </>
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-            <Box sx={{ p: 3, textAlign: 'center' }}>
-              <Typography color="text.secondary">
-                {availableSellers.length === 0 
-                  ? 'No sellers found' 
-                  : 'No sellers match your search'}
-              </Typography>
-            </Box>
-          )}
-        </DialogContent>
-      </Dialog>
+      {/* Seller Selection Dialog - Only for Admin */}
+      {isAdmin && (
+        <Dialog 
+          open={showSellerDialog} 
+          onClose={() => setShowSellerDialog(false)}
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogTitle>
+            Select a Seller to Start Conversation
+          </DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              fullWidth
+              placeholder="Search sellers..."
+              value={sellerSearchQuery}
+              onChange={(e) => setSellerSearchQuery(e.target.value)}
+              variant="outlined"
+              sx={{ mb: 2 }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            
+            {loadingSellers ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
+                <CircularProgress />
+              </Box>
+            ) : filteredSellers.length > 0 ? (
+              <List sx={{ maxHeight: '400px', overflow: 'auto' }}>
+                {filteredSellers.map((seller) => (
+                  <ListItem 
+                    button 
+                    key={seller.id}
+                    onClick={() => startNewChat(seller.id, seller.name)}
+                    sx={{
+                      borderRadius: 1,
+                      mb: 0.5,
+                      '&:hover': { backgroundColor: 'rgba(0, 0, 0, 0.04)' },
+                      position: 'relative',
+                      pl: 2,
+                      ...(seller.status === 'frozen' ? { opacity: 0.7 } : {})
+                    }}
+                  >
+                    <ListItemText 
+                      primary={seller.name}
+                      secondary={
+                        <>
+                          {seller.email}
+                          {seller.status === 'frozen' && (
+                            <Box component="span" sx={{ ml: 1, color: 'error.main', fontSize: '0.75rem' }}>
+                              (Frozen)
+                            </Box>
+                          )}
+                        </>
+                      }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <Box sx={{ p: 3, textAlign: 'center' }}>
+                <Typography color="text.secondary">
+                  {availableSellers.length === 0 
+                    ? 'No sellers found' 
+                    : 'No sellers match your search'}
+                </Typography>
+              </Box>
+            )}
+          </DialogContent>
+        </Dialog>
+      )}
       
       {/* Delete Confirmation Dialog */}
       <Dialog
@@ -803,11 +923,31 @@ const Chat = ({ isAdmin }) => {
         maxWidth="xs"
         fullWidth
       >
-        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogTitle sx={{ color: 'error.main' }}>Clear Conversation</DialogTitle>
         <DialogContent>
-          <Typography>
-            Are you sure you want to delete this conversation? This action cannot be undone and will remove the chat for both you and the seller.
+          <Typography variant="body1" sx={{ mb: 2 }}>
+            Are you sure you want to clear this conversation?
           </Typography>
+          <Typography variant="body2" color="text.secondary">
+            This action will:
+          </Typography>
+          <Box component="ul" sx={{ mt: 1, pl: 2 }}>
+            <Box component="li" sx={{ mb: 0.5 }}>
+              <Typography variant="body2" color="text.secondary">
+                Remove all messages except the initial "How can I help you?" message
+              </Typography>
+            </Box>
+            <Box component="li" sx={{ mb: 0.5 }}>
+              <Typography variant="body2" color="text.secondary">
+                Reset the conversation to its initial state for both you and the seller
+              </Typography>
+            </Box>
+            <Box component="li">
+              <Typography variant="body2" color="text.secondary">
+                The seller will still be able to start a new conversation
+              </Typography>
+            </Box>
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button 
@@ -824,7 +964,7 @@ const Chat = ({ isAdmin }) => {
             variant="contained"
             startIcon={deleteLoading ? <CircularProgress size={20} color="inherit" /> : null}
           >
-            {deleteLoading ? 'Deleting...' : 'Delete'}
+            {deleteLoading ? 'Clearing...' : 'Clear Conversation'}
           </Button>
         </DialogActions>
       </Dialog>
