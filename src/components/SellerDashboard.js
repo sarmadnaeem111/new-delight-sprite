@@ -622,6 +622,14 @@ const SellerDashboard = ({ setIsSeller }) => {
 
   // Update the useEffect to use this function
   useEffect(() => {
+    // Check if there's an active tab stored in localStorage
+    const storedActiveTab = localStorage.getItem('sellerActiveTab');
+    if (storedActiveTab) {
+      setActiveTab(storedActiveTab);
+      // Clear the stored tab after using it
+      localStorage.removeItem('sellerActiveTab');
+    }
+    
     // Main function to fetch essential data first
     const loadEssentialData = async () => {
       try {
@@ -1956,7 +1964,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                 const isSelected = selectedProducts.includes(product.id);
                 
                 return (
-                  <Grid item xs={12} sm={6} md={4} key={product.id}>
+                  <Grid item xs={6} sm={6} md={4} key={product.id}>
                     <Card 
                       sx={{
                         display: 'flex',
@@ -4785,7 +4793,7 @@ const [toogle, setToogle] = useState(true)
                 const isSelected = selectedProducts.includes(product.id);
                 
                 return (
-                  <Grid item xs={12} sm={6} md={4} key={product.id}>
+                  <Grid item xs={6} sm={6} md={4} key={product.id}>
                     <Card 
                       sx={{
                         display: 'flex',
