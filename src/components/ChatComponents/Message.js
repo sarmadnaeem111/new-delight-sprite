@@ -215,15 +215,7 @@ const Message = ({ message, isAdmin }) => {
       )}
       <MessageBubble isCurrentUser={isCurrentUserMessage}>
         <MessageContent>
-          {!isCurrentUserMessage && displayName === "Customer Care" && (
-            <Typography variant="caption" sx={{ 
-              fontWeight: 'bold', 
-              color: 'text.secondary',
-              fontSize: {xs: '0.7rem', sm: '0.75rem'}
-            }}>
-              {displayName}
-            </Typography>
-          )}
+          {/* Removed Customer Care name display as requested */}
           {text && (
             <Typography variant="body2" sx={{
               fontSize: {xs: '0.9rem', sm: '0.95rem', md: '1rem'},
