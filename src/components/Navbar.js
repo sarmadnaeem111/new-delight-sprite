@@ -564,7 +564,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                   </Button>
                   <Button 
                     variant="outlined"
-                    onClick={() => navigate('/seller/login')}
+                    onClick={() => navigate('/customer/register')}
                     sx={{ 
                       color: '#ffffff',
                       textTransform: 'none',
