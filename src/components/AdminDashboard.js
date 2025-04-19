@@ -2944,9 +2944,9 @@ const AdminDashboard = () => {
     } else if (activeTab === 'conversations') {
       return (
         <Box sx={{ width: '100%' }}>
-          <Typography variant="h4" gutterBottom>
+          {/* <Typography variant="h4" gutterBottom>
             Conversations
-          </Typography>
+          </Typography> */}
           <Chat isAdmin={true} />
         </Box>
       );
