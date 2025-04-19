@@ -61,7 +61,7 @@ const Footer = () => {
       >
         <Grid container spacing={4}>
           {/* About Section */}
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={3}>
             <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
               About Our Store
             </Typography>
@@ -98,7 +98,7 @@ const Footer = () => {
           </Grid>
 
           {/* Quick Links Section */}
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
               Quick Links
             </Typography>
@@ -147,7 +147,7 @@ const Footer = () => {
           </Grid>
 
           {/* Contact Section */}
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
               Contact Us
             </Typography>
@@ -175,6 +175,41 @@ const Footer = () => {
                 Secure Payment Gateway
               </Typography>
             </Box> */}
+          </Grid>
+
+          {/* App Download Section */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+              APP DOWNLOAD
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2, opacity: 0.7 }}>
+              Get our mobile app for a better shopping experience
+            </Typography>
+            <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <a 
+                href="https://play.google.com/store" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ display: 'block' }}
+              >
+                <img 
+                  src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" 
+                  alt="Get it on Google Play"
+                  style={{marginLeft: '-7px', width: '160px', height: 'auto', filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))' }}
+                />
+              </a>
+              <a 
+                href="https://apps.apple.com/app/apple-store" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <img 
+                  src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" 
+                  alt="Download on the App Store"
+                  style={{ width: '140px', height: 'auto', filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))' }}
+                />
+              </a>
+            </Box>
           </Grid>
         </Grid>
 
