@@ -2228,7 +2228,14 @@ className={` ${toogle ? 'block' : 'hidden'}`}
         background: 'linear-gradient(to bottom, #f5f7ff, #ffffff)',
         overflowY: 'auto',
         height: '100vh'
-      }}>
+      }}
+      onClick={() => {
+        // Close sidebar when clicking on main content
+        if (toogle) {
+          setToogle(false);
+        }
+      }}
+      >
         <Box 
           sx={{ 
             flexGrow: 1, 
