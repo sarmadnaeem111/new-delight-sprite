@@ -4309,7 +4309,7 @@ const [toogle, setToogle] = useState(true)
     <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }} >
       {/* Sidebar toggle button - repositioned */}
       <button 
-        className='h-8 absolute z-50 top-4 left-3 flex items-center box-border justify-center px-3 py-1 rounded-lg text-white hover:bg-[#e73c1e] transition-colors' 
+        className='h-8 absolute z-50 top-3 left-3 flex items-center box-border justify-center px-3 py-1 rounded-lg text-white hover:bg-[#e73c1e] transition-colors' 
         onClick={() => setToogle(!toogle)}
         style={{ 
           backgroundColor: '#FF4D33',
