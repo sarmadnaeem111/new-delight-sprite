@@ -429,6 +429,7 @@ const SellerDashboard = ({ setIsSeller }) => {
   // Add product search state variables
   const [productSearchQuery, setProductSearchQuery] = useState("");
   const [productPriceRange, setProductPriceRange] = useState({ min: "", max: "" });
+  const [unpickedOrdersCount, setUnpickedOrdersCount] = useState(0);
 
   // Add new effect to fetch admin products when dialog opens
   useEffect(() => {
@@ -539,7 +540,15 @@ const SellerDashboard = ({ setIsSeller }) => {
 
     try {
       setLoading(true);
-      const sellerRef = doc(db, "sellers", auth.currentUser.uid);
+      
+      // Check if auth.currentUser exists, if not get sellerId from localStorage
+      const sellerId = auth.currentUser?.uid || localStorage.getItem('sellerId');
+      
+      if (!sellerId) {
+        throw new Error("User ID not found. Please login again.");
+      }
+      
+      const sellerRef = doc(db, "sellers", sellerId);
       const currentProducts = sellerData?.products || [];
       
       // Add only products that aren't already in the seller's inventory
@@ -784,7 +793,6 @@ const SellerDashboard = ({ setIsSeller }) => {
         return;
       }
 
-      // Use a simpler query without orderBy to avoid index requirement
       const ordersQuery = query(
         collection(db, "orders"),
         where("sellerId", "==", sellerId)
@@ -792,13 +800,22 @@ const SellerDashboard = ({ setIsSeller }) => {
 
       const ordersSnapshot = await getDocs(ordersQuery);
       const ordersData = [];
+      let unpickedCount = 0;
       
       ordersSnapshot.forEach((doc) => {
+        const orderData = doc.data();
         ordersData.push({
           id: doc.id,
-          ...doc.data(),
+          ...orderData,
         });
+        // Count orders that haven't been picked
+        if (orderData.status !== "picked") {
+          unpickedCount++;
+        }
       });
+
+      // Update unpicked orders count
+      setUnpickedOrdersCount(unpickedCount);
 
       // Sort manually by createdAt
       ordersData.sort((a, b) => {
@@ -1348,7 +1365,7 @@ const SellerDashboard = ({ setIsSeller }) => {
             <Grid item xs={12} sm={6} md={3}>
               <DashboardCard
                 title="Total Sales"
-                value={sellerData?.totalSales || 0}
+                value={Number(sellerData?.totalSales || 0).toFixed(2)}
                 icon={<RevenueIcon />}
                 color="#E91E63"
               />
@@ -1735,7 +1752,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                     </Typography>
                     
                     {/* Product Description - with text truncation */}
-                    <Typography 
+                    {/* <Typography 
                       variant="body2" 
                       color="text.secondary" 
                       sx={{ 
@@ -1749,7 +1766,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                       }}
                     >
                       {product.description}
-                    </Typography>
+                    </Typography> */}
                     
                     {/* Price and Profit Information */}
                     <Box sx={{ mt: 'auto' }}>
@@ -1989,9 +2006,9 @@ const SellerDashboard = ({ setIsSeller }) => {
                         </Typography>
                         
                         {/* Product Description */}
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
+                        {/* <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
                           {product.description}
-                        </Typography>
+                        </Typography> */}
                         
                         {/* Price and Profit Information */}
                         <Box sx={{ mt: 'auto' }}>
@@ -2018,7 +2035,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                                     : "text.secondary",
                               }}
                             >
-                              Profit: ${(Number(product.price || 0) - Number(product.cost || 0)).toFixed(2)}
+                              Profit: ${(Number(product.price || 0) * 0.23).toFixed(2)}
                             </Typography>
                           </Box>
                           
@@ -2031,7 +2048,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                               color: "success.main",
                             }}
                           >
-                            23%: ${(Number(product.price || 0) * 0.23).toFixed(2)}
+                            {/* 23%: ${(Number(product.price || 0) * 0.23).toFixed(2)} */}
                           </Typography>
                         </Box>
                       </Box>
@@ -4025,12 +4042,12 @@ const SellerDashboard = ({ setIsSeller }) => {
                   <Typography variant="caption" color="textSecondary">Date</Typography>
                   <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
                 </Grid>
-                <Grid item xs={6}>
+                {/* <Grid item xs={6}>
                   <Typography variant="caption" color="textSecondary">Customer</Typography>
                   <Typography variant="body2" noWrap>
                     {order.customerName || order.customerEmail || "Anonymous"}
                   </Typography>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={6}>
                   <Typography variant="caption" color="textSecondary">Price</Typography>
                   <Typography variant="body2">
@@ -4105,7 +4122,7 @@ const SellerDashboard = ({ setIsSeller }) => {
             <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
               <TableCell sx={{ color: "white" }}>Order ID</TableCell>
               <TableCell sx={{ color: "white" }}>Date</TableCell>
-              <TableCell sx={{ color: "white" }}>Customer</TableCell>
+              {/* <TableCell sx={{ color: "white" }}>Customer</TableCell> */}
               <TableCell sx={{ color: "white" }}>Price</TableCell>
               <TableCell sx={{ color: "white" }}>Profit</TableCell>
               <TableCell sx={{ color: "white" }}>Status</TableCell>
@@ -4134,9 +4151,9 @@ const SellerDashboard = ({ setIsSeller }) => {
                     {order.orderNumber || order.id.substring(0, 8)}
                   </TableCell>
                   <TableCell>{formatDate(order.createdAt)}</TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     {order.customerName || order.customerEmail || "Anonymous"}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell>
                     ${Number(order.total || order.totalAmount || 0).toFixed(2)}
                   </TableCell>
@@ -4358,10 +4375,11 @@ const [toogle, setToogle] = useState(true)
             { icon: <ProductIcon />, text: "Products", value: "products" },
             {
               icon: (
-                <Badge
-                  badgeContent={adminAssignedOrdersCount}
-                  color="secondary"
-                  invisible={adminAssignedOrdersCount === 0}
+                <Badge 
+                  badgeContent={unpickedOrdersCount} 
+                  color="error"
+                  invisible={unpickedOrdersCount === 0}
+                  sx={{ '& .MuiBadge-badge': { right: -3, top: 3 } }}
                 >
                   <OrderIcon />
                 </Badge>
@@ -4535,6 +4553,12 @@ const [toogle, setToogle] = useState(true)
       {/* Main content - improved layout with transitions */}
       <Box
         component="main"
+        onClick={() => {
+          // Close sidebar when clicking on main content in both mobile and desktop
+          if (toogle) {
+            setToogle(false);
+          }
+        }}
         sx={{
           flexGrow: 1,
           p: { xs: 1, sm: 2, md: 3 },
@@ -4831,7 +4855,7 @@ const [toogle, setToogle] = useState(true)
                                     : "text.secondary",
                               }}
                             >
-                              Profit: ${(Number(product.price || 0) - Number(product.cost || 0)).toFixed(2)}
+                              Profit: ${(Number(product.price || 0) * 0.23).toFixed(2)}
                             </Typography>
                           </Box>
                           
