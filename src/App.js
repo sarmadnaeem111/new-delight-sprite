@@ -121,6 +121,7 @@ function AppContent({
 }) {
   const [searchParams] = useSearchParams();
   const location = useLocation();
+  const isSellerDashboard = location.pathname === '/seller/dashboard';
   
   // Extract search term from URL query parameters (once on mount)
   useEffect(() => {
@@ -177,18 +178,25 @@ function AppContent({
 
   return (
     <>
-      <Navbar 
-        isAdmin={isAdmin} 
-        setIsAdmin={setIsAdmin}
-        isCustomer={isCustomer}
-        setIsCustomer={setIsCustomer}
-        isSeller={isSeller}
-        setIsSeller={setIsSeller}
-        isAuthenticated={isAuthenticated}
-        onSearch={onSearch}
-      />
-      <Toolbar />
-      <Container>
+      {!isSellerDashboard && (
+        <>
+          <Navbar 
+            isAdmin={isAdmin} 
+            setIsAdmin={setIsAdmin}
+            isCustomer={isCustomer}
+            setIsCustomer={setIsCustomer}
+            isSeller={isSeller}
+            setIsSeller={setIsSeller}
+            isAuthenticated={isAuthenticated}
+            onSearch={onSearch}
+          />
+          <Toolbar />
+        </>
+      )}
+      <Container sx={{ 
+        padding: isSellerDashboard ? 0 : undefined,
+        maxWidth: isSellerDashboard ? '100%' : undefined
+      }}>
         <Routes>
           <Route path="/" element={<HomePage isAuthenticated={isAuthenticated} searchTerm={searchTerm} />} />
           
