@@ -8,19 +8,30 @@ const MessageContainer = styled(Box)(({ theme, isAdmin }) => ({
   justifyContent: isAdmin ? 'flex-end' : 'flex-start',
   marginBottom: theme.spacing(2),
   width: '100%',
+  [theme.breakpoints.down('sm')]: {
+    marginBottom: theme.spacing(1.5),
+  }
 }));
 
-const MessageBubble = styled(Paper)(({ theme, isAdmin }) => ({
-  padding: theme.spacing(1.5),
-  borderRadius: '18px',
-  maxWidth: '70%',
+const MessageBubble = styled(Box)(({ theme, isCurrentUser }) => ({
+  maxWidth: '80%',
+  padding: theme.spacing(1.5, 2),
+  borderRadius: '1rem',
+  backgroundColor: isCurrentUser ? theme.palette.primary.main : 'white',
+  color: isCurrentUser ? 'white' : theme.palette.text.primary,
+  alignSelf: isCurrentUser ? 'flex-end' : 'flex-start',
   boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
   position: 'relative',
-  backgroundColor: isAdmin 
-    ? alpha(theme.palette.primary.main, 0.1)
-    : alpha(theme.palette.secondary.main, 0.1),
-  borderTopLeftRadius: isAdmin ? '18px' : '4px',
-  borderTopRightRadius: isAdmin ? '4px' : '18px',
+  '& img': {
+    maxWidth: '100%',
+    borderRadius: theme.spacing(1),
+    marginTop: theme.spacing(1),
+  },
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '85%',
+    padding: theme.spacing(1, 1.5),
+    fontSize: '0.95rem',
+  }
 }));
 
 const MessageContent = styled(Box)({
@@ -34,6 +45,9 @@ const MessageTimeStamp = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
   alignSelf: 'flex-end',
   marginTop: '4px',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.65rem',
+  }
 }));
 
 const MessageImage = styled('img')({
@@ -43,6 +57,24 @@ const MessageImage = styled('img')({
   cursor: 'pointer',
   display: 'block',
 });
+
+const MessageAvatar = styled(Box)(({ theme }) => ({
+  width: 36,
+  height: 36,
+  borderRadius: '50%',
+  backgroundColor: theme.palette.grey[300],
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: theme.spacing(1),
+  marginLeft: theme.spacing(1),
+  [theme.breakpoints.down('sm')]: {
+    width: 30,
+    height: 30,
+    marginRight: theme.spacing(0.5),
+    marginLeft: theme.spacing(0.5),
+  }
+}));
 
 const CloudinaryImage = ({ publicId, url, alt, onClick }) => {
   const [loading, setLoading] = useState(true);
@@ -137,12 +169,13 @@ const Message = ({ message, isAdmin }) => {
   const { text, imageUrl, timestamp, senderName, senderUid } = message;
   
   // Display "Customer Care" instead of "mdzahid11@gmail.com" for sender name
-  const displayName = senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "Customer Care" : senderName;
+  // For admin messages, don't display any name
+  const displayName = senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "" : senderName;
   
   // Determine if this message is from the current user (either admin or seller)
   // isAdmin prop now represents whether the current user is admin, not the message sender
   const isCurrentUserMessage = (isAdmin && (senderName === "mdzahid11@gmail.com" || senderName === "Customer Care")) || 
-                              (!isAdmin && senderName !== "mdzahid11@gmail.com" && senderName !== "Customer Care");
+                             (!isAdmin && senderName !== "mdzahid11@gmail.com" && senderName !== "Customer Care");
   
   const formattedTime = timestamp ? new Date(timestamp.toDate()).toLocaleString() : '';
   
@@ -177,20 +210,26 @@ const Message = ({ message, isAdmin }) => {
   return (
     <MessageContainer isAdmin={isCurrentUserMessage}>
       {!isCurrentUserMessage && (
-        <Avatar 
-          sx={{ mr: 1, width: 36, height: 36 }}
+        <MessageAvatar
           alt={displayName}
         />
       )}
-      <MessageBubble isAdmin={isCurrentUserMessage}>
+      <MessageBubble isCurrentUser={isCurrentUserMessage}>
         <MessageContent>
-          {!isCurrentUserMessage && (
-            <Typography variant="caption" sx={{ fontWeight: 'bold', color: 'text.secondary' }}>
+          {!isCurrentUserMessage && displayName && (
+            <Typography variant="caption" sx={{ 
+              fontWeight: 'bold', 
+              color: 'text.secondary',
+              fontSize: {xs: '0.7rem', sm: '0.75rem'}
+            }}>
               {displayName}
             </Typography>
           )}
           {text && (
-            <Typography variant="body2">
+            <Typography variant="body2" sx={{
+              fontSize: {xs: '0.9rem', sm: '0.95rem', md: '1rem'},
+              wordBreak: 'break-word'
+            }}>
               {text}
             </Typography>
           )}
@@ -224,9 +263,8 @@ const Message = ({ message, isAdmin }) => {
         </MessageContent>
       </MessageBubble>
       {isCurrentUserMessage && (
-        <Avatar 
-          sx={{ ml: 1, width: 36, height: 36 }}
-          alt={senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "Customer Care" : displayName}
+        <MessageAvatar
+          alt={senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "" : displayName}
         />
       )}
     </MessageContainer>
