@@ -42,6 +42,11 @@ import {
   InputAdornment,
   TextField,
   MenuItem,
+  useMediaQuery,
+  Switch,
+  FormControl,
+  InputLabel,
+  Select
 } from "@mui/material";
 import {
   Store as StoreIcon,
@@ -1678,12 +1683,13 @@ const SellerDashboard = ({ setIsSeller }) => {
           />
         </Box>
         <Button
+          sx={{ width: 150,ml:2,height:'auto' }}
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
           onClick={() => setIsProductDialogOpen(true)}
         >
-          Add New Products
+          Add
         </Button>
       </Box>
       <Paper elevation={3} sx={{ p: 2, px: { xs: 1, sm: 2, md: 3 }, width: '100%', overflow: 'hidden' }}>
@@ -1888,7 +1894,7 @@ const SellerDashboard = ({ setIsSeller }) => {
           </Box>
           
           {/* Select All Checkbox */}
-          <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -1910,6 +1916,14 @@ const SellerDashboard = ({ setIsSeller }) => {
                 />
               }
               label="Select All"
+            />
+            
+            {/* Selected products counter */}
+            <Chip
+              label={`${selectedProducts.length} product${selectedProducts.length !== 1 ? 's' : ''} selected`}
+              color={selectedProducts.length > 0 ? "primary" : "default"}
+              variant={selectedProducts.length > 0 ? "filled" : "outlined"}
+              sx={{ fontWeight: 'medium' }}
             />
           </Box>
           
@@ -2066,8 +2080,9 @@ const SellerDashboard = ({ setIsSeller }) => {
             variant="contained"
             color="primary"
             disabled={selectedProducts.length === 0 || loading}
+            startIcon={selectedProducts.length > 0 ? <Badge badgeContent={selectedProducts.length} color="error" max={99}><AddIcon /></Badge> : <AddIcon />}
           >
-            Add Selected Products
+            Add {selectedProducts.length > 0 ? `Selected Products (${selectedProducts.length})` : 'Selected Products'}
           </Button>
         </DialogActions>
       </Dialog>
@@ -4351,12 +4366,12 @@ const [toogle, setToogle] = useState(true)
           backgroundImage: `linear-gradient(to bottom, #FF4D33, #FF5E46, #FF6E59)`,
         }}
       >
-        <button className='absolute top-4 right-3 flex items-center justify-center w-8 h-8 rounded-full text-white hover:bg-[#e73c1e] transition-colors' 
+        {/* <button className='absolute top-4 right-3 flex items-center justify-center w-8 h-8 rounded-full text-white hover:bg-[#e73c1e] transition-colors' 
           onClick={() => setToogle(!toogle)}
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
         >
           <span className="text-lg">×</span>
-        </button>
+        </button> */}
 
         <Box sx={{ p: 3, textAlign: "center", mt: 2 }}>
           <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
@@ -4708,7 +4723,7 @@ const [toogle, setToogle] = useState(true)
           </Box>
           
           {/* Select All Checkbox */}
-          <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -4730,6 +4745,14 @@ const [toogle, setToogle] = useState(true)
                 />
               }
               label="Select All"
+            />
+            
+            {/* Selected products counter */}
+            <Chip
+              label={`${selectedProducts.length} product${selectedProducts.length !== 1 ? 's' : ''} selected`}
+              color={selectedProducts.length > 0 ? "primary" : "default"}
+              variant={selectedProducts.length > 0 ? "filled" : "outlined"}
+              sx={{ fontWeight: 'medium' }}
             />
           </Box>
           
@@ -4886,8 +4909,9 @@ const [toogle, setToogle] = useState(true)
             variant="contained"
             color="primary"
             disabled={selectedProducts.length === 0 || loading}
+            startIcon={selectedProducts.length > 0 ? <Badge badgeContent={selectedProducts.length} color="error" max={99}><AddIcon /></Badge> : <AddIcon />}
           >
-            Add Selected Products
+            Add {selectedProducts.length > 0 ? `Selected Products (${selectedProducts.length})` : 'Selected Products'}
           </Button>
         </DialogActions>
       </Dialog>
