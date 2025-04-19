@@ -99,7 +99,7 @@ import {
 import { Chat } from "./ChatComponents";
 
 const drawerWidth = 260;
-const navbarHeight = 64;
+// const navbarHeight = 64;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -439,7 +439,25 @@ const SellerDashboard = () => {
 
   // Update the openProductDialog function
   const openProductDialog = async () => {
-    setIsProductDialogOpen(true);
+    try {
+      // Reset filters and selected products
+      setProductSearchQuery("");
+      setProductPriceRange({ min: "", max: "" });
+      setSelectedProducts([]);
+      
+      // Fetch the latest admin products
+      await fetchAdminProducts();
+      
+      // Open the dialog
+      setIsProductDialogOpen(true);
+    } catch (error) {
+      console.error("Error opening product dialog:", error);
+      setSnackbar({
+        open: true,
+        message: "Error loading products. Please try again.",
+        severity: "error",
+      });
+    }
   };
 
   // Update the fetchAdminProducts function
@@ -479,6 +497,9 @@ const SellerDashboard = () => {
   // Add the function to filter products based on search and price range
   const getFilteredProducts = () => {
     return adminProducts.filter((product) => {
+      // Filter out products that are already in the seller's inventory
+      const notInInventory = !sellerData?.products?.includes(product.id);
+      
       // Filter by search query (name and description)
       const nameMatch = product.name?.toLowerCase().includes(productSearchQuery.toLowerCase()) || false;
       const descriptionMatch = product.description?.toLowerCase().includes(productSearchQuery.toLowerCase()) || false;
@@ -492,7 +513,7 @@ const SellerDashboard = () => {
         (productPriceRange.min === "" || (product.price && product.price >= minPrice)) &&
         (productPriceRange.max === "" || (product.price && product.price <= maxPrice));
       
-      return searchMatch && priceMatch;
+      return notInInventory && searchMatch && priceMatch;
     });
   };
 
@@ -541,10 +562,14 @@ const SellerDashboard = () => {
 
       setSnackbar({
         open: true,
-        message: "Products added successfully!",
+        message: `${newProducts.length} product${newProducts.length !== 1 ? 's' : ''} added successfully!`,
         severity: "success",
       });
+      
+      // Reset selected products
       setSelectedProducts([]);
+      
+      // Close the dialog
       setIsProductDialogOpen(false);
     } catch (error) {
       console.error("Error adding products:", error);
@@ -1852,15 +1877,15 @@ const SellerDashboard = () => {
                 <Checkbox
                   indeterminate={
                     selectedProducts.length > 0 &&
-                    selectedProducts.length < adminProducts.length
+                    selectedProducts.length < getFilteredProducts().length
                   }
                   checked={
-                    selectedProducts.length === adminProducts.length &&
-                    adminProducts.length > 0
+                    selectedProducts.length === getFilteredProducts().length &&
+                    getFilteredProducts().length > 0
                   }
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setSelectedProducts(adminProducts.map((p) => p.id));
+                      setSelectedProducts(getFilteredProducts().map((p) => p.id));
                     } else {
                       setSelectedProducts([]);
                     }
@@ -1898,7 +1923,6 @@ const SellerDashboard = () => {
             <Grid container spacing={2}>
               {getFilteredProducts().map((product) => {
                 const isSelected = selectedProducts.includes(product.id);
-                const isAlreadyAdded = sellerData?.products?.includes(product.id);
                 
                 return (
                   <Grid item xs={12} sm={6} md={4} key={product.id}>
@@ -1911,18 +1935,14 @@ const SellerDashboard = () => {
                         transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
                         boxShadow: isSelected ? '0 8px 16px rgba(25, 118, 210, 0.2)' : '0 2px 8px rgba(0,0,0,0.1)',
                         border: isSelected ? '2px solid #1976d2' : '1px solid rgba(0,0,0,0.12)',
-                        backgroundColor: isAlreadyAdded ? 'rgba(0, 0, 0, 0.04)' : 'inherit',
                         '&:hover': {
-                          transform: isAlreadyAdded ? 'none' : 'translateY(-4px)',
-                          boxShadow: isAlreadyAdded ? '0 2px 8px rgba(0,0,0,0.1)' : '0 8px 16px rgba(0,0,0,0.15)'
+                          transform: 'translateY(-4px)',
+                          boxShadow: '0 8px 16px rgba(0,0,0,0.15)'
                         },
                         position: 'relative',
-                        cursor: isAlreadyAdded ? 'default' : 'pointer',
-                        opacity: isAlreadyAdded ? 0.7 : 1
+                        cursor: 'pointer'
                       }}
-                      onClick={() => {
-                        if (!isAlreadyAdded) handleProductSelection(product.id);
-                      }}
+                      onClick={() => handleProductSelection(product.id)}
                     >
                       {/* Checkbox overlay in top-right corner */}
                       <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
@@ -1932,7 +1952,6 @@ const SellerDashboard = () => {
                             e.stopPropagation();
                             handleProductSelection(product.id);
                           }}
-                          disabled={isAlreadyAdded}
                           sx={{
                             backgroundColor: 'rgba(255,255,255,0.8)',
                             borderRadius: '50%',
@@ -1941,23 +1960,6 @@ const SellerDashboard = () => {
                           }}
                         />
                       </Box>
-                      
-                      {/* Already added indicator */}
-                      {isAlreadyAdded && (
-                        <Chip 
-                          label="Already in inventory" 
-                          size="small" 
-                          color="default"
-                          sx={{ 
-                            position: 'absolute', 
-                            top: 8, 
-                            left: 8, 
-                            zIndex: 1,
-                            backgroundColor: 'rgba(0,0,0,0.6)',
-                            color: 'white'
-                          }}
-                        />
-                      )}
                       
                       {/* Product Image */}
                       <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
@@ -2703,7 +2705,6 @@ const SellerDashboard = () => {
                       <TableCell sx={{ color: "white" }}>Customer</TableCell>
                       <TableCell sx={{ color: "white" }}>Price</TableCell>
                       <TableCell sx={{ color: "white" }}>Profit</TableCell>
-                      {/* <TableCell sx={{ color: "white" }}>Grand Total</TableCell> */}
                       <TableCell sx={{ color: "white" }}>Status</TableCell>
                       <TableCell sx={{ color: "white" }}>Source</TableCell>
                       <TableCell sx={{ color: "white" }}>Actions</TableCell>
@@ -2733,7 +2734,7 @@ const SellerDashboard = () => {
                       {order.customerName || order.customerEmail || "Anonymous"}
                     </TableCell>
                     <TableCell>
-                          ${Number(order.total || order.totalAmount || 0).toFixed(2)}
+                      ${Number(order.total || order.totalAmount || 0).toFixed(2)}
                     </TableCell>
                     <TableCell>
                       <Typography
@@ -4025,6 +4026,12 @@ const SellerDashboard = () => {
                   <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
                 </Grid>
                 <Grid item xs={6}>
+                  <Typography variant="caption" color="textSecondary">Customer</Typography>
+                  <Typography variant="body2" noWrap>
+                    {order.customerName || order.customerEmail || "Anonymous"}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
                   <Typography variant="caption" color="textSecondary">Price</Typography>
                   <Typography variant="body2">
                     ${Number(order.total || order.totalAmount || 0).toFixed(2)}
@@ -4098,10 +4105,9 @@ const SellerDashboard = () => {
             <TableRow sx={{ backgroundColor: theme.palette.primary.main }}>
               <TableCell sx={{ color: "white" }}>Order ID</TableCell>
               <TableCell sx={{ color: "white" }}>Date</TableCell>
-              {/* <TableCell sx={{ color: "white" }}>Customer</TableCell> */}
+              <TableCell sx={{ color: "white" }}>Customer</TableCell>
               <TableCell sx={{ color: "white" }}>Price</TableCell>
               <TableCell sx={{ color: "white" }}>Profit</TableCell>
-              <TableCell sx={{ color: "white" }}>Grand Total</TableCell>
               <TableCell sx={{ color: "white" }}>Status</TableCell>
               <TableCell sx={{ color: "white" }}>Source</TableCell>
               <TableCell sx={{ color: "white" }}>Actions</TableCell>
@@ -4128,7 +4134,9 @@ const SellerDashboard = () => {
                     {order.orderNumber || order.id.substring(0, 8)}
                   </TableCell>
                   <TableCell>{formatDate(order.createdAt)}</TableCell>
-                  {/* <TableCell>{order.customerName || "Anonymous"}</TableCell> */}
+                  <TableCell>
+                    {order.customerName || order.customerEmail || "Anonymous"}
+                  </TableCell>
                   <TableCell>
                     ${Number(order.total || order.totalAmount || 0).toFixed(2)}
                   </TableCell>
@@ -4144,22 +4152,6 @@ const SellerDashboard = () => {
                     >
                       $
                       {(
-                        Number(order.total || order.totalAmount || 0) * 0.23
-                      ).toFixed(2)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontWeight: "medium",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      $
-                      {(
-                        Number(order.total || order.totalAmount || 0) +
                         Number(order.total || order.totalAmount || 0) * 0.23
                       ).toFixed(2)}
                     </Typography>
@@ -4203,16 +4195,7 @@ const SellerDashboard = () => {
                           <VisibilityIcon fontSize="small" />
                         </IconButton>
                       </Tooltip>
-                      {/* {order.status === "assigned" && (
-                        <Button
-                          size="small"
-                          variant="contained"
-                          color="primary"
-                          onClick={() => handlePickOrder(order.id)}
-                        >
-                          PICK
-                        </Button>
-                      )} */}
+                     
                     </Box>
                   </TableCell>
                 </TableRow>
@@ -4286,76 +4269,75 @@ const SellerDashboard = () => {
     setProductSearchQuery("");
     setProductPriceRange({ min: "", max: "" });
   };
+
+  // Handle logout and navigate to seller login page
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      
+      // Clear any seller related data from localStorage
+      localStorage.removeItem('rememberedSeller');
+      localStorage.removeItem('sellerId');
+      localStorage.removeItem('sellerEmail');
+      localStorage.removeItem('sellerName');
+      localStorage.removeItem('sellerShopName');
+      localStorage.removeItem('sellerStatus');
+      localStorage.removeItem('sellerData');
+      localStorage.removeItem('sellerLoginTime');
+      
+      // Navigate to seller login page
+      navigate('/seller/login');
+    } catch (error) {
+      console.error("Error during logout:", error);
+      setSnackbar({
+        open: true,
+        message: "Error logging out. Please try again.",
+        severity: "error",
+      });
+    }
+  };
+
 //responsive sidebar
 const [toogle, setToogle] = useState(true)
 
 
   return (
-    <Box sx={{ display: "flex", height: "100vh" }} >
-      {/* Sidebar */}
-
-      <button className='h-6 absolute z-20 top-22 mt-3 left-3 flex items-start box-border justify-center px-3 py-1 rounded-lg text-white hover:bg-[#e73c1e] transition-colors' 
+    <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }} >
+      {/* Sidebar toggle button - repositioned */}
+      <button 
+        className='h-8 absolute z-50 top-4 left-3 flex items-center box-border justify-center px-3 py-1 rounded-lg text-white hover:bg-[#e73c1e] transition-colors' 
         onClick={() => setToogle(!toogle)}
-        style={{ backgroundColor: '#FF4D33' }}>
-                           
-      <div className="flex items-center">
-    {/* Hamburger/drawer icon using CSS */}
-    <div className="space-y-1 mr-2">
-      <div className="w-6 h-0.5 bg-white"></div>
-      <div className="w-6 h-0.5 bg-white"></div>
-      <div className="w-6 h-0.5 bg-white"></div>
-    </div>
-    {/* Optional text */}
-    
-  </div>  
-      </button>
-      {/* <Box
-        component="nav"
-        sx={{
-          width: 280,
-          flexShrink: 0,
-          position: "fixed", // Fix the sidebar position
-          left: 0, // Align to left
-          top: 0, // Align to top
-          height: "100vh", // Full viewport height
-          backgroundImage:
-            "linear-gradient(to bottom, #1a237e, #283593, #303f9f)",
-          color: "white",
-          overflowY: "auto",
-          boxShadow: "2px 0 20px rgba(0, 0, 0, 0.2)",
-          display: "flex",
-          flexDirection: "column",
-          zIndex: 1200, // Ensure sidebar stays above other content
-          "&:before": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            opacity: 0.1,
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          },
+        style={{ 
+          backgroundColor: '#FF4D33',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)'
         }}
-      > */}
-
+      >
+        <div className="flex items-center">
+          {/* Hamburger/drawer icon using CSS */}
+          <div className="space-y-1">
+            <div className="w-5 h-0.5 bg-white"></div>
+            <div className="w-5 h-0.5 bg-white"></div>
+            <div className="w-5 h-0.5 bg-white"></div>
+          </div>
+        </div>  
+      </button>
 
       <Box
         component="nav"
-        className={`md:w-64 ${toogle ? 'block' : 'hidden'} mt-12 fixed top-0 left-0  h-full bg-gradient-to-b from-[#FF4D33] to-[#FF6E59] text-white overflow-y-auto shadow-lg flex flex-col z-50`}
+        className={`md:w-64 ${toogle ? 'block' : 'hidden'} fixed top-0 left-0 h-full bg-gradient-to-b from-[#FF4D33] to-[#FF6E59] text-white overflow-y-auto shadow-lg flex flex-col z-40`}
         style={{
-          // Add custom styles that aren't available in Tailwind
           boxShadow: "2px 0 20px rgba(0, 0, 0, 0.2)",
           backgroundImage: `linear-gradient(to bottom, #FF4D33, #FF5E46, #FF6E59)`,
         }}
       >
-
-        <button className='absolute mt-16 mt-1 z-50 left-3 flex items-start box-border justify-center px-3 py-1 rounded-lg text-white hover:bg-[#e73c1e] transition-colors' 
+        <button className='absolute top-4 right-3 flex items-center justify-center w-8 h-8 rounded-full text-white hover:bg-[#e73c1e] transition-colors' 
           onClick={() => setToogle(!toogle)}
-          style={{ backgroundColor: '#FF4D33' }}>
-                  X
-                </button>
-        <Box sx={{ p: 3, textAlign: "center" }}>
+          style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
+        >
+          <span className="text-lg">×</span>
+        </button>
+
+        <Box sx={{ p: 3, textAlign: "center", mt: 2 }}>
           <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
             Seller Dashboard
           </Typography>
@@ -4399,19 +4381,45 @@ const [toogle, setToogle] = useState(true)
             },
             { icon: <ProfileIcon />, text: "Manage Profile", value: "profile" },
             { icon: <SettingsIcon />, text: "Shop Setting", value: "settings" },
+            { 
+              icon: <LogoutIcon />, 
+              text: "Logout", 
+              value: "logout",
+              divider: true 
+            },
           ].map((item) => (
             <React.Fragment key={item.value}>
+              {item.divider && (
+                <Box 
+                  sx={{ 
+                    my: 1.5, 
+                    borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+                    opacity: 0.7
+                  }} 
+                />
+              )}
               <ListItemButton
                 selected={activeTab === item.value && !activeSubTab}
                 onClick={() => {
-                  handleTabChange(item.value);
-                  setActiveSubTab(null);
+                  if (item.value === "logout") {
+                    handleLogout();
+                  } else {
+                    handleTabChange(item.value);
+                    setActiveSubTab(null);
+                  }
                 }}
-                disabled={sellerData?.status === 'frozen' && item.value !== 'conversations'}
+                disabled={sellerData?.status === 'frozen' && item.value !== 'conversations' && item.value !== 'logout'}
                 sx={{
                   mb: item.subItems ? 0 : 1,
                   borderRadius: 2,
                   transition: "all 0.2s ease",
+                  ...(item.value === 'logout' && {
+                    '&:hover': {
+                      backgroundColor: 'rgba(252, 90, 75, 0.2)',
+                    },
+                    marginTop: 0.5,
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                  }),
                   "&.Mui-selected": {
                     backgroundColor: "rgba(255, 255, 255, 0.16)",
                     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
@@ -4425,7 +4433,7 @@ const [toogle, setToogle] = useState(true)
                   }
                 }}
               >
-                <ListItemIcon sx={{ color: "white", minWidth: 40 }}>
+                <ListItemIcon sx={{ color: item.value === 'logout' ? '#ffcccb' : 'white', minWidth: 40 }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText
@@ -4434,7 +4442,7 @@ const [toogle, setToogle] = useState(true)
                     fontWeight:
                       activeTab === item.value && !activeSubTab
                         ? "bold"
-                        : "normal",
+                        : item.value === 'logout' ? 'medium' : "normal",
                     fontSize: "0.95rem",
                   }}
                 />
@@ -4511,37 +4519,30 @@ const [toogle, setToogle] = useState(true)
             </React.Fragment>
           ))}
         </List>
-
-        {/* Sign Out Button */}
-        <Box sx={{ p: 2, borderTop: "1px solid rgba(255, 255, 255, 0.1)" }}>
-          <Button
-            fullWidth
-            variant="contained"
-            onClick={() => auth.signOut()}
-            startIcon={<LogoutIcon />}
-            sx={{
-              backgroundColor: '#FF4D33',
-              color: 'white',
-              '&:hover': {
-                backgroundColor: '#e73c1e',
-              },
-            }}
-          >
-            Sign Out
-          </Button>
+        
+        {/* Navigation help text */}
+        <Box sx={{ p: 2, mt: 2, textAlign: 'center' }}>
+          <Typography variant="caption" sx={{ opacity: 0.7, fontSize: '0.75rem' }}>
+            Use the menu above to navigate
+          </Typography>
         </Box>
       </Box>
 
-      {/* Main content - add margin to account for fixed sidebar */}
+      {/* Main content - improved layout with transitions */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
-          marginLeft: "30px", // Match sidebar width
+          p: { xs: 1, sm: 2, md: 3 },
+          paddingTop: { xs: 5, sm: 2 },
+          marginLeft: toogle ? { xs: "64px", md: "64px" } : "0px", 
+          width: toogle ? { xs: "calc(100% - 64px)", md: "calc(100% - 64px)" } : "100%",
           minHeight: "100vh",
+          maxWidth: "100vw",
           background: "linear-gradient(to bottom, #f5f7ff, #ffffff)",
-          overflowX: "hidden",
+          overflowX: "auto",
+          overflowY: "auto",
+          transition: "all 0.3s ease",
         }}
       >
         {sellerData?.status === 'frozen' && (
@@ -4685,15 +4686,15 @@ const [toogle, setToogle] = useState(true)
                 <Checkbox
                   indeterminate={
                     selectedProducts.length > 0 &&
-                    selectedProducts.length < adminProducts.length
+                    selectedProducts.length < getFilteredProducts().length
                   }
                   checked={
-                    selectedProducts.length === adminProducts.length &&
-                    adminProducts.length > 0
+                    selectedProducts.length === getFilteredProducts().length &&
+                    getFilteredProducts().length > 0
                   }
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setSelectedProducts(adminProducts.map((p) => p.id));
+                      setSelectedProducts(getFilteredProducts().map((p) => p.id));
                     } else {
                       setSelectedProducts([]);
                     }
@@ -4731,7 +4732,6 @@ const [toogle, setToogle] = useState(true)
             <Grid container spacing={2}>
               {getFilteredProducts().map((product) => {
                 const isSelected = selectedProducts.includes(product.id);
-                const isAlreadyAdded = sellerData?.products?.includes(product.id);
                 
                 return (
                   <Grid item xs={12} sm={6} md={4} key={product.id}>
@@ -4744,18 +4744,14 @@ const [toogle, setToogle] = useState(true)
                         transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
                         boxShadow: isSelected ? '0 8px 16px rgba(25, 118, 210, 0.2)' : '0 2px 8px rgba(0,0,0,0.1)',
                         border: isSelected ? '2px solid #1976d2' : '1px solid rgba(0,0,0,0.12)',
-                        backgroundColor: isAlreadyAdded ? 'rgba(0, 0, 0, 0.04)' : 'inherit',
                         '&:hover': {
-                          transform: isAlreadyAdded ? 'none' : 'translateY(-4px)',
-                          boxShadow: isAlreadyAdded ? '0 2px 8px rgba(0,0,0,0.1)' : '0 8px 16px rgba(0,0,0,0.15)'
+                          transform: 'translateY(-4px)',
+                          boxShadow: '0 8px 16px rgba(0,0,0,0.15)'
                         },
                         position: 'relative',
-                        cursor: isAlreadyAdded ? 'default' : 'pointer',
-                        opacity: isAlreadyAdded ? 0.7 : 1
+                        cursor: 'pointer'
                       }}
-                      onClick={() => {
-                        if (!isAlreadyAdded) handleProductSelection(product.id);
-                      }}
+                      onClick={() => handleProductSelection(product.id)}
                     >
                       {/* Checkbox overlay in top-right corner */}
                       <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
@@ -4765,7 +4761,6 @@ const [toogle, setToogle] = useState(true)
                             e.stopPropagation();
                             handleProductSelection(product.id);
                           }}
-                          disabled={isAlreadyAdded}
                           sx={{
                             backgroundColor: 'rgba(255,255,255,0.8)',
                             borderRadius: '50%',
@@ -4774,23 +4769,6 @@ const [toogle, setToogle] = useState(true)
                           }}
                         />
                       </Box>
-                      
-                      {/* Already added indicator */}
-                      {isAlreadyAdded && (
-                        <Chip 
-                          label="Already in inventory" 
-                          size="small" 
-                          color="default"
-                          sx={{ 
-                            position: 'absolute', 
-                            top: 8, 
-                            left: 8, 
-                            zIndex: 1,
-                            backgroundColor: 'rgba(0,0,0,0.6)',
-                            color: 'white'
-                          }}
-                        />
-                      )}
                       
                       {/* Product Image */}
                       <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
