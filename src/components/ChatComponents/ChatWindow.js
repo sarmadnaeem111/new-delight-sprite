@@ -11,7 +11,8 @@ import {
   styled,
   alpha,
   Menu,
-  MenuItem
+  MenuItem,
+  useTheme
 } from '@mui/material';
 import { 
   ArrowBack as ArrowBackIcon,
@@ -35,31 +36,67 @@ import {
   arrayUnion
 } from 'firebase/firestore';
 
-const ChatContainer = styled(Paper)(({ theme }) => ({
+const ChatWindowContainer = styled(Box)(({ theme }) => ({
+  flex: 1,
+  width: '100%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  height: '100%',
-  borderRadius: theme.spacing(2),
-  overflow: 'hidden',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+  backgroundColor: theme.palette.background.default,
+  position: 'relative',
+  [theme.breakpoints.down('sm')]: {
+    width: '100vw',
+    height: '100vh',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: 1050
+  },
 }));
 
 const ChatHeader = styled(Box)(({ theme }) => ({
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
-  padding: theme.spacing(2),
-  backgroundColor: alpha(theme.palette.primary.main, 0.05),
-  borderBottom: `1px solid ${alpha(theme.palette.divider, 0.2)}`,
+  padding: theme.spacing(3),
+  backgroundColor: theme.palette.primary.main,
+  color: 'white',
+  textAlign: 'center',
+  position: 'relative',
+  [theme.breakpoints.down('sm')]: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(2),
+  }
 }));
 
-const MessagesContainer = styled(Box)(({ theme }) => ({
-  flexGrow: 1,
-  overflowY: 'auto',
+const MessageContainer = styled(Box)(({ theme }) => ({
+  flex: 1,
+  width: '100%',
   padding: theme.spacing(2),
+  overflowY: 'auto',
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(1),
-  backgroundColor: alpha(theme.palette.background.default, 0.4),
+  gap: theme.spacing(2),
+  backgroundColor: '#f5f5f5',
+  [theme.breakpoints.down('sm')]: {
+    paddingBottom: theme.spacing(4),
+  }
+}));
+
+const InputContainer = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  backgroundColor: 'white',
+  borderTop: `1px solid ${theme.palette.divider}`,
+  [theme.breakpoints.down('sm')]: {
+    position: 'sticky',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    zIndex: 10,
+    padding: theme.spacing(1.5),
+    borderRadius: theme.spacing(2, 2, 0, 0),
+    boxShadow: '0 -2px 10px rgba(0,0,0,0.05)'
+  }
 }));
 
 const NoConversationContainer = styled(Box)(({ theme }) => ({
@@ -69,7 +106,27 @@ const NoConversationContainer = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   height: '100%',
   padding: theme.spacing(3),
-  backgroundColor: alpha(theme.palette.background.default, 0.4),
+  backgroundColor: '#f5f5f5',
+  textAlign: 'center',
+  '& > *': {
+    marginBottom: theme.spacing(1),
+  },
+}));
+
+const AvatarIcon = styled(Box)(({ theme }) => ({
+  width: 60,
+  height: 60,
+  borderRadius: '50%',
+  backgroundColor: 'white',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginBottom: theme.spacing(2),
+  '& svg': {
+    width: 32,
+    height: 32,
+    color: theme.palette.primary.main,
+  },
 }));
 
 const ChatWindow = ({ 
@@ -86,6 +143,7 @@ const ChatWindow = ({
   const messagesEndRef = useRef(null);
   const [localUserDetails, setLocalUserDetails] = useState(null);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const theme = useTheme();
   
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -283,118 +341,139 @@ const ChatWindow = ({
   // Handle chat deletion
   const handleDeleteChat = () => {
     if (onDeleteChat && selectedChatId) {
-      onDeleteChat(selectedChatId);
+      if (window.confirm('Are you sure you want to clear this conversation? This will remove all messages except the initial "How can I help you?" message.')) {
+        onDeleteChat(selectedChatId);
+      }
     }
     handleMenuClose();
   };
 
   if (!selectedChatId) {
     return (
-      <ChatContainer>
+      <ChatWindowContainer>
+        <ChatHeader>
+          {onBackClick && (
+            <IconButton 
+              onClick={onBackClick} 
+              sx={{ 
+                position: 'absolute', 
+                left: 8, 
+                top: 8, 
+                color: 'white',
+                [theme.breakpoints.down('sm')]: {
+                  top: 12
+                }
+              }} 
+              size="small"
+            >
+              <ArrowBackIcon />
+            </IconButton>
+          )}
+          <Typography variant="h6" sx={{ mb: 2 }}>
+            Chat
+          </Typography>
+          <AvatarIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            </svg>
+          </AvatarIcon>
+          <Typography variant="h5" sx={{ fontWeight: 'medium', mb: 1 }}>
+            Questions? Chat with us!
+          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#4caf50' }} />
+            <Typography variant="body2" sx={{ opacity: 0.9 }}>
+              Typically replies under 6 minutes
+            </Typography>
+          </Box>
+        </ChatHeader>
         <NoConversationContainer>
-          <Typography variant="h6" color="text.secondary">
-            Select a conversation to start chatting
+          <Typography variant="body1" color="text.secondary">
+            Start a conversation with our customer service team
           </Typography>
         </NoConversationContainer>
-      </ChatContainer>
+      </ChatWindowContainer>
     );
   }
 
   return (
-    <ChatContainer>
+    <ChatWindowContainer>
       <ChatHeader>
-        <IconButton onClick={onBackClick} sx={{ mr: 1 }} size="small">
+        <IconButton 
+          onClick={onBackClick} 
+          sx={{ 
+            position: 'absolute', 
+            left: 8, 
+            top: 8, 
+            color: 'white',
+            [theme.breakpoints.down('sm')]: {
+              top: 12
+            }
+          }} 
+          size="small"
+        >
           <ArrowBackIcon />
         </IconButton>
-        
-        <Typography variant="subtitle1" fontWeight="medium">
+        <Typography variant="h6">
           {displayName}
         </Typography>
-        
-        <Box sx={{ flexGrow: 1 }} />
-        
         {isAdmin && (
-          <>
-            <Tooltip title="More options">
-              <IconButton size="small" onClick={handleMenuOpen}>
-                <MoreVertIcon />
-              </IconButton>
-            </Tooltip>
-            
-            <Menu
-              anchorEl={menuAnchorEl}
-              open={Boolean(menuAnchorEl)}
-              onClose={handleMenuClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-            >
-              <MenuItem onClick={handleDeleteChat} sx={{ color: 'error.main' }}>
-                <DeleteIcon fontSize="small" sx={{ mr: 1 }} />
-                Delete Conversation
-              </MenuItem>
-            </Menu>
-          </>
+          <IconButton 
+            size="small" 
+            onClick={handleMenuOpen}
+            sx={{ 
+              position: 'absolute', 
+              right: 8, 
+              top: 8, 
+              color: 'white',
+              [theme.breakpoints.down('sm')]: {
+                top: 12
+              }
+            }}
+            aria-label="Delete chat"
+            title="Delete conversation"
+          >
+            <MoreVertIcon />
+          </IconButton>
         )}
-        
-        {!isAdmin && (
-          <Tooltip title="More options">
-            <IconButton size="small">
-              <MoreVertIcon />
-            </IconButton>
-          </Tooltip>
-        )}
+        <Menu
+          anchorEl={menuAnchorEl}
+          open={Boolean(menuAnchorEl)}
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <MenuItem onClick={handleDeleteChat} sx={{ color: 'error.main' }}>
+            <DeleteIcon fontSize="small" sx={{ mr: 1 }} />
+            Clear Conversation
+          </MenuItem>
+        </Menu>
       </ChatHeader>
       
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <>
-          {/* <Box sx={{ 
-            padding: '8px 16px', 
-            backgroundColor: alpha('#fafafa', 0.8), 
-            borderBottom: '1px solid #eee',
-            display: 'flex',
-            justifyContent: 'center'
-          }}>
-            <Typography variant="caption" color="text.secondary" sx={{ fontStyle: 'italic', fontSize: '0.7rem' }}>
-              Messages in this conversation will be automatically deleted after 24 hours
-            </Typography>
-          </Box> */}
-          
-          <MessagesContainer>
-            {messages.length === 0 ? (
-              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                <Typography color="text.secondary">No messages yet. Start a conversation!</Typography>
-              </Box>
-            ) : (
-              messages.map((message) => (
-                <Message 
-                  key={message.id}
-                  message={message}
-                  isAdmin={isAdmin}
-                />
-              ))
-            )}
-            <div ref={messagesEndRef} />
-          </MessagesContainer>
-          
-          <Box sx={{ p: 2 }}>
-            <ChatInput 
-              onSendMessage={handleSendMessage}
-              currentUserUid={currentUserUid}
-            />
-          </Box>
-        </>
-      )}
-    </ChatContainer>
+      <MessageContainer>
+        {messages.map((message) => (
+          <Message 
+            key={message.id}
+            message={message}
+            isAdmin={isAdmin}
+          />
+        ))}
+        <div ref={messagesEndRef} />
+      </MessageContainer>
+      
+      <InputContainer>
+        <ChatInput 
+          onSendMessage={handleSendMessage}
+          currentUserUid={currentUserUid}
+        />
+      </InputContainer>
+    </ChatWindowContainer>
   );
 };
 
