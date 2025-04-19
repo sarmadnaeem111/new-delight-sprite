@@ -210,15 +210,15 @@ const Message = ({ message, isAdmin }) => {
             )
           )}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            <MessageTimeStamp variant="caption">
+            {/* <MessageTimeStamp variant="caption">
               {formattedTime}
-            </MessageTimeStamp>
+            </MessageTimeStamp> */}
             <Typography variant="caption" sx={{ 
               fontSize: '0.65rem', 
               color: 'text.disabled',
               fontStyle: 'italic'
             }}>
-              {getExpirationTime()}
+              {/* {getExpirationTime()} */}
             </Typography>
           </Box>
         </MessageContent>
