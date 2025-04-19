@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, Paper, Typography, useMediaQuery, useTheme, Drawer, IconButton, styled, alpha, Button, Dialog, DialogTitle, DialogContent, List, ListItem, ListItemText, CircularProgress, TextField, InputAdornment } from '@mui/material';
+import { Box, Grid, Paper, Typography, useMediaQuery, useTheme, Drawer, IconButton, styled, alpha, Button, Dialog, DialogTitle, DialogContent, DialogActions, List, ListItem, ListItemText, CircularProgress, TextField, InputAdornment } from '@mui/material';
 import { Menu as MenuIcon, Search as SearchIcon, Add as AddIcon } from '@mui/icons-material';
 import ChatList from './ChatList';
 import ChatWindow from './ChatWindow';
@@ -15,7 +15,9 @@ import {
   addDoc, 
   serverTimestamp,
   getDocs,
-  or
+  or,
+  deleteDoc,
+  writeBatch
 } from 'firebase/firestore';
 import { cloudinary } from '../../utils/cloudinaryConfig';
 import { initializeChatCleanupWorker } from '../../utils/chatCleanup';
@@ -94,6 +96,11 @@ const Chat = ({ isAdmin }) => {
   const [availableSellers, setAvailableSellers] = useState([]);
   const [sellerSearchQuery, setSellerSearchQuery] = useState('');
   const [loadingSellers, setLoadingSellers] = useState(false);
+  
+  // Add states for delete confirmation dialog
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [chatToDelete, setChatToDelete] = useState(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -445,6 +452,7 @@ const Chat = ({ isAdmin }) => {
       const existingChatsSnapshot = await getDocs(existingChatQuery);
       
       let chatId;
+      let isNewChat = false;
       
       if (existingChatsSnapshot.empty) {
         // Create a new chat document
@@ -452,15 +460,33 @@ const Chat = ({ isAdmin }) => {
           sellerUid: currentUserUid,
           adminUid: adminUid,
           createdAt: serverTimestamp(),
-          lastMessageTime: null,
+          lastMessageTime: serverTimestamp(),
           adminUnreadCount: 0,
-          sellerUnreadCount: 0
+          sellerUnreadCount: 1,
+          lastMessage: {
+            text: "How can I help you?",
+            senderUid: adminUid,
+            timestamp: serverTimestamp()
+          }
         });
         
         chatId = newChatRef.id;
+        isNewChat = true;
       } else {
         // Use existing chat
         chatId = existingChatsSnapshot.docs[0].id;
+      }
+      
+      // If this is a new chat, add the default welcome message
+      if (isNewChat) {
+        await addDoc(collection(db, 'chats', chatId, 'messages'), {
+          text: "How can I help you?",
+          imageUrl: null,
+          senderUid: adminUid,
+          senderName: "Customer Care",
+          timestamp: serverTimestamp(),
+          isRead: false
+        });
       }
       
       setSelectedChatId(chatId);
@@ -498,6 +524,72 @@ const Chat = ({ isAdmin }) => {
     }
   }, [showSellerDialog, isAdmin]);
   
+  // Function to open the delete confirmation dialog
+  const confirmDeleteChat = (chatId) => {
+    setChatToDelete(chatId);
+    setDeleteDialogOpen(true);
+  };
+  
+  // Function to close the delete confirmation dialog
+  const closeDeleteDialog = () => {
+    setDeleteDialogOpen(false);
+    setChatToDelete(null);
+  };
+  
+  // Function to handle chat deletion after confirmation
+  const handleDeleteChat = async () => {
+    if (!chatToDelete) return;
+    
+    try {
+      setDeleteLoading(true);
+      
+      // Get the chat document to find seller information
+      const chatDoc = await getDoc(doc(db, 'chats', chatToDelete));
+      if (!chatDoc.exists()) {
+        console.error('Chat does not exist');
+        setDeleteLoading(false);
+        closeDeleteDialog();
+        return;
+      }
+      
+      const chatData = chatDoc.data();
+      const sellerId = chatData.sellerUid;
+      
+      // Use a batch write to ensure all operations succeed or fail together
+      const batch = writeBatch(db);
+      
+      // 1. Delete all messages in the chat
+      const messagesSnapshot = await getDocs(collection(db, 'chats', chatToDelete, 'messages'));
+      messagesSnapshot.forEach((messageDoc) => {
+        batch.delete(doc(db, 'chats', chatToDelete, 'messages', messageDoc.id));
+      });
+      
+      // 2. Delete the chat document itself
+      batch.delete(doc(db, 'chats', chatToDelete));
+      
+      // Execute the batch
+      await batch.commit();
+      
+      console.log(`Chat ${chatToDelete} successfully deleted`);
+      
+      // Update the UI by removing the deleted chat from state
+      setChats(prevChats => prevChats.filter(chat => chat.id !== chatToDelete));
+      
+      // If the deleted chat was selected, clear the selection
+      if (selectedChatId === chatToDelete) {
+        setSelectedChatId(null);
+        setOtherUserDetails(null);
+      }
+      
+      setDeleteLoading(false);
+      closeDeleteDialog();
+    } catch (error) {
+      console.error('Error deleting chat:', error);
+      setDeleteLoading(false);
+      closeDeleteDialog();
+    }
+  };
+  
   // Create the chat layout
   const renderChatLayout = () => {
     if (isMobile) {
@@ -520,7 +612,7 @@ const Chat = ({ isAdmin }) => {
           >
             <SidebarContainer square elevation={0}>
               <SidebarHeader>
-                <Typography variant="h6">Conversations</Typography>
+                <Typography variant="h6">Convesations</Typography>
                 {isAdmin ? (
                   <Button
                     startIcon={<AddIcon />}
@@ -562,6 +654,7 @@ const Chat = ({ isAdmin }) => {
               currentUserName={currentUserName}
               isAdmin={isAdmin}
               otherUserDetails={otherUserDetails}
+              onDeleteChat={isAdmin ? confirmDeleteChat : undefined}
             />
           </Box>
         </>
@@ -615,6 +708,7 @@ const Chat = ({ isAdmin }) => {
             currentUserName={currentUserName}
             isAdmin={isAdmin}
             otherUserDetails={otherUserDetails}
+            onDeleteChat={isAdmin ? confirmDeleteChat : undefined}
           />
         </Grid>
       </Grid>
@@ -700,6 +794,39 @@ const Chat = ({ isAdmin }) => {
             </Box>
           )}
         </DialogContent>
+      </Dialog>
+      
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={!deleteLoading ? closeDeleteDialog : undefined}
+        maxWidth="xs"
+        fullWidth
+      >
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete this conversation? This action cannot be undone and will remove the chat for both you and the seller.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            onClick={closeDeleteDialog} 
+            disabled={deleteLoading}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={handleDeleteChat} 
+            color="error" 
+            disabled={deleteLoading}
+            variant="contained"
+            startIcon={deleteLoading ? <CircularProgress size={20} color="inherit" /> : null}
+          >
+            {deleteLoading ? 'Deleting...' : 'Delete'}
+          </Button>
+        </DialogActions>
       </Dialog>
     </ChatContainer>
   );
