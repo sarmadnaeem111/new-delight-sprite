@@ -547,7 +547,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                       fontSize: { xs: '0.8rem', sm: '0.9rem' },
                       px: { xs: 1, sm: 2 },
                       py: 0.5,
-                      borderRadius: '20px',
+                      // borderRadius: '20px',
                       boxShadow: '0 3px 5px 2px rgba(255, 255, 255, 0.3)',
                       '&:hover': {
                         background: 'linear-gradient(45deg, #f5f5f5 30%, #ffffff 90%)',
@@ -560,7 +560,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                       border: '1px solid rgba(255, 255, 255, 0.5)'
                     }}
                   >
-                    Customer
+                    Login
                   </Button>
                   <Button 
                     variant="outlined"
@@ -571,7 +571,7 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                       fontSize: { xs: '0.8rem', sm: '0.9rem' },
                       px: { xs: 1, sm: 2 },
                       py: 0.5,
-                      borderRadius: '20px',
+                      // borderRadius: '20px',
                       border: '1px solid rgba(255, 255, 255, 0.7)',
                       '&:hover': {
                         backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -583,8 +583,8 @@ const Navbar = ({ isAdmin, setIsAdmin, isCustomer, setIsCustomer, isSeller, setI
                       letterSpacing: 0.5,
                     }}
                   >
-                    <StorefrontIcon sx={{ mr: 1, fontSize: 18 }} />
-                    Seller
+                    {/* <StorefrontIcon sx={{ mr: 1, fontSize: 18 }} /> */}
+                    Register
                   </Button>
                 </Box>
               )}
