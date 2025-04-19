@@ -374,6 +374,10 @@ const SellerOrderDetailsPage = () => {
                   component="img"
                   src={item.imageUrl}
                   alt={item.name}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = process.env.PUBLIC_URL + '/images/product1.jpg';
+                  }}
                   sx={{
                     width: 40,
                     height: 40,
@@ -433,28 +437,9 @@ const SellerOrderDetailsPage = () => {
       }}
     >
       {/* Breadcrumbs - Hide on mobile */}
-      {!isMobile && (
-        <Box sx={{ mb: 4 }}>
-          <Breadcrumbs separator="›" aria-label="breadcrumb">
-            <Button 
-              color="inherit" 
-              onClick={() => navigate('/seller/dashboard')}
-              startIcon={<ArrowBackIcon />}
-            >
-              Dashboard
-            </Button>
-            <Button 
-              color="inherit" 
-              onClick={() => navigate('/seller/dashboard?tab=orders')}
-            >
-              Orders
-            </Button>
-            <Typography color="text.primary">Order Details</Typography>
-          </Breadcrumbs>
-        </Box>
-      )}
 
-      {/* Mobile back button */}
+
+      {/* Mobile back button
       {isMobile && (
         <Box sx={{ mb: 2 }}>
           <Button
@@ -465,7 +450,7 @@ const SellerOrderDetailsPage = () => {
             Back to Orders
           </Button>
         </Box>
-      )}
+      )} */}
 
       {/* Header section */}
       <Box 
@@ -551,9 +536,31 @@ const SellerOrderDetailsPage = () => {
         {/* Order Information */}
         <Grid item xs={12} md={6}>
           <Paper elevation={1} sx={{ p: { xs: 2, md: 3 }, height: '100%' }}>
-            <Typography variant="h6" gutterBottom color="primary">
-              Order Information
-            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+              <Typography variant="h6" color="primary">
+                Order Information
+              </Typography>
+              <IconButton
+                color="primary"
+                onClick={() => {
+                  // First navigate to the dashboard
+                  navigate('/seller/dashboard');
+                  // Then set the active tab to orders in localStorage
+                  localStorage.setItem('sellerActiveTab', 'orders');
+                }}
+                size="small"
+                sx={{
+                  border: '1px solid',
+                  borderColor: 'primary.light',
+                  '&:hover': {
+                    backgroundColor: 'primary.light',
+                    color: 'white'
+                  }
+                }}
+              >
+                <ArrowBackIcon fontSize="small" />
+              </IconButton>
+            </Box>
             <Box sx={{ mb: 2 }}>
               <Typography variant="body2" color="textSecondary">Order Date:</Typography>
               <Typography variant="body1" sx={{ mb: 1 }}>{formatDate(order.createdAt)}</Typography>
@@ -622,6 +629,10 @@ const SellerOrderDetailsPage = () => {
                               <img
                                 src={item.imageUrl}
                                 alt={item.name}
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = process.env.PUBLIC_URL + '/images/product1.jpg';
+                                }}
                                 style={{
                                   width: 40,
                                   height: 40,
