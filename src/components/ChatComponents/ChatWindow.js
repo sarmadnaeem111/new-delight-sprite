@@ -9,11 +9,14 @@ import {
   Stack,
   Tooltip,
   styled,
-  alpha
+  alpha,
+  Menu,
+  MenuItem
 } from '@mui/material';
 import { 
   ArrowBack as ArrowBackIcon,
-  MoreVert as MoreVertIcon 
+  MoreVert as MoreVertIcon,
+  Delete as DeleteIcon
 } from '@mui/icons-material';
 import Message from './Message';
 import ChatInput from './ChatInput';
@@ -75,12 +78,14 @@ const ChatWindow = ({
   currentUserUid, 
   currentUserName,
   isAdmin,
-  otherUserDetails
+  otherUserDetails,
+  onDeleteChat
 }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const messagesEndRef = useRef(null);
   const [localUserDetails, setLocalUserDetails] = useState(null);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -265,6 +270,24 @@ const ChatWindow = ({
     ? "Customer Care" 
     : displayUserDetails?.displayName || 'Chat';
 
+  // Handle menu open
+  const handleMenuOpen = (event) => {
+    setMenuAnchorEl(event.currentTarget);
+  };
+
+  // Handle menu close
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+  };
+
+  // Handle chat deletion
+  const handleDeleteChat = () => {
+    if (onDeleteChat && selectedChatId) {
+      onDeleteChat(selectedChatId);
+    }
+    handleMenuClose();
+  };
+
   if (!selectedChatId) {
     return (
       <ChatContainer>
@@ -290,11 +313,42 @@ const ChatWindow = ({
         
         <Box sx={{ flexGrow: 1 }} />
         
-        <Tooltip title="More options">
-          <IconButton size="small">
-            <MoreVertIcon />
-          </IconButton>
-        </Tooltip>
+        {isAdmin && (
+          <>
+            <Tooltip title="More options">
+              <IconButton size="small" onClick={handleMenuOpen}>
+                <MoreVertIcon />
+              </IconButton>
+            </Tooltip>
+            
+            <Menu
+              anchorEl={menuAnchorEl}
+              open={Boolean(menuAnchorEl)}
+              onClose={handleMenuClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+            >
+              <MenuItem onClick={handleDeleteChat} sx={{ color: 'error.main' }}>
+                <DeleteIcon fontSize="small" sx={{ mr: 1 }} />
+                Delete Conversation
+              </MenuItem>
+            </Menu>
+          </>
+        )}
+        
+        {!isAdmin && (
+          <Tooltip title="More options">
+            <IconButton size="small">
+              <MoreVertIcon />
+            </IconButton>
+          </Tooltip>
+        )}
       </ChatHeader>
       
       {loading ? (
@@ -303,7 +357,7 @@ const ChatWindow = ({
         </Box>
       ) : (
         <>
-          <Box sx={{ 
+          {/* <Box sx={{ 
             padding: '8px 16px', 
             backgroundColor: alpha('#fafafa', 0.8), 
             borderBottom: '1px solid #eee',
@@ -313,7 +367,7 @@ const ChatWindow = ({
             <Typography variant="caption" color="text.secondary" sx={{ fontStyle: 'italic', fontSize: '0.7rem' }}>
               Messages in this conversation will be automatically deleted after 24 hours
             </Typography>
-          </Box>
+          </Box> */}
           
           <MessagesContainer>
             {messages.length === 0 ? (
