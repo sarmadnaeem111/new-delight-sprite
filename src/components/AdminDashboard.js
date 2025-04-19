@@ -1889,10 +1889,10 @@ const AdminDashboard = () => {
             throw new Error('Seller not found');
           }
           
-          const sellerData = sellerDoc.data();
-          const currentWalletBalance = Number(sellerData.walletBalance || 0);
-          const currentPendingAmount = Number(sellerData.pendingAmount || 0);
-          
+            const sellerData = sellerDoc.data();
+            const currentWalletBalance = Number(sellerData.walletBalance || 0);
+            const currentPendingAmount = Number(sellerData.pendingAmount || 0);
+            
           console.log('SELLER DATA BEFORE UPDATE:', {
             id: orderData.sellerId,
             walletBalance: currentWalletBalance,
@@ -1997,14 +1997,14 @@ const AdminDashboard = () => {
             newWalletBalance,
             newPendingAmount
           });
-          
-          // Update seller's wallet and pending amounts
-          await updateDoc(sellerRef, {
-            walletBalance: newWalletBalance,
-            pendingAmount: newPendingAmount,
-            lastUpdated: serverTimestamp()
-          });
-          
+            
+            // Update seller's wallet and pending amounts
+            await updateDoc(sellerRef, {
+              walletBalance: newWalletBalance,
+              pendingAmount: newPendingAmount,
+              lastUpdated: serverTimestamp()
+            });
+            
           // Verify the update was successful by getting the seller's data again
           const updatedSellerDoc = await getDoc(sellerRef);
           const updatedSellerData = updatedSellerDoc.data();
@@ -2018,24 +2018,24 @@ const AdminDashboard = () => {
           });
           
           // Add a transaction record for accounting
-          await addDoc(collection(db, 'transactions'), {
-            orderId: orderId,
-            sellerId: orderData.sellerId,
+            await addDoc(collection(db, 'transactions'), {
+              orderId: orderId,
+              sellerId: orderData.sellerId,
             amount: grandTotal,
             baseAmount: baseAmount,
             profitAmount: profitAmount,
-            type: 'order_completed',
-            timestamp: serverTimestamp(),
+              type: 'order_completed',
+              timestamp: serverTimestamp(),
             description: `Order #${orderData.orderNumber || orderId.substring(0, 8)} completed. $${baseAmount.toFixed(2)} base + $${profitAmount.toFixed(2)} profit (total $${grandTotal.toFixed(2)}) transferred from pending to wallet.`,
             walletBalanceBefore: currentWalletBalance,
             walletBalanceAfter: newWalletBalance,
             pendingAmountBefore: currentPendingAmount,
             pendingAmountAfter: newPendingAmount,
             processedBy: 'admin'
-          });
-          
-          // Update the order with transfer information
-          await updateDoc(orderRef, {
+            });
+            
+            // Update the order with transfer information
+            await updateDoc(orderRef, {
             pendingTransferred: grandTotal,
             baseAmountTransferred: baseAmount,
             profitAmountTransferred: profitAmount,
@@ -2049,11 +2049,11 @@ const AdminDashboard = () => {
           console.log(`SUCCESS: Transferred $${grandTotal.toFixed(2)} total (base: $${baseAmount.toFixed(2)} + profit: $${profitAmount.toFixed(2)}) from pending to wallet for seller ${orderData.sellerId}`);
           
           // Set a special message for this operation
-          setSnackbar({
-            open: true,
+      setSnackbar({
+        open: true,
             message: `Order status updated to ${newStatus}. Transferred $${baseAmount.toFixed(2)} + $${profitAmount.toFixed(2)} profit (total $${grandTotal.toFixed(2)}) from pending to wallet balance.`,
-            severity: 'success'
-          });
+        severity: 'success'
+      });
         } catch (transferError) {
           // If there was an error in the transfer process, log it but don't throw
           console.error('ERROR during wallet transfer process:', transferError);
@@ -4342,7 +4342,7 @@ const AdminDashboard = () => {
 
   // Add the AddMoneyForm to the sidebar
   const renderSidebarContent = () => (
-    <Box sx={{ mt: 2 }}>
+    <Box sx={{ mt: 2  }}>
       <List>
         <ListItemButton 
           onClick={() => handleTabChange('dashboard')}
@@ -5137,7 +5137,7 @@ const AdminDashboard = () => {
           <ShoppingCartIcon />
         </Badge>
       </Fab>
-
+{/* xyz */}
       <Box sx={{ display: 'flex', flexGrow: 1, position: 'relative' }}>
         <Drawer
 
@@ -5492,7 +5492,14 @@ const AdminDashboard = () => {
           background: 'linear-gradient(to bottom, #f5f7ff, #ffffff)',
           overflowY: 'auto',
           pb: 6
-        }}>
+        }}
+        onClick={() => {
+          // Close sidebar when clicking on main content
+          if (toogle) {
+            setToogle(false);
+          }
+        }}
+        >
           {renderTabContent()}
           {/* <ChatWindow userRole="admin" recipientRole="seller" /> */}
           <ScrollToTopButton 
