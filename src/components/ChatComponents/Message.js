@@ -58,14 +58,13 @@ const MessageImage = styled('img')({
   display: 'block',
 });
 
-const MessageAvatar = styled(Box)(({ theme }) => ({
+const MessageAvatar = styled(Avatar)(({ theme, isAdmin }) => ({
   width: 36,
   height: 36,
   borderRadius: '50%',
-  backgroundColor: theme.palette.grey[300],
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  backgroundColor: isAdmin ? theme.palette.primary.main : theme.palette.grey[300],
+  color: isAdmin ? 'white' : theme.palette.text.primary,
+  fontSize: '1rem',
   marginRight: theme.spacing(1),
   marginLeft: theme.spacing(1),
   [theme.breakpoints.down('sm')]: {
@@ -73,6 +72,7 @@ const MessageAvatar = styled(Box)(({ theme }) => ({
     height: 30,
     marginRight: theme.spacing(0.5),
     marginLeft: theme.spacing(0.5),
+    fontSize: '0.8rem'
   }
 }));
 
@@ -211,6 +211,7 @@ const Message = ({ message, isAdmin }) => {
       {!isCurrentUserMessage && (
         <MessageAvatar
           alt={displayName}
+          isAdmin={isAdmin}
         />
       )}
       <MessageBubble isCurrentUser={isCurrentUserMessage}>
@@ -256,6 +257,7 @@ const Message = ({ message, isAdmin }) => {
       {isCurrentUserMessage && (
         <MessageAvatar
           alt={senderName === "mdzahid11@gmail.com" || senderName === "Customer Care" ? "Customer Care" : displayName}
+          isAdmin={isAdmin}
         />
       )}
     </MessageContainer>
