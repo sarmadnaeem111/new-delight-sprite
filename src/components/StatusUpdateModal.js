@@ -24,6 +24,7 @@ const StatusUpdateModal = ({ open, order, onClose, onUpdateStatus }) => {
     { value: 'pending', label: 'Pending', color: 'default' },
     { value: 'processing', label: 'Processing', color: 'info' },
     { value: 'assigned', label: 'Assigned', color: 'primary' },
+    { value: 'on-the-way', label: 'On the way', color: 'warning' },
     { value: 'completed', label: 'Completed', color: 'success' },
     { value: 'cancelled', label: 'Cancelled', color: 'error' }
   ];
@@ -56,6 +57,7 @@ const StatusUpdateModal = ({ open, order, onClose, onUpdateStatus }) => {
               order.status === 'completed' ? 'success' :
               order.status === 'processing' ? 'info' :
               order.status === 'assigned' ? 'primary' :
+              order.status === 'on-the-way' ? 'warning' :
               order.status === 'cancelled' ? 'error' : 'default'
             }
             size="small"
