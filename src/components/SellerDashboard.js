@@ -3586,6 +3586,25 @@ const SellerDashboard = ({ setIsSeller }) => {
       <Typography variant="h4" gutterBottom fontWeight="medium">
         Conversations
       </Typography>
+      {sellerData?.status === 'frozen' && (
+        <Box 
+          sx={{ 
+            p: 2, 
+            mb: 3, 
+            textAlign: 'center', 
+            bgcolor: '#FFEBEE', 
+            borderRadius: 2,
+            display: { xs: 'block', sm: 'none' }, // Only show on mobile
+            position: 'sticky',
+            top: 0,
+            zIndex: 10
+          }}
+        >
+          <Typography variant="subtitle1" color="error.dark" fontWeight="bold">
+            Your account is frozen.
+          </Typography>
+        </Box>
+      )}
       <Chat isAdmin={false} />
     </Container>
   );
