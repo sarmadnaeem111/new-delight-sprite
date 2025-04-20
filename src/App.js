@@ -55,12 +55,13 @@ function App() {
     const rememberedAdmin = localStorage.getItem('rememberedAdmin') === 'true';
     const adminId = localStorage.getItem('adminId');
     
+    // Immediately set roles based on localStorage to prevent flicker
     if (rememberedAdmin && adminId) {
       console.log("Found remembered admin in localStorage");
       setIsAdmin(true);
       setIsAuthenticated(true);
     }
-    else if (rememberedSeller && sellerId && sellerData) {
+    if (rememberedSeller && sellerId && sellerData) {
       console.log("Found remembered seller in localStorage");
       setIsSeller(true);
       setIsAuthenticated(true);
@@ -170,7 +171,12 @@ function AppContent({
   };
 
   const ProtectedSellerRoute = ({ children }) => {
-    if (!isSeller) {
+    // Check not only the isSeller state but also localStorage for seller credentials
+    const rememberedSeller = localStorage.getItem('rememberedSeller') === 'true';
+    const sellerId = localStorage.getItem('sellerId');
+    const sellerData = localStorage.getItem('sellerData');
+    
+    if (!isSeller && !(rememberedSeller && sellerId && sellerData)) {
       return <Navigate to="/seller/login" />;
     }
     return children;
