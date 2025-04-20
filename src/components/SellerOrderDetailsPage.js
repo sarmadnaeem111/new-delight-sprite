@@ -389,15 +389,21 @@ const SellerOrderDetailsPage = () => {
               <Typography variant="subtitle2">{item.name}</Typography>
             </Box>
             <Grid container spacing={1}>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <Typography variant="caption" color="text.secondary">Price</Typography>
                 <Typography variant="body2">${Number(item.price || 0).toFixed(2)}</Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
                 <Typography variant="caption" color="text.secondary">Quantity</Typography>
                 <Typography variant="body2">{item.quantity}</Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={3}>
+                <Typography variant="caption" color="text.secondary">Profit</Typography>
+                <Typography variant="body2" sx={{ color: 'success.main' }}>
+                  ${(Number(item.price || 0) * 0.23).toFixed(2)}
+                </Typography>
+              </Grid>
+              <Grid item xs={3}>
                 <Typography variant="caption" color="text.secondary">Subtotal</Typography>
                 <Typography variant="body2">${(Number(item.price || 0) * (item.quantity || 1)).toFixed(2)}</Typography>
               </Grid>
@@ -409,10 +415,6 @@ const SellerOrderDetailsPage = () => {
       <Card variant="outlined">
         <CardContent sx={{ p: 2 }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-            <Typography variant="body2">Subtotal:</Typography>
-            <Typography variant="body2">${Number(order.subtotal || 0).toFixed(2)}</Typography>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
             <Typography variant="body2">Shipping:</Typography>
             <Typography variant="body2">${Number(order.shipping || 0).toFixed(2)}</Typography>
           </Box>
@@ -421,6 +423,13 @@ const SellerOrderDetailsPage = () => {
             <Typography variant="subtitle2" color="primary">Total:</Typography>
             <Typography variant="subtitle2" color="primary">
               ${Number(order.total || order.totalAmount || 0).toFixed(2)}
+            </Typography>
+          </Box>
+          <Divider sx={{ my: 1 }} />
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Typography variant="subtitle2" color="success.main">Total Profit:</Typography>
+            <Typography variant="subtitle2" color="success.main">
+              ${Number(order.items?.reduce((total, item) => total + (Number(item.price || 0) * 0.23 * (item.quantity || 1)), 0) || 0).toFixed(2)}
             </Typography>
           </Box>
         </CardContent>
