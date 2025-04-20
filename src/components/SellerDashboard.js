@@ -255,7 +255,7 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
       width: "100%",
       height: "100%",
       opacity: 0.1,
-      backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+      backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
     },
   },
 }));
@@ -1183,6 +1183,39 @@ const SellerDashboard = ({ setIsSeller }) => {
 
   const renderDashboardContent = () => (
     <Container maxWidth="lg" sx={{ py: 3 }}>
+      {/* Mobile Seller Info Header - Only visible on mobile */}
+      <Box sx={{ display: { xs: 'flex', sm: 'none' }, mb: 3, p: 2, bgcolor: 'background.paper', borderRadius: 2 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Typography backgroundColor="red" p={0.5} borderRadius={3} variant="caption" color="white">Seller</Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', mt: 0.5, gap: 1 }}>
+              <Avatar 
+                src={sellerData?.profileImageUrl} 
+                alt={sellerData?.name || "Seller"}
+                sx={{ 
+                  width: 24, 
+                  height: 24, 
+                  bgcolor: 'primary.main',
+                  fontSize: '14px',
+                  fontWeight: 'bold'
+                }}
+              >
+                {(sellerData?.name || "S").charAt(0).toUpperCase()}
+              </Avatar>
+              <Typography variant="body2" fontWeight="medium" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {sellerData?.name || "Seller"}
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography backgroundColor="green" p={0.5} borderRadius={3} variant="caption" color="white">Guarantee Money</Typography>
+            <Typography variant="body2" fontWeight="medium">
+              ${Number(sellerData?.guaranteeMoney || 0).toFixed(2)}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+
       {/* Show skeleton loaders while loading dashboard stats */}
       {dashboardStatsLoading ? (
         <>
@@ -2070,7 +2103,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                               color: "success.main",
                             }}
                           >
-                            {/* 23%: ${(Number(product.price || 0) * 0.23).toFixed(2)} */}
+                            23%: ${(Number(product.price || 0) * 0.23).toFixed(2)}
                           </Typography>
                         </Box>
                       </Box>
@@ -2675,7 +2708,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                     <Typography variant="caption" color="textSecondary">Status</Typography>
                     <Box>
                       <Chip
-                        label={order.status}
+                        label={order.status === "pending" ? "Unpicked" : order.status}
                         color={
                           order.status === "completed"
                             ? "success"
@@ -2683,7 +2716,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                               ? "info"
                               : order.status === "assigned"
                                 ? "primary"
-                                : order.status === "cancelled"
+                                : order.status === "cancelled" || order.status === "pending"
                                   ? "error"
                                   : "default"
                         }
@@ -2794,7 +2827,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                     </TableCell>
                     <TableCell>
                       <Chip
-                        label={order.status}
+                        label={order.status === "pending" ? "Unpicked" : order.status}
                         color={
                           order.status === "completed"
                             ? "success"
@@ -2802,7 +2835,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                               ? "info"
                               : order.status === "assigned"
                                 ? "primary"
-                                : order.status === "cancelled"
+                                : order.status === "cancelled" || order.status === "pending"
                                   ? "error"
                                   : "default"
                         }
@@ -2911,6 +2944,9 @@ const SellerDashboard = ({ setIsSeller }) => {
     const [bankAccountName, setBankAccountName] = useState("");
     const [bankAccountNumber, setBankAccountNumber] = useState("");
     const [ifscCode, setIfscCode] = useState("");
+    // Add theme and mobile media query
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     // Function to fetch withdrawal history
     const fetchWithdrawalHistory = async () => {
@@ -3029,14 +3065,14 @@ const SellerDashboard = ({ setIsSeller }) => {
 
         if (paymentMethod === "Bank") {
           paymentDetails = {
-            bankName,
-            bankAccountName,
-            bankAccountNumber,
-            ifscCode,
+            bankName: bankName,
+            bankAccountName: bankAccountName,
+            bankAccountNumber: bankAccountNumber,
+            ifscCode: ifscCode,
           };
         } else {
           paymentDetails = {
-            walletAddress,
+            walletAddress: walletAddress,
           };
         }
 
@@ -3070,11 +3106,12 @@ const SellerDashboard = ({ setIsSeller }) => {
         // Reset form
         setWithdrawAmount("");
         setWalletAddress("");
+        setWithdrawNote("");
+        setPaymentMethod("USDT");
         setBankName("");
         setBankAccountName("");
         setBankAccountNumber("");
         setIfscCode("");
-        setWithdrawNote("");
 
         // Refresh withdrawal history immediately
         setTimeout(() => {
@@ -3282,27 +3319,165 @@ const SellerDashboard = ({ setIsSeller }) => {
               <CircularProgress />
             </Box>
           ) : withdrawHistory && withdrawHistory.length > 0 ? (
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Payment Method</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Note/Details</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {withdrawHistory.map((request) => (
-                    <TableRow key={request.id}>
-                      <TableCell>
-                        {request.timestamp.toLocaleDateString()}{" "}
-                        {request.timestamp.toLocaleTimeString()}
-                      </TableCell>
-                      <TableCell>${request.amount.toFixed(2)}</TableCell>
-                      <TableCell>{request.paymentMethod}</TableCell>
-                      <TableCell>
+            <>
+              {/* Desktop view - Table format */}
+              <TableContainer sx={{ display: { xs: 'none', sm: 'block' } }}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Date</TableCell>
+                      <TableCell>Amount</TableCell>
+                      <TableCell>Payment Method</TableCell>
+                      <TableCell>Status</TableCell>
+                      <TableCell>Note/Details</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {withdrawHistory.map((request) => (
+                      <TableRow key={request.id}>
+                        <TableCell>
+                          {request.timestamp.toLocaleDateString()}{" "}
+                          {request.timestamp.toLocaleTimeString()}
+                        </TableCell>
+                        <TableCell>${request.amount.toFixed(2)}</TableCell>
+                        <TableCell>{request.paymentMethod}</TableCell>
+                        <TableCell>
+                          <Chip
+                            label={
+                              request.status.charAt(0).toUpperCase() +
+                              request.status.slice(1)
+                            }
+                            color={getStatusColor(request.status)}
+                            size="small"
+                          />
+                        </TableCell>
+                        <TableCell>
+                          {request.status === "rejected" &&
+                          request.rejectionReason ? (
+                            <Tooltip
+                              title={`Rejection reason: ${request.rejectionReason}`}
+                            >
+                              <Box sx={{ display: "flex", alignItems: "center" }}>
+                                <InfoOutlined
+                                  fontSize="small"
+                                  color="error"
+                                  sx={{ mr: 1 }}
+                                />
+                                <Typography variant="body2" color="error">
+                                  Rejected:{" "}
+                                  {request.rejectionReason.substring(0, 30)}
+                                  {request.rejectionReason.length > 30
+                                    ? "..."
+                                    : ""}
+                                </Typography>
+                              </Box>
+                            </Tooltip>
+                          ) : (
+                            <>
+                              {request.paymentMethod === "Bank" &&
+                              request.paymentDetails ? (
+                                <Tooltip
+                                  title={`Bank: ${request.paymentDetails.bankName || "-"}, Account: ${request.paymentDetails.bankAccountName || "-"}, Number: ${request.paymentDetails.bankAccountNumber || "-"}, IFSC: ${request.paymentDetails.ifscCode || "-"}`}
+                                >
+                                  <Box
+                                    component="span"
+                                    sx={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                  >
+                                    Bank Payment Details
+                                  </Box>
+                                </Tooltip>
+                              ) : request.paymentDetails?.walletAddress ? (
+                                <Tooltip
+                                  title={request.paymentDetails.walletAddress}
+                                >
+                                  <Box
+                                    component="span"
+                                    sx={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                  >
+                                    Wallet Address
+                                  </Box>
+                                </Tooltip>
+                              ) : request.walletAddress ? ( // Support for old database entries
+                                <Tooltip title={request.walletAddress}>
+                                  <Box
+                                    component="span"
+                                    sx={{
+                                      cursor: "pointer",
+                                      textDecoration: "underline",
+                                    }}
+                                  >
+                                    Wallet Address
+                                  </Box>
+                                </Tooltip>
+                              ) : (
+                                request.note || "-"
+                              )}
+                            </>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              
+              {/* Mobile view - Card format with vertical layout */}
+              <Box sx={{ display: { xs: 'flex', sm: 'none' }, flexDirection: 'column', gap: 2 }}>
+                {withdrawHistory.map((request) => (
+                  <Paper
+                    key={request.id}
+                    elevation={2}
+                    sx={{
+                      p: 2,
+                      borderRadius: 2,
+                      borderLeft: `4px solid ${
+                        request.status === "completed"
+                          ? theme.palette.success.main
+                          : request.status === "pending"
+                            ? theme.palette.warning.main
+                            : request.status === "rejected"
+                              ? theme.palette.error.main
+                              : theme.palette.grey[500]
+                      }`
+                    }}
+                  >
+                    <Grid container spacing={1}>
+                      <Grid item xs={4}>
+                        <Typography variant="caption" color="textSecondary">Date</Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <Typography variant="body2">
+                          {request.timestamp.toLocaleDateString()}{" "}
+                          {request.timestamp.toLocaleTimeString()}
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid item xs={4}>
+                        <Typography variant="caption" color="textSecondary">Amount</Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <Typography variant="body2" fontWeight="medium">
+                          ${request.amount.toFixed(2)}
+                        </Typography>
+                      </Grid>
+                      
+                      <Grid item xs={4}>
+                        <Typography variant="caption" color="textSecondary">Payment Method</Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <Typography variant="body2">{request.paymentMethod}</Typography>
+                      </Grid>
+                      
+                      <Grid item xs={4}>
+                        <Typography variant="caption" color="textSecondary">Status</Typography>
+                      </Grid>
+                      <Grid item xs={8}>
                         <Chip
                           label={
                             request.status.charAt(0).toUpperCase() +
@@ -3311,82 +3486,68 @@ const SellerDashboard = ({ setIsSeller }) => {
                           color={getStatusColor(request.status)}
                           size="small"
                         />
-                      </TableCell>
-                      <TableCell>
-                        {request.status === "rejected" &&
-                        request.rejectionReason ? (
-                          <Tooltip
-                            title={`Rejection reason: ${request.rejectionReason}`}
-                          >
-                            <Box sx={{ display: "flex", alignItems: "center" }}>
-                              <InfoOutlined
-                                fontSize="small"
-                                color="error"
-                                sx={{ mr: 1 }}
-                              />
-                              <Typography variant="body2" color="error">
-                                Rejected:{" "}
-                                {request.rejectionReason.substring(0, 30)}
-                                {request.rejectionReason.length > 30
-                                  ? "..."
-                                  : ""}
-                              </Typography>
-                            </Box>
-                          </Tooltip>
+                      </Grid>
+                      
+                      <Grid item xs={4}>
+                        <Typography variant="caption" color="textSecondary">Details</Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                        {request.status === "rejected" && request.rejectionReason ? (
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <InfoOutlined
+                              fontSize="small"
+                              color="error"
+                              sx={{ mr: 1 }}
+                            />
+                            <Typography variant="body2" color="error">
+                              Rejected:{" "}
+                              {request.rejectionReason.substring(0, 30)}
+                              {request.rejectionReason.length > 30 ? "..." : ""}
+                            </Typography>
+                          </Box>
                         ) : (
                           <>
-                            {request.paymentMethod === "Bank" &&
-                            request.paymentDetails ? (
-                              <Tooltip
-                                title={`Bank: ${request.paymentDetails.bankName || "-"}, Account: ${request.paymentDetails.bankAccountName || "-"}, Number: ${request.paymentDetails.bankAccountNumber || "-"}, IFSC: ${request.paymentDetails.ifscCode || "-"}`}
+                            {request.paymentMethod === "Bank" && request.paymentDetails ? (
+                              <Box
+                                component="span"
+                                sx={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+                                }}
                               >
-                                <Box
-                                  component="span"
-                                  sx={{
-                                    cursor: "pointer",
-                                    textDecoration: "underline",
-                                  }}
-                                >
-                                  Bank Payment Details
-                                </Box>
-                              </Tooltip>
+                                Bank Payment Details
+                              </Box>
                             ) : request.paymentDetails?.walletAddress ? (
-                              <Tooltip
-                                title={request.paymentDetails.walletAddress}
+                              <Box
+                                component="span"
+                                sx={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+                                }}
                               >
-                                <Box
-                                  component="span"
-                                  sx={{
-                                    cursor: "pointer",
-                                    textDecoration: "underline",
-                                  }}
-                                >
-                                  Wallet Address
-                                </Box>
-                              </Tooltip>
-                            ) : request.walletAddress ? ( // Support for old database entries
-                              <Tooltip title={request.walletAddress}>
-                                <Box
-                                  component="span"
-                                  sx={{
-                                    cursor: "pointer",
-                                    textDecoration: "underline",
-                                  }}
-                                >
-                                  Wallet Address
-                                </Box>
-                              </Tooltip>
+                                Wallet Address
+                              </Box>
+                            ) : request.walletAddress ? (
+                              <Box
+                                component="span"
+                                sx={{
+                                  cursor: "pointer",
+                                  textDecoration: "underline",
+                                }}
+                              >
+                                Wallet Address
+                              </Box>
                             ) : (
                               request.note || "-"
                             )}
                           </>
                         )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                ))}
+              </Box>
+            </>
           ) : (
             <Box sx={{ p: 2, textAlign: "center" }}>
               <Typography color="textSecondary">
@@ -4056,13 +4217,13 @@ const SellerDashboard = ({ setIsSeller }) => {
             >
               <Grid container spacing={1}>
                 <Grid item xs={6}>
-                  <Typography variant="caption" color="textSecondary">Order ID</Typography>
+                  <Typography variant="caption" backgroundColor="red" p={0.5} borderRadius={3} color="white">Order ID</Typography>
                   <Typography variant="body2" fontWeight="medium">
                     {order.orderNumber || order.id.substring(0, 8)}
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="caption" color="textSecondary">Date</Typography>
+                  <Typography backgroundColor="green" p={0.5} borderRadius={3} variant="caption" color="white">Date</Typography>
                   <Typography variant="body2">{formatDate(order.createdAt)}</Typography>
                 </Grid>
                 {/* <Grid item xs={6}>
@@ -4072,13 +4233,13 @@ const SellerDashboard = ({ setIsSeller }) => {
                   </Typography>
                 </Grid> */}
                 <Grid item xs={6}>
-                  <Typography variant="caption" color="textSecondary">Price</Typography>
+                  <Typography backgroundColor="blue" p={0.5} borderRadius={3} variant="caption" color="white">Price</Typography>
                   <Typography variant="body2">
                     ${Number(order.total || order.totalAmount || 0).toFixed(2)}
                   </Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant="caption" color="textSecondary">Profit</Typography>
+                  <Typography backgroundColor="orange" p={0.5} borderRadius={3} variant="caption" color="white">Profit</Typography>
                   <Typography variant="body2" sx={{ color: 'success.main', fontWeight: 'medium' }}>
                     ${(Number(order.total || order.totalAmount || 0) * 0.23).toFixed(2)}
                   </Typography>
@@ -4087,7 +4248,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                   <Typography variant="caption" color="textSecondary">Status</Typography>
                   <Box>
                     <Chip
-                      label={order.status}
+                      label={order.status === "pending" ? "Unpicked" : order.status}
                       color={
                         order.status === "completed"
                           ? "success"
@@ -4095,7 +4256,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                             ? "info"
                             : order.status === "assigned"
                               ? "primary"
-                              : order.status === "cancelled"
+                              : order.status === "cancelled" || order.status === "pending"
                                 ? "error"
                                 : "default"
                       }
@@ -4198,7 +4359,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                   </TableCell>
                   <TableCell>
                     <Chip
-                      label={order.status}
+                      label={order.status === "pending" ? "Unpicked" : order.status}
                       color={
                         order.status === "completed"
                           ? "success"
@@ -4206,7 +4367,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                             ? "info"
                             : order.status === "assigned"
                               ? "primary"
-                              : order.status === "cancelled"
+                              : order.status === "cancelled" || order.status === "pending"
                                 ? "error"
                                 : "default"
                       }
@@ -4664,6 +4825,7 @@ const [toogle, setToogle] = useState(true)
         open={isProductDialogOpen}
         onClose={handleProductDialogClose}
         maxWidth="md"
+      
         fullWidth
       >
         <DialogTitle>
@@ -4672,6 +4834,7 @@ const [toogle, setToogle] = useState(true)
             aria-label="close"
             onClick={handleProductDialogClose}
             sx={{
+              
               position: 'absolute',
               right: 8,
               top: 8,
@@ -4850,14 +5013,22 @@ const [toogle, setToogle] = useState(true)
                         />
                       </Box>
                       
-                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                      <Box sx={{ p: { xs: 1, sm: 1.5 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                         {/* Product Name */}
-                        <Typography variant="h6" component="h3" sx={{ mb: 1, fontWeight: 600 }}>
+                        <Typography variant="h6" component="h3" sx={{ 
+                          mb: 1, 
+                          fontWeight: 200,
+                          fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' }
+                        }}>
                           {product.name}
                         </Typography>
                         
                         {/* Product Description */}
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
+                        <Typography variant="body2" color="text.secondary" sx={{ 
+                          mb: 2, 
+                          flexGrow: 1,
+                          fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' }
+                        }}>
                           {product.description}
                         </Typography>
                         
