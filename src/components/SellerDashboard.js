@@ -2174,7 +2174,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                           overflow: 'hidden',
                           textOverflow: 'ellipsis'
                         }}>
-                          {product.description}
+                          {/* {product.description} */}
                         </Typography>
                         
                         {/* Price and Profit Information */}
