@@ -93,6 +93,7 @@ import {
   serverTimestamp,
   limit,
   deleteDoc,
+  onSnapshot
 } from "firebase/firestore";
 // import ChatWindow from "./Chat/ChatWindow";
 import { useNavigate } from "react-router-dom";
@@ -435,6 +436,11 @@ const SellerDashboard = ({ setIsSeller }) => {
   const [productSearchQuery, setProductSearchQuery] = useState("");
   const [productPriceRange, setProductPriceRange] = useState({ min: "", max: "" });
   const [unpickedOrdersCount, setUnpickedOrdersCount] = useState(0);
+  const [unreadConversationsCount, setUnreadConversationsCount] = useState(() => {
+    // Check localStorage for persisted unread count, default to 1 if not found
+    const savedCount = localStorage.getItem('unreadConversationsCount');
+    return savedCount !== null ? parseInt(savedCount, 10) : 1;
+  });
 
   // Add new effect to fetch admin products when dialog opens
   useEffect(() => {
@@ -442,6 +448,43 @@ const SellerDashboard = ({ setIsSeller }) => {
       fetchAdminProducts();
     }
   }, [isProductDialogOpen]);
+
+  // Listen for new messages and update unread indicator
+  useEffect(() => {
+    if (!sellerData) return;
+
+    const sellerId = sellerData.id || localStorage.getItem('sellerId');
+    if (!sellerId) return;
+
+    // Get reference to the chats collection
+    const chatsRef = collection(db, 'chats');
+    
+    // Create a query for chats where the current seller is involved
+    const q = query(chatsRef, where('sellerUid', '==', sellerId));
+    
+    // Listen for changes in any chat documents
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      // Don't update if user is currently on conversations tab
+      if (activeTab === 'conversations') return;
+      
+      // Calculate total unread count across all chats
+      let totalUnreadCount = 0;
+      
+      snapshot.forEach((doc) => {
+        const chatData = doc.data();
+        const sellerUnreadCount = chatData.sellerUnreadCount || 0;
+        totalUnreadCount += sellerUnreadCount;
+      });
+      
+      // If there are unread messages, update the indicator
+      if (totalUnreadCount > 0) {
+        setUnreadConversationsCount(totalUnreadCount);
+        localStorage.setItem('unreadConversationsCount', totalUnreadCount.toString());
+      }
+    });
+
+    return () => unsubscribe();
+  }, [sellerData, activeTab]);
 
   // Update the openProductDialog function
   const openProductDialog = async () => {
@@ -945,6 +988,13 @@ const SellerDashboard = ({ setIsSeller }) => {
     }
     
     setActiveTab(tab);
+    
+    // Clear unread indicator when the Conversations tab is opened
+    if (tab === "conversations" && unreadConversationsCount > 0) {
+      setUnreadConversationsCount(0);
+      // Save to localStorage to persist across page refreshes
+      localStorage.setItem('unreadConversationsCount', '0');
+    }
 
     // If the tab has subitems, toggle its expanded state
     if (["orders"].includes(tab)) {
@@ -3668,6 +3718,16 @@ const SellerDashboard = ({ setIsSeller }) => {
     return <WithdrawalContent />;
   };
 
+  // Function to handle when a seller sends a message
+  const handleSellerMessageSent = () => {
+    // Clear the unread conversations indicator
+    if (unreadConversationsCount > 0) {
+      setUnreadConversationsCount(0);
+      // Save to localStorage to persist across page refreshes
+      localStorage.setItem('unreadConversationsCount', '0');
+    }
+  };
+
   const renderConversationsContent = () => (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Typography variant="h4" gutterBottom fontWeight="medium">
@@ -3692,7 +3752,10 @@ const SellerDashboard = ({ setIsSeller }) => {
           </Typography>
         </Box>
       )}
-      <Chat isAdmin={false} />
+      <Chat 
+        isAdmin={false} 
+        onMessageSent={handleSellerMessageSent}
+      />
     </Container>
   );
 
@@ -4724,6 +4787,7 @@ const [toogle, setToogle] = useState(false)
               icon: <ConversationsIcon />,
               text: "Conversations",
               value: "conversations",
+              badge: unreadConversationsCount
             },
             { icon: <ProfileIcon />, text: "Manage Profile", value: "profile" },
             { icon: <SettingsIcon />, text: "Shop Setting", value: "settings" },
@@ -4801,6 +4865,25 @@ const [toogle, setToogle] = useState(false)
                       transition: "transform 0.3s",
                     }}
                   />
+                )}
+                {item.badge > 0 && item.value === 'conversations' && (
+                  <Box
+                    sx={{
+                      bgcolor: 'error.main',
+                      color: 'white',
+                      borderRadius: '50%',
+                      width: 22,
+                      height: 22,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '0.75rem',
+                      fontWeight: 'bold',
+                      mr: 1
+                    }}
+                  >
+                    {item.badge}
+                  </Box>
                 )}
               </ListItemButton>
 
