@@ -85,7 +85,7 @@ const ScrollableChatListContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Chat = ({ isAdmin }) => {
+const Chat = ({ isAdmin, onMessageSent }) => {
   const [chats, setChats] = useState([]);
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -782,6 +782,7 @@ const Chat = ({ isAdmin }) => {
               isAdmin={isAdmin}
               otherUserDetails={otherUserDetails}
               onDeleteChat={isAdmin ? confirmDeleteChat : undefined}
+              onMessageSent={onMessageSent}
             />
           </Box>
         </>
@@ -827,6 +828,7 @@ const Chat = ({ isAdmin }) => {
             isAdmin={isAdmin}
             otherUserDetails={otherUserDetails}
             onDeleteChat={isAdmin ? confirmDeleteChat : undefined}
+            onMessageSent={onMessageSent}
           />
         </Grid>
       </Grid>
