@@ -660,13 +660,17 @@ const SellerDashboard = ({ setIsSeller }) => {
             if (parsedData.status === 'frozen' || parsedData.status === 'pending') {
               setActiveTab("conversations");
             }
+            
+            // Immediate UI update with cached data
+            setDashboardStatsLoading(false);
+            setLoading(false);
           } catch (e) {
             console.error("Error parsing cached seller data:", e);
             // Continue to fetch from Firestore
           }
         }
 
-        // Try to fetch fresh data from Firestore
+        // Try to fetch fresh data from Firestore without blocking UI
         try {
           const sellerDoc = await getDoc(doc(db, "sellers", sellerId));
           
@@ -707,12 +711,14 @@ const SellerDashboard = ({ setIsSeller }) => {
                 });
               })
               .finally(() => {
+                setDashboardStatsLoading(false);
                 setLoading(false);
               });
           } else {
             console.error('Seller document not found');
             // If Firestore doesn't have the seller doc but we have cached data, use that
             if (cachedSellerData) {
+              // Keep using cached data, don't redirect
               setLoading(false);
             } else {
               setSnackbar({
@@ -720,13 +726,17 @@ const SellerDashboard = ({ setIsSeller }) => {
                 message: "Error loading seller data. Please try logging in again.",
                 severity: "error"
               });
-              navigate('/seller/login');
+              // Add delay before redirect to prevent flash
+              setTimeout(() => {
+                navigate('/seller/login');
+              }, 1000);
             }
           }
         } catch (firestoreError) {
           console.error("Error fetching seller document:", firestoreError);
           // If Firestore fails but we have cached data, continue with cached data
           if (cachedSellerData) {
+            // Keep using cached data, don't redirect
             setLoading(false);
           } else {
             setSnackbar({
@@ -734,8 +744,10 @@ const SellerDashboard = ({ setIsSeller }) => {
               message: "Error connecting to database. Please check your connection.",
               severity: "error"
             });
-            // Only redirect if we don't have cached data
-            navigate('/seller/login');
+            // Add delay before redirect to prevent flash
+            setTimeout(() => {
+              navigate('/seller/login');
+            }, 1000);
           }
         }
       } catch (error) {
@@ -1105,7 +1117,14 @@ const SellerDashboard = ({ setIsSeller }) => {
     setIsSettingsSaving(true);
 
     try {
-      const sellerRef = doc(db, "sellers", auth.currentUser.uid);
+      // Get sellerId from localStorage instead of relying on auth.currentUser
+      const sellerId = localStorage.getItem('sellerId');
+      
+      if (!sellerId) {
+        throw new Error("Seller ID not found. Please log in again.");
+      }
+      
+      const sellerRef = doc(db, "sellers", sellerId);
 
       // Update seller data in Firestore
       const updateData = {
@@ -1132,7 +1151,8 @@ const SellerDashboard = ({ setIsSeller }) => {
       // Handle password change if requested
       if (
         editableSellerData.newPassword &&
-        editableSellerData.currentPassword
+        editableSellerData.currentPassword &&
+        auth.currentUser // Only attempt password change if auth.currentUser exists
       ) {
         try {
           // Re-authenticate user
@@ -1153,7 +1173,7 @@ const SellerDashboard = ({ setIsSeller }) => {
           alert(
             "Failed to update password. Please check your current password and try again.",
           );
-          return;
+          // Continue with the profile update even if password update fails
         }
       }
 
@@ -1162,6 +1182,20 @@ const SellerDashboard = ({ setIsSeller }) => {
         ...prev,
         ...updateData,
       }));
+      
+      // Update localStorage with the new data
+      const cachedSellerData = localStorage.getItem('sellerData');
+      if (cachedSellerData) {
+        try {
+          const parsedData = JSON.parse(cachedSellerData);
+          localStorage.setItem('sellerData', JSON.stringify({
+            ...parsedData,
+            ...updateData
+          }));
+        } catch (e) {
+          console.error("Error updating cached seller data:", e);
+        }
+      }
 
       // Reset password fields
       setEditableSellerData((prev) => ({
@@ -1172,10 +1206,20 @@ const SellerDashboard = ({ setIsSeller }) => {
       }));
 
       setIsSettingsEditable(false);
-      alert("Profile updated successfully!");
+      
+      // Use snackbar instead of alert for better UX
+      setSnackbar({
+        open: true,
+        message: "Profile updated successfully!",
+        severity: "success"
+      });
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile. Please try again.");
+      setSnackbar({
+        open: true,
+        message: "Failed to update profile: " + error.message,
+        severity: "error"
+      });
     } finally {
       setIsSettingsSaving(false);
     }
