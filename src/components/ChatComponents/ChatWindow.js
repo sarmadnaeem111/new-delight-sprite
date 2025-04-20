@@ -80,22 +80,6 @@ const HeaderSection = styled(Box)(({ theme }) => ({
   color: 'white',
 }));
 
-const ChatLogoIcon = styled(Box)(({ theme }) => ({
-  width: 28,
-  height: 28,
-  borderRadius: '50%',
-  backgroundColor: 'white',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginRight: theme.spacing(1),
-  '& svg': {
-    width: 16,
-    height: 16,
-    color: theme.palette.primary.main,
-  },
-}));
-
 const MessageContainer = styled(Box)(({ theme }) => ({
   flex: 1,
   width: '100%',
@@ -171,6 +155,15 @@ const ChatWindow = ({
   const [localUserDetails, setLocalUserDetails] = useState(null);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const theme = useTheme();
+  const [sellerStatus, setSellerStatus] = useState(null);
+  
+  // Load seller status from localStorage
+  useEffect(() => {
+    if (!isAdmin) {
+      const status = localStorage.getItem('sellerStatus');
+      setSellerStatus(status);
+    }
+  }, [isAdmin]);
   
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -415,11 +408,6 @@ const ChatWindow = ({
           </Box>
           
           <HeaderSection>
-            <ChatLogoIcon>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-              </svg>
-            </ChatLogoIcon>
             <Typography variant="body2">
               Seller Support Chat
             </Typography>
@@ -476,13 +464,8 @@ const ChatWindow = ({
         )}
         
         <HeaderSection>
-          <ChatLogoIcon>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-            </svg>
-          </ChatLogoIcon>
           <Typography variant="body2">
-          Questions? Chat with us!
+            Seller Support Chat
           </Typography>
         </HeaderSection>
         
@@ -505,6 +488,24 @@ const ChatWindow = ({
           </MenuItem>
         </Menu>
       </ChatHeader>
+      
+      {/* Add frozen account notification for sellers in mobile view */}
+      {!isAdmin && sellerStatus === 'frozen' && (
+        <Box 
+          sx={{
+            p: 2,
+            bgcolor: '#FFEBEE',
+            color: 'error.dark',
+            textAlign: 'center',
+            fontWeight: 'bold',
+            display: { xs: 'block', sm: 'none' }, // Only show on mobile
+            position: 'relative',
+            zIndex: 10
+          }}
+        >
+          Your account is frozen.
+        </Box>
+      )}
       
       <MessageContainer>
         {messages.map((message) => (
