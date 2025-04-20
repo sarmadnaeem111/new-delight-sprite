@@ -69,6 +69,33 @@ const ChatHeader = styled(Box)(({ theme }) => ({
   }
 }));
 
+const HeaderSection = styled(Box)(({ theme }) => ({
+  width: '100%',
+  padding: theme.spacing(1),
+  marginTop: theme.spacing(1),
+  borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: 'white',
+}));
+
+const ChatLogoIcon = styled(Box)(({ theme }) => ({
+  width: 28,
+  height: 28,
+  borderRadius: '50%',
+  backgroundColor: 'white',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: theme.spacing(1),
+  '& svg': {
+    width: 16,
+    height: 16,
+    color: theme.palette.primary.main,
+  },
+}));
+
 const MessageContainer = styled(Box)(({ theme }) => ({
   flex: 1,
   width: '100%',
@@ -386,6 +413,17 @@ const ChatWindow = ({
               Typically replies under 6 minutes
             </Typography>
           </Box>
+          
+          <HeaderSection>
+            <ChatLogoIcon>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+              </svg>
+            </ChatLogoIcon>
+            <Typography variant="body2">
+              Seller Support Chat
+            </Typography>
+          </HeaderSection>
         </ChatHeader>
         <NoConversationContainer>
           <Typography variant="body1" color="text.secondary">
@@ -436,6 +474,18 @@ const ChatWindow = ({
             <MoreVertIcon />
           </IconButton>
         )}
+        
+        <HeaderSection>
+          <ChatLogoIcon>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            </svg>
+          </ChatLogoIcon>
+          <Typography variant="body2">
+          Questions? Chat with us!
+          </Typography>
+        </HeaderSection>
+        
         <Menu
           anchorEl={menuAnchorEl}
           open={Boolean(menuAnchorEl)}
