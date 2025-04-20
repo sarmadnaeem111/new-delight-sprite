@@ -656,8 +656,8 @@ const SellerDashboard = ({ setIsSeller }) => {
               ordersCount: 0
             });
             
-            // Check if seller is frozen and redirect to conversations tab
-            if (parsedData.status === 'frozen') {
+            // Check if seller is frozen or pending and redirect to conversations tab
+            if (parsedData.status === 'frozen' || parsedData.status === 'pending') {
               setActiveTab("conversations");
             }
           } catch (e) {
@@ -688,8 +688,8 @@ const SellerDashboard = ({ setIsSeller }) => {
               ordersCount: 0
             });
             
-            // If seller is frozen, force the conversations tab
-            if (data.status === 'frozen') {
+            // If seller is frozen or pending, force the conversations tab
+            if (data.status === 'frozen' || data.status === 'pending') {
               setActiveTab("conversations");
             }
 
@@ -4039,6 +4039,40 @@ const SellerDashboard = ({ setIsSeller }) => {
   };
 
   const renderContent = () => {
+    // If seller is pending approval, only show conversations content
+    if (sellerData?.status === 'pending') {
+      return activeTab === "conversations" 
+        ? (
+          <>
+            <Box sx={{ p: 3, textAlign: 'center', mb: 3, bgcolor: '#fff3e0', borderRadius: 2 }}>
+              <Typography variant="h6" color="warning.dark" sx={{ fontWeight: 'bold' }}>
+                Your account is unverified. Please contact customer care.
+              </Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ mt: 1 }}>
+                While your account is pending approval, you can only use the chat functionality.
+              </Typography>
+            </Box>
+            {renderConversationsContent()}
+          </>
+        ) 
+        : <Box sx={{ p: 3, textAlign: 'center' }}>
+            <Typography variant="h6" color="warning.dark" sx={{ fontWeight: 'bold', mb: 2 }}>
+              Your account is unverified. Please contact customer care.
+            </Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+              While your account is pending approval, you can only use the chat functionality.
+            </Typography>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              sx={{ mt: 2 }}
+              onClick={() => setActiveTab("conversations")}
+            >
+              Go to Conversations
+            </Button>
+          </Box>;
+    }
+    
     // If seller is frozen, only show conversations content
     if (sellerData?.status === 'frozen') {
       return activeTab === "conversations" 
