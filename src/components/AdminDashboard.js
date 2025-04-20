@@ -622,6 +622,7 @@ const OrderDetailsModal = ({ open, order, onClose, onUpdateStatus }) => {
               order.status === 'completed' ? 'success' :
               order.status === 'processing' ? 'info' :
               order.status === 'assigned' ? 'primary' :
+              order.status === 'on-the-way' ? 'warning' :
               order.status === 'cancelled' ? 'error' : 'default'
             }
             size="small"
@@ -3700,6 +3701,7 @@ const AdminDashboard = () => {
                     <TableCell>Date</TableCell>
                     <TableCell>Seller</TableCell>
                     <TableCell>Total</TableCell>
+                    <TableCell>Profit</TableCell>
                     <TableCell>Status</TableCell>
                     <TableCell>Actions</TableCell>
                   </TableRow>
@@ -3743,13 +3745,14 @@ const AdminDashboard = () => {
                           <TableCell>{formatDate(order.createdAt)}</TableCell>
                           <TableCell>{order.sellerInfo?.email || 'Unknown Seller'}</TableCell>
                           <TableCell>${Number(order.totalAmount || 0).toFixed(2)}</TableCell>
+                          <TableCell>${Number(order.totalAmount*23/100 || 0).toFixed(2)}</TableCell>
                           <TableCell>
                             <Chip 
                               label={order.status} 
                               color={
                                 order.status === 'completed' ? 'success' :
                                 order.status === 'processing' ? 'info' :
-                                order.status === 'pending' ? 'warning' :
+                                order.status === 'on-the-way' ? 'warning' :
                                 order.status === 'cancelled' ? 'error' : 'default'
                               }
                               size="small"
@@ -3799,7 +3802,7 @@ const AdminDashboard = () => {
             </TableContainer>
           )}
         </SectionCard>
-        
+        {/* xyz */}
         {/* Status update dropdown menu */}
         <Menu
           anchorEl={anchorEl}
@@ -3810,11 +3813,11 @@ const AdminDashboard = () => {
           }}
         >
           <MenuItem onClick={() => {
-            handleUpdateOrderStatus(selectedOrder?.id, 'pending');
+            handleUpdateOrderStatus(selectedOrder?.id, 'on-the-way');
             setAnchorEl(null);
           }}>
             <Chip 
-              label="Pending" 
+              label="On the way" 
               color="warning"
               size="small"
               sx={{ minWidth: 80 }}
@@ -3954,7 +3957,7 @@ const AdminDashboard = () => {
                           order.status === 'completed' ? 'success' :
                           order.status === 'processing' ? 'info' :
                           order.status === 'assigned' ? 'primary' :
-                          order.status === 'pending' ? 'warning' :
+                          order.status === 'on-the-way' ? 'warning' :
                           order.status === 'cancelled' ? 'error' : 'default'
                         }
                         size="small"
