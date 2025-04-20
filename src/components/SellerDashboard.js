@@ -833,8 +833,8 @@ const SellerDashboard = ({ setIsSeller }) => {
           id: doc.id,
           ...orderData,
         });
-        // Count orders that haven't been picked
-        if (orderData.status !== "picked") {
+        // Count orders with "pending" status (unpicked orders)
+        if (orderData.status === "pending") {
           unpickedCount++;
         }
       });
@@ -2440,6 +2440,14 @@ const SellerDashboard = ({ setIsSeller }) => {
         ),
       );
 
+      // Update unpicked orders count if status was changed from pending
+      if (orderData.status === "pending" && updatedStatus !== "pending") {
+        setUnpickedOrdersCount((prevCount) => Math.max(0, prevCount - 1));
+      } else if (orderData.status !== "pending" && updatedStatus === "pending") {
+        // If changing to pending status, increment the unpicked count
+        setUnpickedOrdersCount((prevCount) => prevCount + 1);
+      }
+
       setSnackbar({
         open: true,
         message: isCompletionRequest
@@ -2572,6 +2580,11 @@ const SellerDashboard = ({ setIsSeller }) => {
             : order,
         ),
       );
+
+      // Update unpicked orders count if the order was in pending status
+      if (orderData.status === "pending") {
+        setUnpickedOrdersCount((prevCount) => Math.max(0, prevCount - 1));
+      }
 
       // Update seller data in state
       setSellerData((prevData) => ({
