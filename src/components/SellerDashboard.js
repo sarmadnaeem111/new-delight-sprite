@@ -1181,40 +1181,44 @@ const SellerDashboard = ({ setIsSeller }) => {
     }
   };
 
-  const renderDashboardContent = () => (
-    <Container maxWidth="lg" sx={{ py: 3 }}>
-      {/* Mobile Seller Info Header - Only visible on mobile */}
-      <Box sx={{ display: { xs: 'flex', sm: 'none' }, mb: 3, p: 2, bgcolor: 'background.paper', borderRadius: 2 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Typography backgroundColor="red" p={0.5} borderRadius={3} variant="caption" color="white">Seller</Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', mt: 0.5, gap: 1 }}>
-              <Avatar 
-                src={sellerData?.profileImageUrl} 
-                alt={sellerData?.name || "Seller"}
-                sx={{ 
-                  width: 24, 
-                  height: 24, 
-                  bgcolor: 'primary.main',
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                }}
-              >
-                {(sellerData?.name || "S").charAt(0).toUpperCase()}
-              </Avatar>
-              <Typography variant="body2" fontWeight="medium" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {sellerData?.name || "Seller"}
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography backgroundColor="green" p={0.5} borderRadius={3} variant="caption" color="white">Guarantee Money</Typography>
-            <Typography variant="body2" fontWeight="medium">
-              ${Number(sellerData?.guaranteeMoney || 0).toFixed(2)}
+    const renderDashboardContent = () => (
+      <Container maxWidth="lg" >
+        {/* Mobile Seller Info Header - Only visible on mobile */}
+        <Box sx={{
+          width: '28%', 
+          marginLeft: 'auto',
+          display: { xs: 'flex', sm: 'none' }, 
+          mt:-4,
+          mb: 3, 
+          p: 1, 
+          bgcolor: 'orange', 
+          borderRadius: 2,
+          justifyContent: 'flex-end' 
+        }}>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: 1, 
+            width: 'auto' 
+          }}>
+            <Avatar 
+              src={sellerData?.profileImageUrl} 
+              alt={sellerData?.name || "Seller"}
+              sx={{ 
+                width: 24, 
+                height: 24, 
+                bgcolor: 'primary.main',
+                fontSize: '14px',
+                fontWeight: 'bold'
+              }}
+            >
+              {(sellerData?.name || "S").charAt(0).toUpperCase()}
+            </Avatar>
+            <Typography variant="body2" fontWeight="medium" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {sellerData?.name || "Seller"}
             </Typography>
-          </Grid>
-        </Grid>
-      </Box>
+          </Box>
+        </Box>
 
       {/* Show skeleton loaders while loading dashboard stats */}
       {dashboardStatsLoading ? (
@@ -1411,7 +1415,7 @@ const SellerDashboard = ({ setIsSeller }) => {
             <Grid item xs={12} sm={6} md={3}>
               <DashboardCard
                 title="Total Sales"
-                value={Number(sellerData?.totalSales || 0).toFixed(2)}
+                value={`$${Number(sellerData?.totalSales || 0).toFixed(2)}`}
                 icon={<RevenueIcon />}
                 color="#E91E63"
               />
@@ -2017,7 +2021,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                       onClick={() => handleProductSelection(product.id)}
                     >
                       {/* Checkbox overlay in top-right corner */}
-                      <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
+                      <Box sx={{ position: 'absolute', top: 4, right: 4, zIndex: 1 }}>
                         <Checkbox
                           checked={isSelected}
                           onChange={(e) => {
@@ -2027,14 +2031,14 @@ const SellerDashboard = ({ setIsSeller }) => {
                           sx={{
                             backgroundColor: 'rgba(255,255,255,0.8)',
                             borderRadius: '50%',
-                            padding: '4px',
+                            padding: '2px',
                             '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
                           }}
                         />
                       </Box>
                       
                       {/* Product Image */}
-                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
+                      <Box sx={{ p: { xs: 0.5, sm: 1, md: 1.5 }, display: 'flex', justifyContent: 'center' }}>
                         <Box
                           component="img"
                           src={product.imageUrl}
@@ -2045,7 +2049,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                           }}
                           sx={{
                             width: '100%',
-                            height: 180,
+                            height: { xs: 120, sm: 150, md: 180 },
                             objectFit: 'contain',
                             borderRadius: 1,
                             backgroundColor: '#f5f5f5',
@@ -2054,28 +2058,50 @@ const SellerDashboard = ({ setIsSeller }) => {
                         />
                       </Box>
                       
-                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                      <Box sx={{ p: { xs: 1, sm: 1.5 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                         {/* Product Name */}
-                        <Typography variant="h6" component="h3" sx={{ mb: 1, fontWeight: 600 }}>
+                        <Typography variant="h6" component="h3" sx={{ 
+                          mb: 0.5, 
+                          fontWeight: 400,
+                          fontSize: { xs: '0.75rem', sm: '0.9rem', md: '1.1rem' },
+                          lineHeight: 1.2
+                        }}>
                           {product.name}
                         </Typography>
                         
                         {/* Product Description */}
-                        {/* <Typography variant="body2" color="text.secondary" sx={{ mb: 2, flexGrow: 1 }}>
+                        <Typography variant="body2" color="text.secondary" sx={{ 
+                          mb: 1, 
+                          flexGrow: 1,
+                          fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.85rem' },
+                          display: { xs: '-webkit-box' },
+                          WebkitLineClamp: { xs: 2, sm: 3 },
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis'
+                        }}>
                           {product.description}
-                        </Typography> */}
+                        </Typography>
                         
                         {/* Price and Profit Information */}
                         <Box sx={{ mt: 'auto' }}>
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', mb: 1 }}>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', mb: 0.5 }}>
+                            <Typography variant="subtitle1" sx={{ 
+                              fontWeight: 'bold',
+                              fontSize: { xs: '0.85rem', sm: '0.9rem', md: '1rem' }
+                            }}>
                               ${Number(product.price).toFixed(2)}
                             </Typography>
                             
-                            <Typography
+                            
+                          </Box>
+
+                          <Box>
+                          <Typography
                               variant="body2"
                               sx={{
                                 fontWeight: "medium",
+                                fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.8rem' },
                                 color:
                                   product.price &&
                                   product.cost &&
@@ -2093,18 +2119,22 @@ const SellerDashboard = ({ setIsSeller }) => {
                               Profit: ${(Number(product.price || 0) * 0.23).toFixed(2)}
                             </Typography>
                           </Box>
-                          
+{/*                          
+
+
+
                           <Typography
                             variant="caption"
                             sx={{
                               display: 'block',
                               textAlign: 'right',
                               fontWeight: "medium",
+                              fontSize: { xs: '0.65rem', sm: '0.7rem' },
                               color: "success.main",
                             }}
                           >
                             23%: ${(Number(product.price || 0) * 0.23).toFixed(2)}
-                          </Typography>
+                          </Typography> */}
                         </Box>
                       </Box>
                     </Card>
@@ -4556,7 +4586,7 @@ const SellerDashboard = ({ setIsSeller }) => {
   };
 
 //responsive sidebar
-const [toogle, setToogle] = useState(true)
+const [toogle, setToogle] = useState(false)
 
 
   return (
@@ -5029,7 +5059,7 @@ const [toogle, setToogle] = useState(true)
                       onClick={() => handleProductSelection(product.id)}
                     >
                       {/* Checkbox overlay in top-right corner */}
-                      <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
+                      <Box sx={{ position: 'absolute', top: 4, right: 4, zIndex: 1 }}>
                         <Checkbox
                           checked={isSelected}
                           onChange={(e) => {
@@ -5039,14 +5069,14 @@ const [toogle, setToogle] = useState(true)
                           sx={{
                             backgroundColor: 'rgba(255,255,255,0.8)',
                             borderRadius: '50%',
-                            padding: '4px',
+                            padding: '2px',
                             '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' }
                           }}
                         />
                       </Box>
                       
                       {/* Product Image */}
-                      <Box sx={{ p: { xs: 1, sm: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
+                      <Box sx={{ p: { xs: 0.5, sm: 1, md: 1.5 }, display: 'flex', justifyContent: 'center' }}>
                         <Box
                           component="img"
                           src={product.imageUrl}
@@ -5057,7 +5087,7 @@ const [toogle, setToogle] = useState(true)
                           }}
                           sx={{
                             width: '100%',
-                            height: 180,
+                            height: { xs: 120, sm: 150, md: 180 },
                             objectFit: 'contain',
                             borderRadius: 1,
                             backgroundColor: '#f5f5f5',
@@ -5069,26 +5099,35 @@ const [toogle, setToogle] = useState(true)
                       <Box sx={{ p: { xs: 1, sm: 1.5 }, pt: 0, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                         {/* Product Name */}
                         <Typography variant="h6" component="h3" sx={{ 
-                          mb: 1, 
-                          fontWeight: 200,
-                          fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' }
+                          mb: 0.5, 
+                          fontWeight: 400,
+                          fontSize: { xs: '0.75rem', sm: '0.9rem', md: '1.1rem' },
+                          lineHeight: 1.2
                         }}>
                           {product.name}
                         </Typography>
                         
-                        {/* Product Description */}
+                        Product Description
                         <Typography variant="body2" color="text.secondary" sx={{ 
-                          mb: 2, 
+                          mb: 1, 
                           flexGrow: 1,
-                          fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' }
+                          fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.85rem' },
+                          display: { xs: '-webkit-box' },
+                          WebkitLineClamp: { xs: 2, sm: 3 },
+                          WebkitBoxOrient: 'vertical',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis'
                         }}>
                           {product.description}
                         </Typography>
                         
                         {/* Price and Profit Information */}
                         <Box sx={{ mt: 'auto' }}>
-                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', mb: 1 }}>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', mb: 0.5 }}>
+                            <Typography variant="subtitle1" sx={{ 
+                              fontWeight: 'bold',
+                              fontSize: { xs: '0.85rem', sm: '0.9rem', md: '1rem' }
+                            }}>
                               ${Number(product.price).toFixed(2)}
                             </Typography>
                             
@@ -5096,6 +5135,7 @@ const [toogle, setToogle] = useState(true)
                               variant="body2"
                               sx={{
                                 fontWeight: "medium",
+                                fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.8rem' },
                                 color:
                                   product.price &&
                                   product.cost &&
@@ -5120,6 +5160,7 @@ const [toogle, setToogle] = useState(true)
                               display: 'block',
                               textAlign: 'right',
                               fontWeight: "medium",
+                              fontSize: { xs: '0.65rem', sm: '0.7rem' },
                               color: "success.main",
                             }}
                           >
