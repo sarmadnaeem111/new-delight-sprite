@@ -147,7 +147,8 @@ const ChatWindow = ({
   currentUserName,
   isAdmin,
   otherUserDetails,
-  onDeleteChat
+  onDeleteChat,
+  onMessageSent
 }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -284,6 +285,14 @@ const ChatWindow = ({
         // Increment unread count for the other user
         [isAdmin ? 'sellerUnreadCount' : 'adminUnreadCount']: arrayUnion(1)
       });
+      
+      // Call the onMessageSent callback if it exists (for both admin and seller)
+      if (onMessageSent) {
+        console.log(`Message sent by ${isAdmin ? 'admin' : 'seller'}, calling onMessageSent callback`);
+        onMessageSent();
+      } else {
+        console.log(`Message sent by ${isAdmin ? 'admin' : 'seller'}, but no onMessageSent callback provided`);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
     }
