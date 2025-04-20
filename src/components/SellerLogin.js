@@ -118,7 +118,7 @@ const SellerLogin = ({ setIsSeller }) => {
   const handleSellerAuthenticated = async (userDoc, userId) => {
     const userData = userDoc.data();
     if (userData.role === 'seller') {
-      if (userData.status === 'active' || userData.status === 'frozen') {
+      if (userData.status === 'active' || userData.status === 'frozen' || userData.status === 'pending') {
         try {
           // Always store seller data for persistence
           localStorage.setItem('rememberedSeller', 'true');
@@ -160,12 +160,6 @@ const SellerLogin = ({ setIsSeller }) => {
           setError('Error loading seller data. Please try again.');
           auth.signOut();
         }
-      } else if (userData.status === 'pending') {
-        setError('Your account is pending approval');
-        auth.signOut();
-      } else if (userData.status === 'frozen') {
-        setError('Your account has been frozen. Please contact admin for support.');
-        auth.signOut();
       } else {
         setError('Your registration was rejected');
         auth.signOut();
