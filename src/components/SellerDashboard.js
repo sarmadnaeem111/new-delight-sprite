@@ -2164,7 +2164,8 @@ const SellerDashboard = ({ setIsSeller }) => {
                         </Typography>
                         
                         {/* Product Description */}
-                        <Typography variant="body2" color="text.secondary" sx={{ 
+                        <Typography variant="body2" color="text.secondary" sx={{
+                          mt: -1.7, 
                           mb: 1, 
                           flexGrow: 1,
                           fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.85rem' },
@@ -2194,6 +2195,7 @@ const SellerDashboard = ({ setIsSeller }) => {
                           <Typography
                               variant="body2"
                               sx={{
+                                mt: -1.2,
                                 fontWeight: "medium",
                                 fontSize: { xs: '0.7rem', sm: '0.75rem', md: '0.8rem' },
                                 color:
@@ -2247,7 +2249,9 @@ const SellerDashboard = ({ setIsSeller }) => {
             disabled={selectedProducts.length === 0 || loading}
             startIcon={selectedProducts.length > 0 ? <Badge badgeContent={selectedProducts.length} color="error" max={99}><AddIcon /></Badge> : <AddIcon />}
           >
-            Add {selectedProducts.length > 0 ? `Selected Products (${selectedProducts.length})` : 'Selected Products'}
+            {/* Add {selectedProducts.length > 0 ? `Selected Products (${selectedProducts.length})` : 'Selected Products'} */}
+
+            Add {selectedProducts.length > 0 ? ` (${selectedProducts.length})` : ''}
           </Button>
         </DialogActions>
       </Dialog>
@@ -5324,7 +5328,10 @@ const [toogle, setToogle] = useState(false)
             disabled={selectedProducts.length === 0 || loading}
             startIcon={selectedProducts.length > 0 ? <Badge badgeContent={selectedProducts.length} color="error" max={99}><AddIcon /></Badge> : <AddIcon />}
           >
-            Add {selectedProducts.length > 0 ? `Selected Products (${selectedProducts.length})` : 'Selected Products'}
+            {/* Add {selectedProducts.length > 0 ? `Selected Products (${selectedProducts.length})` : 'Selected Products'} */}
+
+            Add {selectedProducts.length > 0 ? ` (${selectedProducts.length})` : ''}
+
           </Button>
         </DialogActions>
       </Dialog>
