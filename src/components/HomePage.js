@@ -1879,6 +1879,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 }
               }}>
                 <CardMedia
+                marginBottom={2}
                   component="img"
                   height="180"
                   image="https://esellerstorevip.biz/public/uploads/all/XscwCkojrDJfzIYafWutWtKSMTzG6zV5wwSyL3VA.jpg"
@@ -1913,20 +1914,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://esellerstorevip.biz/public/uploads/all/y7Rt1PWWT33n6ZlpkWzk0x5movEbL5zIOcA8pwFV.jpg"
-                  alt="  JOYSTAR Pluto Kids Bike"
+                  image="https://esellerstorevip.biz/public/uploads/all/IiOPdiIusVjs07y5o0s5dJrDhsdUr6jTGcwbEgDp.png"
+                  alt=" Autel EVO II Dual"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                  $236.25 /Pc                  </Typography>
+                  $5,625.00 /KG
+                                    </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                  JOYSTAR Pluto Kids Bike 12 14 16 18 20 Inch Children's Bicycle for Boys Girls Age 3-12 Years, Kids' Bicycles, Multiple Colors
-                  </Typography>
+                  Autel EVO II Dual 640T Thermal imaging Foldable Drone Thermal Camera Evo 2 Cheap Drones With 8k Hd Camera                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2334,7 +2335,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://esellerstorevip.biz/public/uploads/all/XscwCkojrDJfzIYafWutWtKSMTzG6zV5wwSyL3VA.jpg"
+                  image="https://www.pedalcardepot.com/wp-content/uploads/kriddo-kids-tricycles-age-24-month-to-4-years-toddler-kids-trike-for-25-to-5-year-old-gift-toddler-tricycles-for-2-4-yea-2-819x1024.jpg"
                   alt="Baby Shorts"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
@@ -2367,7 +2368,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
+                  image="https://th.bing.com/th/id/OIP.QL9wWI-4Ukr8EG1TxDOk6gHaIx?rs=1&pid=ImgDetMain"
                   alt="Easter Basket Stuffers"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
@@ -2399,7 +2400,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
+                  image="https://th.bing.com/th/id/OIP.wwNiAO_EiVkvjSGELd54FgHaHa?rs=1&pid=ImgDetMain"
                   alt="Electric Bottle Brush"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
