@@ -913,9 +913,9 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
           borderRadius: 2,
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
         }}>
-          {/* <Typography variant="h6" fontWeight="medium" color="text.secondary" align="center" sx={{ mb: 2 }}>
+          <Typography variant="h6" fontWeight="medium" color="text.secondary" align="center" sx={{ mb: 2 }}>
             Shop by Category
-          </Typography> */}
+          </Typography>
           <Box sx={{ 
             display: 'flex', 
             flexWrap: { xs: 'nowrap', sm: 'wrap' },
@@ -1881,12 +1881,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/XscwCkojrDJfzIYafWutWtKSMTzG6zV5wwSyL3VA.jpg"
+                  alt=" KRIDDO Kids Tricycles"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $70.00 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -1894,7 +1894,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
+                  KRIDDO Kids Tricycles for 2-4 Year Olds, Toddler Trike Gift for 24 Months to 4 Years, White
                   </Typography>
                 </CardContent>
               </Card>
@@ -1913,20 +1913,19 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/y7Rt1PWWT33n6ZlpkWzk0x5movEbL5zIOcA8pwFV.jpg"
+                  alt="  JOYSTAR Pluto Kids Bike"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
-                  </Typography>
+                  $236.25 /Pc                  </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
+                  JOYSTAR Pluto Kids Bike 12 14 16 18 20 Inch Children's Bicycle for Boys Girls Age 3-12 Years, Kids' Bicycles, Multiple Colors
                   </Typography>
                 </CardContent>
               </Card>
@@ -1945,13 +1944,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/cIsGV4vl5mhgp9EDqXo0zno8SDsjy4EXWxpIDGA0.jpg"
+                  alt="Aveeno Baby Daily Moisture Gentle Bath Wash & Shampoo"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
-                  </Typography>
+                  $33.75 /Pc                  </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
@@ -1959,7 +1957,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
+                  Aveeno Baby Daily Moisture Gentle Bath Wash & Shampoo with Natural Oat Extract, Hypoallergenic, Tear-Free & Paraben-Free Formula for Sensitive Hair & Skin, Lightly Scented, 33 fl. oz
                   </Typography>
                 </CardContent>
               </Card>
@@ -1978,13 +1976,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/V9DKgUbuTB6sNdxgKiNJbEu5G9iYU4jWPhVCL2mZ.png"
+                  alt="Hot sale "
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
-                  </Typography>
+                  $540.77 /KG                  </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
@@ -1992,8 +1989,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  Hot sale trotinette electrique eu/best selling trotinette electrique tout terrain 24 pouces/cheap piece trotinette electrique                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2011,21 +2007,21 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/89Y6d0M6hE5uCdxcqVUzAoGqzNu5rIUjyT1y1RDQ.jpg"
+                  alt=" ACEGER Girls Bike "
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
-                  </Typography>
+
+                  $161.25 /Pc  
+                                  </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+                  ACEGER Girls Bike with Basket, Kids Bicycle for 3-13 Years, Included Coaster Brake & Caliper Brake, 14 16 18 Inch with Training Wheels, 20 Inch with Kickstand but no Training Wheels                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2043,21 +2039,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/IiOPdiIusVjs07y5o0s5dJrDhsdUr6jTGcwbEgDp.png"
+                  alt=" Autel EVO II Dual"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
-                  </Typography>
+                  $5,625.00 /KG
+                                    </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  Autel EVO II Dual 640T Thermal imaging Foldable Drone Thermal Camera Evo 2 Cheap Drones With 8k Hd Camera                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2075,12 +2070,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://esellerstorevip.biz/public/uploads/all/mCy6LeNXpWdfLIbIptTPQ9erPTpO3kDZerHHA3bE.png"
+                  alt=" FIMI X8 MINI PRO Fly Combo"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                  $447.50 /KG
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -2089,8 +2084,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
-                  </Typography>
+                  FIMI X8 MINI PRO Fly Combo 249g Weight Foldable 3 Axies 4K Mini Drone With Camera Beginner Drone                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2108,21 +2102,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg"
-                  alt="Portable Blender"
+                  image="https://esellerstorevip.biz/public/uploads/all/jnFbuxr0w3zKeO3wo6pG61cfRdAqsQcQDOffJKFY.png"
+                  alt=" Stilts walker"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $32.50/Pc
-                  </Typography>
+                  $875.00 /KG
+                                    </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Portable Blender for Smoothies and Shakes
-                  </Typography>
+                  Stilts walker led big robot costume clothing with robotic voice for men                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2140,13 +2133,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4050388/pexels-photo-4050388.jpeg"
-                  alt="Wireless Charger"
+                  image="https://esellerstorevip.biz/public/uploads/all/QfomT9J5ZrOKdxWpbnuZHYB2k9rZYLBBIzERxzHe.png"
+                  alt="Luxury Modern Full Body Robot AI"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $19.99/Pc
-                  </Typography>
+                  $1,570.00 /KG
+                                    </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
@@ -2154,8 +2147,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Fast Wireless Charger for iPhone and Android
-                  </Typography>
+                  Luxury Modern Full Body Robot AI Smart SL Track deluxe massage cahir Zero Gravity Shiatsu AI 4D Massage Chair for Home Office                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2173,12 +2165,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg"
-                  alt="Smart LED Light Bulbs"
+                  image="https://esellerstorevip.biz/public/uploads/all/b9qK8YB49rgV9s6yv6Zw0Iws6T1o6nzstyHwNpUU.png"
+                  alt="Durable leather sofa"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $15.75/Pc
+                  $937.50 /kg
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -2186,8 +2178,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart LED Light Bulbs, Color Changing, Works with Alexa
-                  </Typography>
+                  Durable leather sofa, the latest sofa design living room furniture                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2205,12 +2196,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg"
-                  alt="Yoga Mat"
+                  image="https://esellerstorevip.biz/public/uploads/all/w7I25l1L19LGsPwt6N3pn7bS3o6g2gf3xyB3izuU.png"
+                  alt="  Bjflamingo Italian carbon steel "
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $24.99/Pc
+                  $1,058.66 /kg
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -2219,8 +2210,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Yoga Mat with Carrying Strap, Non-Slip
-                  </Typography>
+                  Bjflamingo Italian carbon steel dinning tables sets luxury 6 chairs                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2238,12 +2228,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/2536965/pexels-photo-2536965.jpeg"
-                  alt="Stainless Steel Water Bottle"
+                  image="https://esellerstorevip.biz/public/uploads/all/iekhwkf7DB5tkn9aZgCr9eLjZhsMKTFbfETpx7wV.png"
+                  alt=" 2022 Smartphone for Samsung "
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $18.50/Pc
+                  $322.50 /kg
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -2251,8 +2241,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Insulated Stainless Steel Water Bottle, 24oz
-                  </Typography>
+                  2022 Smartphone for Samsung S22 Ultra 5G original unlocked wholesale Android 12 Global Version 6.8 inch 2G +16 GB Mobile phones                  </Typography>
                 </CardContent>
               </Card>
             </Box>
@@ -2345,12 +2334,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
+                  image="https://esellerstorevip.biz/public/uploads/all/XscwCkojrDJfzIYafWutWtKSMTzG6zV5wwSyL3VA.jpg"
                   alt="Baby Shorts"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                    
+                  $70.00 /Pc  
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -2358,7 +2348,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
+                  KRIDDO Kids Tricycles for 2-4 Year Olds, Toddler Trike Gift for 24 Months to 4 Years, White
                   </Typography>
                 </CardContent>
               </Card>
@@ -2442,12 +2432,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/MP530jSd9kGEVeULAMkcKEnxKndZvvsnvxbluiMp.jpg"
+                  alt=" STARBUCKS KOREA"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                  $54.09 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -2456,8 +2446,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  STARBUCKS KOREA X BLACK PINK Rhinestone Cold Cup Tumbler Bag Limited Edition                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2810,21 +2799,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/uYmG98Yju1Q5tDgMw1c1v34AqcVX412wktr0hi4u.png"
+                  alt="10 x Self Adhesive Wall Sticky Hooks"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $1.00 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  10 x Self Adhesive Wall Sticky Hooks Strong Stainless steel Door Hook Holder UK                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2842,20 +2830,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/dQ8qdsPtUk1pGof9bUAvTlCNmXagxEMLPvn0mKni.jpg"
+                  alt="LECDER i37 Kids Headphones"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
-                  </Typography>
+                  $16.99 /PC
+                                    </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
+                  ELECDER i37 Kids Headphones Children Girls Boys Teens Foldable Adjustable On Ear Headphones 3.5mm Jack Compatible Cellphones Computer MP3/4 Kindle School Tablet Orange/Black
                   </Typography>
                 </CardContent>
               </Card>
@@ -2874,12 +2862,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/m9OqDahfRQjxalyH9Qe0bPpDAAvilKckmFZ6a48t.jpg"
+                  alt=" LIDYUK End Table"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  $147.50 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -2888,8 +2876,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                  </Typography>
+                  LIDYUK End Table with Charging Station, Flip Top Side Table with USB Ports and Outlets, Nightstand for Small Spaces, Bedside Tables with Storage Shelf for Living Room, Bedroom, Dark Cherry                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2907,12 +2894,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/Oy4RclxTxvPA3PupQSxFReip50FWe9ekfffBX4mm.png"
+                  alt="Baby Diaper Bag"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                  $46.24 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -2921,8 +2908,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  Baby Diaper Bag Backpack with Changing Station, Waterproof Changing Pad, USB Charging Port,Pacifier Case ,Pink Color                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2940,12 +2926,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/zr01LXrc3zhI58EQjGcqUASLxafZoUW2fWJ0sQFN.jpg"
+                  alt="Ankis Black Brown White Biege Gold Women's Flat Sandals"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
+                  $42.50 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -2953,8 +2939,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+                  Ankis Black Brown White Biege Gold Women's Flat Sandals Comfortable Women's Slide Sandals Fashion Flat Sandals for Women Summer                  </Typography>
                 </CardContent>
               </Card>
 
@@ -2972,12 +2957,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/iN7tgADvcLfT6hNUt09GFsqPp3YlYv8R7duQ1i9f.png"
+                  alt="Retractable Baby Safety Gate"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
+                  $36.24 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -2985,8 +2970,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  Retractable Baby Safety Gate, Mesh Pet Gate 33" Tall, Extends to 55" Wide, Black                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3004,12 +2988,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://esellerstorevip.biz/public/uploads/all/MiRA4ozfRxfRl5AELRbBqjcNkeukq0VUaYjoVi0T.jpg"
+                  alt="OK MOKKOM Automatic Nut Milk Maker"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                  $83.75 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -3018,8 +3002,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
-                  </Typography>
+                  OK MOKKOM Automatic Nut Milk Maker 20 oz Soy Milk Maker, Homemade Almond, Oat, Coconut, Soy, or Plant-Based Milk Dairy Free Beverages, Almond Milk Maker with Delay Start/Boild Water/Self Clean - White                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3037,12 +3020,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg"
+                  image="https://esellerstorevip.biz/public/uploads/all/GmGFPFPXiwNAn81B5lqEzm81eBOg3PTaIbzXYekD.jpg"
                   alt="Portable Blender"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $32.50/Pc
+                  $35.00 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3050,7 +3033,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Portable Blender for Smoothies and Shakes
+                    Portable Blender for SmoothMomMed Electric Bottle Brush, Electric Baby Bottle Brush Set with Silicone Bottle/Pacifier/Straw Brush and Mixing Head, Waterproof Bottle Cleaner Brush with Drying Rack, 2 Modes & 360° Rotationies and Shakes
                   </Typography>
                 </CardContent>
               </Card>
@@ -3069,12 +3052,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4050388/pexels-photo-4050388.jpeg"
-                  alt="Wireless Charger"
+                  image="https://esellerstorevip.biz/public/uploads/all/eSTBQAAvJW6t7btCnTDHx7WEotIhOyYtUWG33GG3.png"
+                  alt="Pirecart 14-Panel Foldable Baby Playpen"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $19.99/Pc
+                  $141.24 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -3083,8 +3066,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Fast Wireless Charger for iPhone and Android
-                  </Typography>
+                  Pirecart 14-Panel Foldable Baby Playpen, Unisex Kids Playard Center with Game Panel & Lock Door                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3102,12 +3084,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg"
-                  alt="Smart LED Light Bulbs"
+                  image="https://esellerstorevip.biz/public/uploads/all/wT9wdlYppRKhRlQ6BURlbLraVzfvCHsOVBNERbtN.jpg"
+                  alt="Gardening Tools"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $15.75/Pc
+                  $42.50 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3115,13 +3097,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart LED Light Bulbs, Color Changing, Works with Alexa
-                  </Typography>
+                  Gardening Tools 9-Piece Heavy Duty Gardening Hand Tools with Fashion and Durable Garden Tools Organizer Handbag,Rust-Proof Garden Tool Set, Ideal Gardening Gifts for Women                  </Typography>
                 </CardContent>
               </Card>
 
               {/* Product 11 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -3151,10 +3132,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Premium Yoga Mat with Carrying Strap, Non-Slip
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 12 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -3183,7 +3164,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Insulated Stainless Steel Water Bottle, 24oz
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </Box>
 
             {/* Left Arrow */}
@@ -3334,12 +3315,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/A8FMEWioToNQVzZQI2zTf2nVmRoNAhXyHFXeeWSL.png"
+                  alt="River Island Womens Midi Dress"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $8.24 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3347,8 +3328,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  River Island Womens Midi Dress Brown Satin Animal Print Stylish                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3366,12 +3346,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/D7FFpqYjZnUGoLEOtXTuEKBdiKWCXAS5RQwgioce.png"
+                  alt="Ladies Mule Slippers"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
+                  $10.97 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3379,8 +3359,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
-                  </Typography>
+                  Ladies Mule Slippers Ladies Mules Slip On Slippers Sheepskin Slippers Hard Sole                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3398,12 +3377,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
+                  image="https://esellerstorevip.biz/public/uploads/all/jzjKy6HcTBWBlY1wLwQ2nXmXDJGiWycqnR0gZFan.webp"
                   alt="Electric Bottle Brush"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  $30.09 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -3412,8 +3391,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                  </Typography>
+                  Solid Zipper Front Slim Top, Versatile Long Sleeve Mock Neck Top For Spring & Fall, Women's Clothing                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3431,12 +3409,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/EkA7tvkyAXauHA26t5AovUEKAihm1A9qnVrBBtZL.jpg"
+                  alt="Travistar Crossbody Bags"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                  $35.00 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -3445,8 +3423,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  Travistar Crossbody Bags for Women Small Handbags PU Leather Shoulder Bag Purse Evening Bag Quilted Satchels with Chain Strap                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3464,12 +3441,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/pVQiuZItrVI8huHLgc1M8FSVkjaIWtp07ec5EIF8.jpg"
+                  alt="JD.GLOBAL Essentials Women's Classic-Fit Short-Sleeve V-Neck T-Shirt"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
+                  $17.50 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3477,8 +3454,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+                  JD.GLOBAL Essentials Women's Classic-Fit Short-Sleeve V-Neck T-Shirt, Multipacks                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3496,21 +3472,19 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/V8mtLYU7ZdNrCvS3WWsETk3MluA6YU5IWDk9K0ez.jpg"
+                  alt="Dr. Martens Women's Blaire Brando Fisherman Sandal"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
-                  </Typography>
+                  $97.50 /Pc                  </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  Dr. Martens Women's Blaire Brando Fisherman Sandal                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3528,12 +3502,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://esellerstorevip.biz/public/uploads/all/fWMdjSbxmLl51bIkKHpVJ1a9qNLQQmtxj29QhMTU.jpg"
+                  alt="Ankis Black Brown White Biege Gold Women's Flat Sandals Comfortable Women's Slide Sandals Fashion Flat Sandals for Women Summer"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                  $42.50 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -3542,8 +3516,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
-                  </Typography>
+                  Ankis Black Brown White Biege Gold Women's Flat Sandals Comfortable Women's Slide Sandals Fashion Flat Sandals for Women Summer                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3561,12 +3534,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1667088/pexels-photo-1667088.jpeg"
-                  alt="Portable Blender"
+                  image="https://esellerstorevip.biz/public/uploads/all/jjj3YNrWJkl08UND6llRZYzou66N8yVG9vbkCtJh.jpg"
+                  alt="BTFBM Women's 2024 Summer Casual Beach Dresses Crew Neck Short Sleeve Wrap Party Club Mini Ruched Bodycon T Shirt Dress"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $32.50/Pc
+                   
+$48.75 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3574,7 +3548,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Portable Blender for Smoothies and Shakes
+                  BTFBM Women's 2024 Summer Casual Beach Dresses Crew Neck Short Sleeve Wrap Party Club Mini Ruched Bodycon T Shirt Dress
                   </Typography>
                 </CardContent>
               </Card>
@@ -3593,12 +3567,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4050388/pexels-photo-4050388.jpeg"
-                  alt="Wireless Charger"
+                  image="https://esellerstorevip.biz/public/uploads/all/WDlj1E7t7HgmFmkJYDLzkmLRdwNlxQWO3SvXr9pG.jpg"
+                  alt="JD.GLOBAL Essentials Women's Classic-Fit Short-Sleeve V-Neck T-Shirt"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $19.99/Pc
+                  $17.50 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -3607,8 +3581,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Fast Wireless Charger for iPhone and Android
-                  </Typography>
+                  JD.GLOBAL Essentials Women's Classic-Fit Short-Sleeve V-Neck T-Shirt, Multipacks                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3626,12 +3599,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3780681/pexels-photo-3780681.jpeg"
-                  alt="Smart LED Light Bulbs"
+                  image="https://esellerstorevip.biz/public/uploads/all/X0p9OLlds54tXv7xCuDmuBU2CKR67M7P73HcQXcv.jpg"
+                  alt="JD.GLOBAL Essentials Women's Classic-Fit Short-Sleeve V-Neck T-Shirt"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $15.75/Pc
+                  $17.50 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3639,13 +3612,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart LED Light Bulbs, Color Changing, Works with Alexa
+                  JD.GLOBAL Essentials Women's Classic-Fit Short-Sleeve V-Neck T-Shirt, Multipacks
                   </Typography>
                 </CardContent>
               </Card>
 
               {/* Product 11 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -3675,10 +3648,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Premium Yoga Mat with Carrying Strap, Non-Slip
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 12 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -3707,7 +3680,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Insulated Stainless Steel Water Bottle, 24oz
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </Box>
 
             {/* Left Arrow */}
@@ -3802,12 +3775,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/DGWGWhFKA5lcD5OwqypP3iAoDU0JDw56i8ca9uA3.jpg"
+                  alt="Scarleton Purses for Women Large Hobo Bags Washed Vegan Leather Shoulder Bag Satchel Tote Top Handle Handbags"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                   
+                        $48.75 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3815,8 +3789,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  Scarleton Purses for Women Large Hobo Bags Washed Vegan Leather Shoulder Bag Satchel Tote Top Handle Handbags, H1292                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3834,12 +3807,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/xJnMiRSKkWgqlNp7Z7k2vb0iD49h7aBHN4o07Ttn.png"
+                  alt="Hair Dryer, NEXPURE 1800W Professional Ionic Hairdryer for Hair Care, Powerful Hot/Cool Wind Blow Dryer with Diffuser, Nozzle, ETL, UL and ALCI Safety Plug (Dark Grey)"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
+                  $44.99 /Pc$22.35/Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3847,8 +3820,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
-                  </Typography>
+                  Hair Dryer, NEXPURE 1800W Professional Ionic Hairdryer for Hair Care, Powerful Hot/Cool Wind Blow Dryer with Diffuser, Nozzle, ETL, UL and ALCI Safety Plug (Dark Grey)                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3866,22 +3838,21 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/2XWn8cTg7FITvzISyNtVeT2pNYYyHIHFCGVa6XZu.png"
+                  alt="Parfums de Marly Kalan by Parfums de Marly, 2.5 oz EDP Spray for Men"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  $189.85 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4].map((star) => (
+                    {[1, 2, 3].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                  </Typography>
+                  Parfums de Marly Kalan by Parfums de Marly, 2.5 oz EDP Spray for Men                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3899,12 +3870,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/9PTQ8QfRS3fT4jPa150YSPxg0XS9RpaIzFckrZFb.png"
+                  alt="Parfums De Marly Godolphin Eau De Toilette Spray, Cologne for Men, 4.2 Oz"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                  $185.62 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -3913,8 +3884,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  Parfums De Marly Godolphin Eau De Toilette Spray, Cologne for Men, 4.2 Oz                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3932,12 +3902,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/kHQMeVMrTEcpWp7ctWJgQ4qB6NgBdkBzpfw1VUmf.png"
+                  alt="Hinzonek 5 in 1 Hair Blower Brush Hairdryer-Detachable and Interchangeable Hot Tools Blow Dryer Brush, Negative Ion Technology Heated Curling Brush for Straightening, Curling, Dry Combing"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
+                   
+$26.73 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -3945,8 +3916,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+Hinzonek 5 in 1 Hair Blower Brush Hairdryer-Detachable and Interchangeable Hot Tools Blow Dryer Brush, Negative Ion Technology Heated Curling Brush for Straightening, Curling, Dry Combing                  </Typography>
                 </CardContent>
               </Card>
 
@@ -3965,19 +3935,19 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                   component="img"
                   height="180"
                   image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  alt="beauty creams"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
+                    $23.99/Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
+                 Beauty Creams
                   </Typography>
                 </CardContent>
               </Card>
@@ -3996,12 +3966,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://esellerstorevip.biz/public/uploads/all/9c8WWMynWk72cz1WGwjEpMN69jdHu5zZlESnPYdG.png"
+                  alt="Luxury Modern Full Body Robot AI Smart SL Track deluxe massage cahir Zero Gravity Shiatsu AI 4D Massage Chair for Home Office"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                  $1,570.00 /KG
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -4010,13 +3980,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
-                  </Typography>
+                  Luxury Modern Full Body Robot AI Smart SL Track deluxe massage cahir Zero Gravity Shiatsu AI 4D Massage Chair for Home Office                  </Typography>
                 </CardContent>
               </Card>
 
               {/* Product 8 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4045,10 +4014,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Portable Blender for Smoothies and Shakes
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 9 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4078,10 +4047,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Fast Wireless Charger for iPhone and Android
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 10 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4110,10 +4079,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Smart LED Light Bulbs, Color Changing, Works with Alexa
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 11 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4143,10 +4112,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Premium Yoga Mat with Carrying Strap, Non-Slip
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 12 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4175,7 +4144,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Insulated Stainless Steel Water Bottle, 24oz
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </Box>
 
             {/* Left Arrow */}
@@ -4266,21 +4235,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/vqTZeH9sO7xp0g8NrMO3GAEiA0PMM8PAchsWVD8x.png"
+                  alt="Fashion Pure"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $4,164.48 /kg
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  Fashion Pure 18k Gold 6ct Diamond Chain Necklace Bracelet Women Ladies Bridal Engagement Wedding Jewelry                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4298,12 +4266,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/zSLh3SJv4XBRw098Fy8yTFCwKA5ucvlWoxtIkdn6.png"
+                  alt="5D hard yellow solid gold jewelry manufacturer fashion 61.38g 22inch pure 24k gold chain necklace jewelry for man"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
+                  $5,825.00 /kg
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -4311,8 +4279,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
-                  </Typography>
+                  5D hard yellow solid gold jewelry manufacturer fashion 61.38g 22inch pure 24k gold chain necklace jewelry for man                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4330,12 +4297,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/B5L2a6oRYDvBICjTc0ffAjAkFS0CzBwIxlEDoPGf.png"
+                  alt="24k gold chain necklace jewelry for man"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  
+                        $5,825.00 /kg
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -4344,8 +4312,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                  </Typography>
+                  24k gold chain necklace jewelry for man                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4363,12 +4330,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/pM1U82gYhp1n04hdhIuIwkK4yvcT9WLzYmInKhkm.png"
+                  alt="solid gold jewelry manufacturer fashion"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                  $4,785.00 /kg
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -4377,8 +4344,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  solid gold jewelry manufacturer fashion                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4396,12 +4362,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/j9KghSMk9eBlLSmW8N4eGH3u8DbwmOCJwECREvC3.jpg"
+                  alt="Smart Watch for Men Women(Answer/Make Call),1.83" 
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
+                    
+$62.49 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -4409,8 +4376,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+                  Smart Watch for Men Women(Answer/Make Call),1.83" Fitness Tracker with Blood Pressure Heart Rate Monitor,Sleep Tracker,Pedometer,123 Sport Modes, IP68 Waterproof Smartwatches for iPhone&Android                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4428,12 +4394,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/kk785Pkne8xuohU06E00Y6k6wS0nnKYIpCl4pvvF.jpg"
+                  alt="Michael Kors Crossbody"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
+                  $86.81 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -4441,8 +4407,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  Michael Kors Crossbody                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4460,27 +4425,27 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://lzd-img-global.slatic.net/g/p/fa8b8e43242a878da27457f101f47b25.jpg_720x720q80.jpg_.webp"
+                  alt="Arthesdam Jewellery 916 Gold Starry Solitaire Pendant"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                   
+$157.50 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4].map((star) => (
+                    {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
-                  </Typography>
+                  Arthesdam Jewellery 916 Gold Starry Solitaire Pendant                  </Typography>
                 </CardContent>
               </Card>
 
               {/* Product 8 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4509,10 +4474,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Portable Blender for Smoothies and Shakes
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 9 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4542,10 +4507,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Fast Wireless Charger for iPhone and Android
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 10 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4574,10 +4539,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Smart LED Light Bulbs, Color Changing, Works with Alexa
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 11 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4607,10 +4572,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Premium Yoga Mat with Carrying Strap, Non-Slip
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 12 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4639,7 +4604,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Insulated Stainless Steel Water Bottle, 24oz
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </Box>
 
             {/* Left Arrow */}
@@ -4731,12 +4696,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/PWY0HkCSooMTupcCfVtmbetCP8zJCimmWlTRlIwq.png"
+                  alt="Canon EOS 2000D Rebel T7 DSLR Camera with 18-55mm III Lens With 25 Piece Bundle"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $527.24 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -4744,8 +4709,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  Canon EOS 2000D Rebel T7 DSLR Camera with 18-55mm III Lens With 25 Piece Bundle                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4763,21 +4727,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/poyVyES6igjdiDWe28keHRsE4eQrSimbT79D2bui.jpg"
+                  alt="1 Pair Boardless Skateboard, Double Wheel Roller With Thicked Pendal And Durable PU Wheel Drift Anti-Slip Board, Suitable For Beginners"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
-                  </Typography>
+                  $157.00 /pc
+                                    </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
-                  </Typography>
+                  1 Pair Boardless Skateboard, Double Wheel Roller With Thicked Pendal And Durable PU Wheel Drift Anti-Slip Board, Suitable For Beginners                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4795,12 +4758,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/DICzj6lIZleoH7PthNsOrs3L3UkJZO9x3vvcyVp8.png"
+                  alt="ELENKER Steerable Knee Scooter Walker Shock Absorber Ultra Compact Portable"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  $109.24 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -4809,8 +4772,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                  </Typography>
+                  ELENKER Steerable Knee Scooter Walker Shock Absorber Ultra Compact Portable                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4828,12 +4790,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/T9xkMUuT2twi1wcRy2N34mNt1s72tGB1F72zCXlk.png"
+                  alt="Tuffcare Smooth Steerable Seated Scooter, Slow Propelled Mobility Knee Walker"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                  $229.24 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -4842,8 +4804,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  Tuffcare Smooth Steerable Seated Scooter, Slow Propelled Mobility Knee Walker                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4861,21 +4822,21 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/7swN7nGPNRuzcdgmkpYlTrDpnEwisdtxV2c1crHO.jpg"
+                  alt="Canon EOS R6 Full-Frame Mirrorless Camera with 4K Video, Full-Frame CMOS Senor, DIGIC X Image Processor, Dual UHS-II SD Memory Card Slots, and Up to 12 fps with Mechnical Shutter, Body Only, Black"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
-                  </Typography>
+
+                  $3,118.75 /Pc
+                                    </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+                  Canon EOS R6 Full-Frame Mirrorless Camera with 4K Video, Full-Frame CMOS Senor, DIGIC X Image Processor, Dual UHS-II SD Memory Card Slots, and Up to 12 fps with Mechnical Shutter, Body Only, Black                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4893,12 +4854,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/KG7jP03dSRayvaCjCI0IkI1z71E2iRRB7JHMzxCD.jpg"
+                  alt="Marcy Dual Action Cross Training Recumbent Exercise Bike with Arm Exercisers, Gym Equipment for Work from Home Fitness, Black JX-7301"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
+                  
+$384.99 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -4906,8 +4868,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  Marcy Dual Action Cross Training Recumbent Exercise Bike with Arm Exercisers, Gym Equipment for Work from Home Fitness, Black JX-7301                  </Typography>
                 </CardContent>
               </Card>
 
@@ -4925,12 +4886,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
+                  image="https://esellerstorevip.biz/public/uploads/all/WiN7dZMQoymwvhd6z6Hdw1UJKP5jJaIaaZDXlHSq.png"
                   alt="Smart Watch"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                  $237.60 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -4939,13 +4900,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
+                  Lowepro backpack Pro Trekker BP 350 AW II. No Fees! EU Seller!
                   </Typography>
                 </CardContent>
               </Card>
 
               {/* Product 8 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -4974,10 +4935,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Portable Blender for Smoothies and Shakes
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 9 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5007,10 +4968,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Fast Wireless Charger for iPhone and Android
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 10 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5039,10 +5000,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Smart LED Light Bulbs, Color Changing, Works with Alexa
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 11 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5072,10 +5033,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Premium Yoga Mat with Carrying Strap, Non-Slip
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 12 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5104,7 +5065,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Insulated Stainless Steel Water Bottle, 24oz
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </Box>
 
             {/* Left Arrow */}
@@ -5196,21 +5157,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/REpTjrAh3WF6gyVYJT8VXcSh7t3hEvX84WnrYHJ2.png"
+                  alt="Dunlop Protective Footwear, Chesapeake plain toe Black Amazon, 100% Waterproof PVC, Lightweight and Durable, 8677577.11, Size 11 US"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $24.06 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  Dunlop Protective Footwear, Chesapeake plain toe Black Amazon, 100% Waterproof PVC, Lightweight and Durable, 8677577.11, Size 11 US                  </Typography>
                 </CardContent>
               </Card>
 
@@ -5228,12 +5188,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/U5dydLvS5hZ5gCZN6iHmiQ4GRMuMZoSPfyHCMLrv.png"
+                  alt="adidas Men's Ultraboost 1.0 Sneaker"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
+                   
+$171.86 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -5241,8 +5202,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
-                  </Typography>
+                  adidas Men's Ultraboost 1.0 Sneaker                  </Typography>
                 </CardContent>
               </Card>
 
@@ -5260,12 +5220,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/92Qfwo5POGIVmVSNQYcphvbbsXCNwdcVwMAdgWMu.png"
+                  alt="Timberland Men's 6-Inch Premium Waterproof Boot"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  $148.75 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -5274,8 +5234,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                  </Typography>
+                  Timberland Men's 6-Inch Premium Waterproof Boot                  </Typography>
                 </CardContent>
               </Card>
 
@@ -5293,12 +5252,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/Wpjn8B1n77cd1wMRsujmnpGUTwn5FmNs1QPI2Yll.png"
+                  alt="Crocs Echo Clog Men desert grass"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                 
+$37.85 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -5307,7 +5267,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
+                  Crocs Echo Clog Men desert grass
                   </Typography>
                 </CardContent>
               </Card>
@@ -5326,21 +5286,21 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/TpAgWIWtOrwzqaXGkiu8BHHKlZ5DBx2TPl1SXodf.png"
+                  alt="MENS WOMENS CASUAL SWEAT SHORTS PLAIN GYM SHORTS FLEECE HOUSE GYM DAILY HAREM"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
+                    
+$7.74 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+                  MENS WOMENS CASUAL SWEAT SHORTS PLAIN GYM SHORTS FLEECE HOUSE GYM DAILY HAREM                  </Typography>
                 </CardContent>
               </Card>
 
@@ -5358,12 +5318,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/k9omeEAOD4tbHeJkTsUvDamsXrCkumEcccy4VVii.png"
+                  alt=" Genuine Leather Luxury Belts"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
+                  $23.85 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -5371,8 +5331,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  Genuine Leather Luxury Belts For Men Classy Dress Belts Mens Belt Many Colors                  </Typography>
                 </CardContent>
               </Card>
 
@@ -5390,8 +5349,8 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://esellerstorevip.biz/public/uploads/all/8pG3Ay1B5GS4CkaE1bUwVGKOqZtA9bwSlpDtw2cz.jpg"
+                  alt=" Plus Size Men's "
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
@@ -5404,13 +5363,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
+                  Plus Size Men's "Simple" Print Sweatshirt & Sweatpants Set For Autumn/winter, Contrast Color 2Pcs Outfits For Sports/outdoor, Men's Clothing
                   </Typography>
                 </CardContent>
               </Card>
 
               {/* Product 8 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5439,10 +5398,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Portable Blender for Smoothies and Shakes
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 9 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5472,10 +5431,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Fast Wireless Charger for iPhone and Android
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 10 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5504,10 +5463,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Smart LED Light Bulbs, Color Changing, Works with Alexa
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 11 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5537,10 +5496,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Premium Yoga Mat with Carrying Strap, Non-Slip
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 12 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5569,7 +5528,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Insulated Stainless Steel Water Bottle, 24oz
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </Box>
 
             {/* Left Arrow */}
@@ -5661,12 +5620,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/Oy4RclxTxvPA3PupQSxFReip50FWe9ekfffBX4mm.png"
+                  alt="Baby Diaper Bag Backpack with Changing Station, Waterproof Changing Pad, USB Charging Port,Pacifier Case ,Pink Color"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $46.24 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -5674,8 +5633,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  Baby Diaper Bag Backpack with Changing Station, Waterproof Changing Pad, USB Charging Port,Pacifier Case ,Pink Color                  </Typography>
                 </CardContent>
               </Card>
 
@@ -5693,20 +5651,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/6QXOQ2UZlGWcqXmPLPPo1mBsovvSqv9m1dVOlpda.jpg"
+                  alt="MAM Easy Active Baby Bottle 11oz, Easy Switch Between Breast and Bottle, Easy to Clean, 4+ Months & Plastic Trainer Cup (1 Count), 8 oz. Trainer Drinking Cup with Extra-Soft Spout"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
+                  $23.09 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
+                  MAM Easy Active Baby Bottle 11oz, Easy Switch Between Breast and Bottle, Easy to Clean, 4+ Months & Plastic Trainer Cup (1 Count), 8 oz. Trainer Drinking Cup with Extra-Soft Spout
                   </Typography>
                 </CardContent>
               </Card>
@@ -5725,12 +5683,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/cIsGV4vl5mhgp9EDqXo0zno8SDsjy4EXWxpIDGA0.jpg"
+                  alt="Aveeno Baby Daily Moisture Gentle Bath Wash & Shampoo with Natural Oat Extract, Hypoallergenic, Tear-Free & Paraben-Free Formula for Sensitive Hair & Skin, Lightly Scented, 33 fl. oz"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  $33.75 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -5739,7 +5697,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
+                  Aveeno Baby Daily Moisture Gentle Bath Wash & Shampoo with Natural Oat Extract, Hypoallergenic, Tear-Free & Paraben-Free Formula for Sensitive Hair & Skin, Lightly Scented, 33 fl. oz
                   </Typography>
                 </CardContent>
               </Card>
@@ -5758,12 +5716,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/XscwCkojrDJfzIYafWutWtKSMTzG6zV5wwSyL3VA.jpg"
+                  alt="KRIDDO Kids Tricycles for 2-4 Year Olds, Toddler Trike Gift for 24 Months to 4 Years, White"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                  $70.00 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -5772,7 +5730,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
+                  KRIDDO Kids Tricycles for 2-4 Year Olds, Toddler Trike Gift for 24 Months to 4 Years, White
                   </Typography>
                 </CardContent>
               </Card>
@@ -5791,20 +5749,19 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/y7Rt1PWWT33n6ZlpkWzk0x5movEbL5zIOcA8pwFV.jpg"
+                  alt="JOYSTAR Pluto Kids Bike 12 14 16 18 20 Inch Children's Bicycle for Boys Girls Age 3-12 Years, Kids' Bicycles, Multiple Colors"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
-                  </Typography>
+                  $236.25 /Pc                  </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
+                    JD GLOBAL Basics Multipurpose, Comfort Grip ScissJOYSTAR Pluto Kids Bike 12 14 16 18 20 Inch Children's Bicycle for Boys Girls Age 3-12 Years, Kids' Bicycles, Multiple Colorsors
                   </Typography>
                 </CardContent>
               </Card>
@@ -5823,12 +5780,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/oTyrOQKPA1LUJQwsEDynjYqBqMusW3Ji8pnlqraO.jpg"
+                  alt="MAM Bottle Nipples Mixed Flow Pack - Fast Flow Nipple Level 3 and Extra Fast Flow Nipple Level 4, for Newborns and Older, SkinSoft Silicone Nipples for Baby Bottles, Fits All MAM Bottles, 4 Pack"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
+                  $13.75 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -5836,8 +5793,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  MAM Bottle Nipples Mixed Flow Pack - Fast Flow Nipple Level 3 and Extra Fast Flow Nipple Level 4, for Newborns and Older, SkinSoft Silicone Nipples for Baby Bottles, Fits All MAM Bottles, 4 Pack                  </Typography>
                 </CardContent>
               </Card>
 
@@ -5855,12 +5811,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://esellerstorevip.biz/public/uploads/all/TDmw7TvzEpU4TzKvvwrl4dhBrdw0nG4HbXZ4SC1f.jpg"
+                  alt="MomMed Electric Bottle Brush, Electric Baby Bottle Brush Set with Silicone Bottle/Pacifier/Straw Brush and Mixing Head, Waterproof Bottle Cleaner Brush with Drying Rack, 2 Modes & 360° Rotation"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                  $35.00 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -5869,13 +5825,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
-                  </Typography>
+                  MomMed Electric Bottle Brush, Electric Baby Bottle Brush Set with Silicone Bottle/Pacifier/Straw Brush and Mixing Head, Waterproof Bottle Cleaner Brush with Drying Rack, 2 Modes & 360° Rotation                  </Typography>
                 </CardContent>
               </Card>
 
               {/* Product 8 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5904,10 +5859,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Portable Blender for Smoothies and Shakes
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 9 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5937,10 +5892,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Fast Wireless Charger for iPhone and Android
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 10 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -5969,10 +5924,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Smart LED Light Bulbs, Color Changing, Works with Alexa
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 11 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -6002,10 +5957,10 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Premium Yoga Mat with Carrying Strap, Non-Slip
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Product 12 */}
-              <Card sx={{ 
+              {/* <Card sx={{ 
                 minWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 maxWidth: { xs: 'calc(100% / 2.2)', sm: 'calc(100% / 3.2)', md: 'calc(100% / 5.2)' },
                 cursor: 'pointer',
@@ -6034,7 +5989,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     Insulated Stainless Steel Water Bottle, 24oz
                   </Typography>
                 </CardContent>
-              </Card>
+              </Card> */}
             </Box>
 
             {/* Left Arrow */}
@@ -6098,7 +6053,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
         {/* omputers-Cameras-Accessories Section */}
 <Box sx={{ mb: 5, position: 'relative', overflow: 'hidden' }}>
           <Typography variant="h5" component="h2" color="error" fontWeight="bold" sx={{ mb: 2, borderBottom: '1px solid #eaeaea', pb: 1 }}>
-          omputers-Cameras-Accessories
+          Computers-Cameras-Accessories
           </Typography>
           
           <Box sx={{ position: 'relative', px: { xs: 2, md: 0 } }}>
@@ -6127,12 +6082,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg"
-                  alt="Baby Shorts"
+                  image="https://esellerstorevip.biz/public/uploads/all/dQ8qdsPtUk1pGof9bUAvTlCNmXagxEMLPvn0mKni.jpg"
+                  alt="ELECDER i37 Kids Headphones Children Girls Boys Teens Foldable Adjustable On Ear Headphones 3.5mm Jack Compatible Cellphones Computer MP3/4 Kindle School Tablet Orange/Black"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.23/Pc
+                  $16.99 /PC
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -6140,8 +6095,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Gerber Baby 3-Pack Knit Shorts
-                  </Typography>
+                  ELECDER i37 Kids Headphones Children Girls Boys Teens Foldable Adjustable On Ear Headphones 3.5mm Jack Compatible Cellphones Computer MP3/4 Kindle School Tablet Orange/Black                  </Typography>
                 </CardContent>
               </Card>
 
@@ -6159,12 +6113,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4887256/pexels-photo-4887256.jpeg"
-                  alt="Easter Basket Stuffers"
+                  image="https://esellerstorevip.biz/public/uploads/all/KZDrBby0AstIGOHgG8tedBbYaZxyJCKi9i8XgrEC.jpg"
+                  alt="Xiaomi Pad 5 WiFi Only 11 inches 120Hz 8720mAh Bluetooth 5.0 Four Speakers Dolby Atmos 13 Mp Camera + Fast Car 51W Charger Bundle (Cosmic Gray, 256GB + 6GB)"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $22.35/Pc
+                  $497.99 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -6172,8 +6126,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Easter Basket Stuffers - Toddlers Montessori Toys
-                  </Typography>
+                  Xiaomi Pad 5 WiFi Only 11 inches 120Hz 8720mAh Bluetooth 5.0 Four Speakers Dolby Atmos 13 Mp Camera + Fast Car 51W Charger Bundle (Cosmic Gray, 256GB + 6GB)                  </Typography>
                 </CardContent>
               </Card>
 
@@ -6191,12 +6144,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg"
-                  alt="Electric Bottle Brush"
+                  image="https://esellerstorevip.biz/public/uploads/all/HoeIgHWmmCZB6F4OXcAliiCPLjmNAUW2I6wfiXKw.jpg"
+                  alt="New Dell Pro Slim 15" 
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $35.00/Pc
+                  $17.74 /Pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -6205,8 +6158,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    MomMed Electric Bottle Brush, Electric Baby Bottle Cleaner
-                  </Typography>
+                  New Dell Pro Slim 15" Briefcase Laptop Bag                  </Typography>
                 </CardContent>
               </Card>
 
@@ -6224,12 +6176,13 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/6306248/pexels-photo-6306248.jpeg"
-                  alt="Paper Bowls"
+                  image="https://esellerstorevip.biz/public/uploads/all/D46DsYQDwdm2IG23ih4ATrOZVsewYmrkkolsqDlf.jpg"
+                  alt="Wireless Speaker, 4 Sound Holes, 6D Surround Sound, Shocking Heavy Bass, RBG Color, Long Strip, Easy To Store And Save Space, Desktop Audio/computer Speaker/car Speaker/cycling Speaker/camping Speaker"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $21.25/Pc
+                   
+$48.84 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -6238,8 +6191,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Homestockplus [50 Pack] 24 Oz Disposable Paper Bowls
-                  </Typography>
+                  Wireless Speaker, 4 Sound Holes, 6D Surround Sound, Shocking Heavy Bass, RBG Color, Long Strip, Easy To Store And Save Space, Desktop Audio/computer Speaker/car Speaker/cycling Speaker/camping Speaker                  </Typography>
                 </CardContent>
               </Card>
 
@@ -6257,21 +6209,20 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4226894/pexels-photo-4226894.jpeg"
-                  alt="Comfort Grip Scissors"
+                  image="https://esellerstorevip.biz/public/uploads/all/j8ytgv7PKRcD5ZUDMveoimuXNdV5rTQUxgH5AUJ5.jpg"
+                  alt="YinDiao Caller Mechanical Keyboard 104 Keys Green Axis Backlit Office E-sports Game Keyboard Wired USB Desktop Computer Notebook Universal"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $12.50/Pc
+                  $106.95 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3].map((star) => (
                       <Box key={star} component="span" color="#FFB900" sx={{ fontSize: '14px' }}>★</Box>
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    JD GLOBAL Basics Multipurpose, Comfort Grip Scissors
-                  </Typography>
+                  YinDiao Caller Mechanical Keyboard 104 Keys Green Axis Backlit Office E-sports Game Keyboard Wired USB Desktop Computer Notebook Universal                  </Typography>
                 </CardContent>
               </Card>
 
@@ -6289,12 +6240,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/1029896/pexels-photo-1029896.jpeg"
-                  alt="Wireless Earbuds"
+                  image="https://esellerstorevip.biz/public/uploads/all/39xb9a9fht07ID8mbiB6s0yzPl1V2fZSctNfvgNA.jpg"
+                  alt="RGB Desktop Speakers, 2.0CH Stereo PC Computer Gaming Speakers, 6W Multimedia Monitor Speakers, Volume Control, USB Powered / 3.5mm Cable"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $45.99/Pc
+                  $13.61 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -6302,8 +6253,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     ))}
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Premium Wireless Earbuds with Noise Cancellation
-                  </Typography>
+                  RGB Desktop Speakers, 2.0CH Stereo PC Computer Gaming Speakers, 6W Multimedia Monitor Speakers, Volume Control, USB Powered / 3.5mm Cable                  </Typography>
                 </CardContent>
               </Card>
 
@@ -6321,12 +6271,12 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                 <CardMedia
                   component="img"
                   height="180"
-                  image="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg"
-                  alt="Smart Watch"
+                  image="https://esellerstorevip.biz/public/uploads/all/4SP2HwITvYWNK9aweOHaAFsPtDMCJ1kZk4Iq3UPM.jpg"
+                  alt="Upgrade Your Gaming Experience: G2000 Surround Stereo Gaming Headset with Noise Cancelling Mic, LED Lights & Soft Memory Earmuffs for PS5/PS4/Xbox One/Nintendo Switch/PC Mac"
                 />
                 <CardContent sx={{ p: 1, pt: 1.5 }}>
                   <Typography color="error" fontWeight="bold" variant="body1">
-                    $89.99/Pc
+                  $104.70 /pc
                   </Typography>
                   <Box sx={{ display: 'flex', my: 0.5 }}>
                     {[1, 2, 3, 4].map((star) => (
@@ -6335,7 +6285,7 @@ const HomePage = ({ isAuthenticated, searchTerm }) => {
                     <Box component="span" color="#e0e0e0" sx={{ fontSize: '14px' }}>★</Box>
                   </Box>
                   <Typography variant="body2" sx={{ fontSize: '0.8rem', height: '40px', overflow: 'hidden' }}>
-                    Smart Watch with Heart Rate Monitor and GPS
+                  Upgrade Your Gaming Experience: G2000 Surround Stereo Gaming Headset with Noise Cancelling Mic, LED Lights & Soft Memory Earmuffs for PS5/PS4/Xbox One/Nintendo Switch/PC Mac
                   </Typography>
                 </CardContent>
               </Card>
